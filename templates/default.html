@@ -1,0 +1,66 @@
+<!doctype html>
+<!-- Getting Started: https://foundation.zurb.com/sites/docs/index.html -->
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title -->
+    <title>
+      {% block c_title %}
+      Placeholder Title
+      {% endblock %}
+    </title>
+
+    <!-- Proper Calls for Flask + Foundation -->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/foundation.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/app.css') }}">
+    
+  </head>
+  
+  <body>
+    
+    <!-- NavBar -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+	<ul class="dropdown menu" data-dropdown-menu="zrtbeq-dropdown-menu">
+	  <li class="menu-text">Sample</li>
+	  <li><a href="/dummy">Dummy</a></li>
+	  <li>
+            <a href="#">Features</a>
+            <ul class="menu vertical">
+              <li><a href="/">Home</a></li>
+              <li><a href="/dummy">Dummy</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu">
+          <li><input type="search" placeholder="Search"></li>
+          <li><button type="button" class="button">Search</button></li>
+        </ul>
+      </div>
+    </div>
+
+    {% block c_content %}
+    {% endblock %}
+    
+    <!-- Footer -->
+    <div class="container" style="background-color:#F1F1F1">
+      <hr>
+      <center>
+	This Name is Copyrighted &copy;
+	<span id="copyright">
+	  <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
+	</span>
+      </center>
+    </div>
+    <!-- Foundation Scripts! -->
+    <script src="{{ url_for('static',filename='js/vendor/jquery.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/vendor/what-input.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/vendor/foundation.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/app.js') }}"></script>
+  </body>
+</html>
