@@ -1,0 +1,27 @@
+{% extends 'default.html' %}
+
+{% block c_title %}
+Simon
+{% endblock %}
+
+{% block js %}
+<link rel="stylesheet" href="../static/css/simon.css">
+<script src="../static/js/simon.js"></script>
+{% endblock %}
+
+{% block c_content %}
+<div id="game_window">
+	<div class="button display blue" id="display_blue_button"></div>
+	<div class="button display red" id="display_red_button"></div>
+	<div class="button display green" id="display_green_button"></div>
+	<div class="button display yellow" id="display_yellow_button"></div>
+	
+	<br>
+	
+	<div class="button user blue" id="user_blue_button"></div>
+	<div class="button user red" id="user_red_button"></div>
+	<div class="button user green" id="user_green_button"></div>
+	<div class="button user yellow" id="user_yellow_button"></div>
+</div>
+<p>hello</p>
+{% endblock %}

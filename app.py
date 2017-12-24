@@ -13,6 +13,10 @@ def login():
 def dummy():
     return render_template('dummy.html')
 
+@app.route('/simon')
+def simon():
+    return render_template('simon.html')
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
