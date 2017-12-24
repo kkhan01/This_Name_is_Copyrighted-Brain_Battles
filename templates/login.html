@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login_custom.css') }}">
+  </head>
+  
+  <body>
+    <!-- Makes middle look smaller + good. May switch to Grid later -->
+    <div style="width:800px; margin:0 auto;">
+      
+      <h1 style="font-size: 50px;">LOGIN</h1>
+      <!-- LOGO! -->
+      <div class="media-object-section">
+	  <img style="width:100px !important;" src="{{ url_for('static',filename='img/logo.png') }}" alt="You Shouldn't Be Downloading This... It's Copyrighted">
+      </div>
+      <!-- Actual Info -->
+      <div class="container">
+	<label><b>Username</b></label>
+	<input type="text" placeholder="Enter Username" name="uname" required>
+
+	<label><b>Password</b></label>
+	<input type="password" placeholder="Enter Password" name="upass" required>
+	
+	<button type="submit">Login</button>
+	<!-- If user cant login straight away -->
+	<button type="button" class="lbutton">Forgot Password</button>
+	<button type="button" class="rbutton">Sign Up</button>
+      </div>
+    </div>
+    
+    <footer>
+      <div class="bottom">
+	<br>
+	<br>
+	<br>
+	<center>
+	  This Name is Copyrighted &copy;
+	  <span id="copyright">
+	    <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
+	  </span>
+	</center>
+      </div>
+    </footer>
+    
+  </body>
+  
+</html>

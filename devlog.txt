@@ -1,3 +1,6 @@
 khanK -- 2017-12-23 19:42:51
 basic structure of navbar + footer with jinja done
 
+khanK -- 2017-12-23 21:56:05
+done with a basic login design. need to make it actually direct + possible change fonts
+
