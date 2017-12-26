@@ -2,8 +2,6 @@ let display, user;
 let curIndex, pattern;
 let score, result;
 
-let gameStatus = new Promise(() => {});
-
 const COLOR_MAP = {
 	0: "blue",
 	1: "red",
@@ -15,14 +13,31 @@ function init() {
 	display = document.getElementsByClassName("display");
 	user = document.getElementsByClassName("user");
 	
-	score = result = 0;
+	curIndex = score = result = 0;
 	pattern = [];
+}
+
+//doesn't actually set to black, cuz the disabled CSS class does some stuff
+//it's actually gray (which isn't a bad color)
+function endGame() {
+	userClear();
+	for (let x = 0; x < 4; x++) {
+		user[x].style.backgroundColor = "black";
+		display[x].style.backgroundColor = "black";
+	}
+	
+	let scoreElem = document.createElement("h3");
+	scoreElem.innerHTML = "Final score: " + score;
+	
+	let gameDiv = document.getElementById("game_window");
+	gameDiv.appendChild(scoreElem);
 }
 
 //For some reason, this doesn't work inside of a promise
 //I don't why
 function userClear() {
 	for (let x = 0; x < 4; x++) {
+		//disable button
 		user[x].classList.remove(COLOR_MAP[parseInt(user[x].id)]);
 		user[x].classList.add("disabled");
 		
@@ -30,32 +45,32 @@ function userClear() {
 	}
 }
 
+//Every button press will call this
 function correctClick() {
 	let index = parseInt(this.id);
 	if (index != pattern[curIndex++]) {
 		console.log("oh no");
-		//gameStatus = Promise.resolve();
+		
+		//simon_exec will end the game if result is -1
 		result = -1;
-		//return Promise.resolve(-1);
 		simon_exec();
 	}
 	else if (curIndex >= pattern.length) {
 		console.log("we did it");
-		//gameStatus = Promise.resolve();
 		score++;
 		userClear();
 		simon_exec().then(() => {
 			user_run();
 		});
 	}
-	
-	console.log(gameStatus);
 }
 
+//Make user buttons available to use
 function user_run() {
 	curIndex = 0;
 	
 	for (let x = 0; x < 4; x++) {
+		//enbale button
 		user[x].classList.remove("disabled");
 		user[x].classList.add(COLOR_MAP[parseInt(user[x].id)]);
 		
@@ -71,16 +86,17 @@ function display_run(pattern) {
 		exec = exec.then(() => {
 		return new Promise(resolve => {
 		setTimeout(() => {
+			//change button color by adding it to another CSS class
 			display[index].classList.remove("disabled");
 			display[index].classList.add(COLOR_MAP[index]);
+			
 			setTimeout(() => {
 				display[index].classList.remove(COLOR_MAP[index]);
 				display[index].classList.add("disabled");
-			}, 500);
+			}, 500);	//change this interval to change flashing speed
 			
-			console.log("wee" + index);
 			resolve(index);
-		}, 1000);
+		}, 1000);		//change this interval to change wait time between button flashes
 		});
 		});
 	}
@@ -88,15 +104,16 @@ function display_run(pattern) {
 	return exec;
 }
 
+//main reason this is async is so program will "block" on display_run
+//also legacy reasons
 async function simon_exec() {
 	if (result == -1) {
 		console.log("final score: " + score);
-		//call end routine
+		endGame();
 		return;
 	}
 	
 	pattern.push(Math.floor(Math.random() * 4));
-	//pattern = [3, 0];
 	console.log("pattern: " + pattern);
 	
 	await display_run(pattern);
@@ -111,6 +128,4 @@ init();
 simon_exec().then(() => {
 	user_run();
 });
-
-//display_run([3, 0, 1, 2, 1]);
 
