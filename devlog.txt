@@ -4,3 +4,15 @@ basic structure of navbar + footer with jinja done
 khanK -- 2017-12-23 21:56:05
 done with a basic login design. need to make it actually direct + possible change fonts
 
+linS -- 2017-12-24 15:59:18
+figured out how to do timer for simon game
+
+linS -- 2017-12-24 16:36:22
+POC of game switching control from display to user
+
+linS -- 2017-12-25 22:57:21
+Completed base Simon game
+
+linS -- 2017-12-25 23:29:16
+Created endgame display
+
