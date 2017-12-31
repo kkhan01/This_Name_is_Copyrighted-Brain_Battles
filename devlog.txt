@@ -16,3 +16,6 @@ Completed base Simon game
 linS -- 2017-12-25 23:29:16
 Created endgame display
 
+khanK -- 2017-12-31 18:26:49
+completed logging in and signing up with database interaction!
+

@@ -1,39 +1,60 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login</title>
+    <title>
+      {% block c_title %}
+      Login
+      {% endblock %}
+    </title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login_custom.css') }}">
   </head>
   
   <body>
+    <!-- Messages -->
+    <center>
+      {% set messages = get_flashed_messages() %}
+      {% for i in messages %}
+      {{i}}
+      {% endfor %}
+    </center>
+    
     <!-- Makes middle look smaller + good. May switch to Grid later -->
     <div style="width:800px; margin:0 auto;">
-      
-      <h1 style="font-size: 50px;">LOGIN</h1>
+      <h1 style="font-size: 50px;">{% block c_title2 %} LOGIN {% endblock %}</h1>
       <!-- LOGO! -->
       <div class="media-object-section">
-	  <img style="width:100px !important;" src="{{ url_for('static',filename='img/logo.png') }}" alt="You Shouldn't Be Downloading This... It's Copyrighted">
+	<img style="width:100px !important;" src="{{ url_for('static',filename='img/logo.png') }}" alt="You Shouldn't Be Downloading This... It's Copyrighted">
       </div>
+      {% block content %}
       <!-- Actual Info -->
       <div class="container">
-	<label><b>Username</b></label>
-	<input type="text" placeholder="Enter Username" name="uname" required>
+	<form method="POST" action="/home">
+	  <label><b>Username</b></label>
+	  <input type="text" placeholder="Enter Username" name="uname" required>
 
-	<label><b>Password</b></label>
-	<input type="password" placeholder="Enter Password" name="upass" required>
-	
-	<button type="submit">Login</button>
+	  <label><b>Password</b></label>
+	  <input type="password" placeholder="Enter Password" name="upass" required>
+	  
+	  <button type="submit">Login</button>
+	</form>
 	<!-- If user cant login straight away -->
-	<button type="button" class="lbutton">Forgot Password</button>
-	<button type="button" class="rbutton">Sign Up</button>
+
+	<!-- Later addition -->
+	<!-- <button type="button" class="lbutton">Forgot Password</button> -->
+	<form method="POST" action="/create">
+	  <button type="submit" class="rbutton">Sign Up</button>
+	</form>
       </div>
+      {% endblock %}
     </div>
     
     <footer>
       <div class="bottom">
+	{% block breaks %}
 	<br>
 	<br>
 	<br>
+	{% endblock %}
 	<center>
 	  This Name is Copyrighted &copy;
 	  <span id="copyright">

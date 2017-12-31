@@ -1,0 +1,25 @@
+{% extends 'login.html' %}
+
+{% block c_title %}
+Sign Up!
+{% endblock %}
+
+{% block c_title2 %}
+Sign Up Form
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <form method="POST" action="/creation">
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="upass" required>
+
+    <label><b>Verify Password</b></label>
+    <input type="password" placeholder="Enter Password Again" name="upass2" required>
+    <button type="submit">Sign Up</button>
+  </form>
+</div>
+{% endblock %}
