@@ -127,7 +127,9 @@ def home():
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
-    return render_template('search.html', s_text = request.form['searchtext'])
+    # REPLACE ARRAY W/ LEGIT DATABASE RESULTS LATER!!!
+    array = [5, "girl", 2, "horse", 21]
+    return render_template('search.html', s_text = request.form['searchtext'], results = array)
 
 @app.route('/simon')
 def simon():

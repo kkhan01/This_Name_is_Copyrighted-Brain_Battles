@@ -6,6 +6,10 @@ Search Results
 
 {% block c_content %}
 
-{{s_text}}
+<h2>Results matching "{{s_text}}" found:</h2>
+<hr>
+{% for i in results %}
+<center>{{i}}</center>
+{% endfor %}
 
 {% endblock %}
