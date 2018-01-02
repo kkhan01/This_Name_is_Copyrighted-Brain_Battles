@@ -15,6 +15,28 @@ function init() {
 	
 	curIndex = score = result = 0;
 	pattern = [];
+	
+	simon_exec().then(() => {
+		user_run();
+	});
+}
+
+function restart() {
+	for (let x = 0; x < 4; x++) {
+		user[x].style = "";
+		display[x].style = "";
+	}
+	
+	//both restartButton and finalScore should exist together
+	let restartButton = document.getElementById("restart");
+	let finalScore = document.getElementById("finalScore");
+	
+	let gameDiv = document.getElementById("game_window");
+	
+	gameDiv.removeChild(finalScore);
+	gameDiv.removeChild(restartButton);
+	
+	init();
 }
 
 //doesn't actually set to black, cuz the disabled CSS class does some stuff
@@ -27,10 +49,18 @@ function endGame() {
 	}
 	
 	let scoreElem = document.createElement("h3");
+	scoreElem.id = "finalScore";
 	scoreElem.innerHTML = "Final score: " + score;
+	
+	let restartButton = document.createElement("div");
+	restartButton.classList.add("button");
+	restartButton.id = "restart";
+	restartButton.addEventListener("click", restart);
+	restartButton.innerHTML = "Play Again";
 	
 	let gameDiv = document.getElementById("game_window");
 	gameDiv.appendChild(scoreElem);
+	gameDiv.appendChild(restartButton);
 }
 
 //For some reason, this doesn't work inside of a promise
@@ -93,9 +123,9 @@ function display_run(pattern) {
 			setTimeout(() => {
 				display[index].classList.remove(COLOR_MAP[index]);
 				display[index].classList.add("disabled");
+				resolve(index);
 			}, 500);	//change this interval to change flashing speed
 			
-			resolve(index);
 		}, 1000);		//change this interval to change wait time between button flashes
 		});
 		});
@@ -119,13 +149,9 @@ async function simon_exec() {
 	await display_run(pattern);
 	console.log("display_run finished");
 	
-	user_run();
 	return;
 }
 
 init();
 
-simon_exec().then(() => {
-	user_run();
-});
 

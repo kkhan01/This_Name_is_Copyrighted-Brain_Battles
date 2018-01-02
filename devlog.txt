@@ -19,12 +19,20 @@ Created endgame display
 khanK -- 2017-12-31 18:26:49
 completed logging in and signing up with database interaction!
 
-khanK -- 2018-01-02 15:32:16
-made a cancel button for sign up page
+linS -- 2018-01-02 14:41:24
+added restart button to simon
 
 khanK -- 2018-01-02 15:46:46
 added a search results, need to actually search database. search button looks ugly rn, need to fix later
 
+elsharawyM -- 2018-01-02 14:48:00
+started reaction timer, got startup working
+
+khanK -- 2018-01-02 15:32:16
+made a cancel button for sign up page
+
 khanK -- 2018-01-02 15:17:18
 made search results, need to connect to actual database, but it's ready to display array results
 
+khanK -- 2018-01-02 15:46:46
+added a search results, need to actually search database. search button looks ugly rn, need to fix later, devlog is a bit of a mess....
