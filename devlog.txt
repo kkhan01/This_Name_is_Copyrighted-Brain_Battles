@@ -22,3 +22,6 @@ completed logging in and signing up with database interaction!
 -e khanK -- 2018-01-02 15:32:16
 made a cancel button for sign up page
 
+-e khanK -- 2018-01-02 15:46:46
+added a search results, need to actually search database. search button looks ugly rn, need to fix later
+

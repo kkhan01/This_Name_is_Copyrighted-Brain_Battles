@@ -42,8 +42,12 @@
       </div>
       <div class="top-bar-right">
         <ul class="menu">
-          <li><input type="search" placeholder="Search"></li>
-          <li><button type="button" class="button">Search</button></li>
+	  <form method="POST" action="/search">
+            <li><input type="text" placeholder="Search" name="searchtext"></li>
+	    <li></li>
+            <li><button type="submit" class="button">Search</button></li>
+	    <li></li>
+	  </form>
 	  <li><a href="/logout">Logout</a></li>
         </ul>
       </div>

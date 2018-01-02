@@ -125,6 +125,10 @@ def home():
     else:
         return render_template('dummy.html', name = session['user'])
 
+@app.route('/search', methods=['POST', 'GET'])
+def search():
+    return render_template('search.html', s_text = request.form['searchtext'])
+
 @app.route('/simon')
 def simon():
     return render_template('simon.html')
