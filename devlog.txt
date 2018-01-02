@@ -22,3 +22,6 @@ completed logging in and signing up with database interaction!
 -e khanK -- 2018-01-02 15:32:16
 made a cancel button for sign up page
 
+linS -- 2018-01-02 14:41:24
+added restart button to simon
+
