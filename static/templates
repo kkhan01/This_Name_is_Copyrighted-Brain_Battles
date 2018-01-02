@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .full {height: 100vh;}
+      .box {border: 1px solid black;}
+    </style>
+  </head>
+
+  <body class="full">
+    <div class="full box" id="box"></div>
+
+    <script src="find.js"></script>
+  </body>
+</html>

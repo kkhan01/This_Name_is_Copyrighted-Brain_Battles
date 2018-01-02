@@ -28,3 +28,6 @@ added restart button to simon
 khanK -- 2018-01-02 15:46:46
 added a search results, need to actually search database. search button looks ugly rn, need to fix later
 
+elsharawyM -- 2018-01-02 14:48:00
+started reaction timer, got startup working
+
