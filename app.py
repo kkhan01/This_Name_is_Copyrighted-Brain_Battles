@@ -39,6 +39,18 @@ def create_user(username, password):
     db.commit() #save changes
     return True
 
+#get list of users with matching string within
+def search_user(username):
+    command = 'SELECT * FROM accounts'
+    possibility = c.execute(command)
+    array = []
+    for i in possibility:
+        if(username in i[0]):
+            array.append(i[0])
+        else:
+            pass        
+    return array
+
 #==========================================================
 #flask code
 app = Flask(__name__)
@@ -127,13 +139,16 @@ def home():
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
-    # REPLACE ARRAY W/ LEGIT DATABASE RESULTS LATER!!!
-    array = [5, "girl", 2, "horse", 21]
-    return render_template('search.html', s_text = request.form['searchtext'], results = array)
+    s = request.form['searchtext']
+    return render_template('search.html', s_text = s, results = search_user(s))
 
 @app.route('/simon')
 def simon():
     return render_template('simon.html')
+
+@app.route('/react')
+def react():
+    return render_template('react.html')
 
 if __name__ == '__main__':
     app.debug = True

@@ -45,3 +45,6 @@ reworked some aesthetics of react, needs to be added to flask app
 linS -- 2018-01-03 14:34:44
 added start button to simon
 
+khanK -- 2018-01-03 15:42:34
+made a serach method, unsure if it works, working on react logistics with mansour
+
