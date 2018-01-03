@@ -36,3 +36,6 @@ made search results, need to connect to actual database, but it's ready to displ
 
 khanK -- 2018-01-02 15:46:46
 added a search results, need to actually search database. search button looks ugly rn, need to fix later, devlog is a bit of a mess....
+elsharawyM -- 2018-01-02 20:22:40
+Finished reaction timer, lacking good style
+
