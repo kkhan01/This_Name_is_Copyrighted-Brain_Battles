@@ -24,18 +24,6 @@ function start() {
 	let gameDiv = document.getElementById("game_window");
 	gameDiv.appendChild(temp);
 	gameDiv.appendChild(startButton);
-	
-	/*
-	let restartButton = document.createElement("div");
-	restartButton.classList.add("button");
-	restartButton.id = "restart";
-	restartButton.addEventListener("click", restart);
-	restartButton.innerHTML = "Play Again";
-	
-	let gameDiv = document.getElementById("game_window");
-	gameDiv.appendChild(scoreElem);
-	gameDiv.appendChild(restartButton);
-	*/
 }
 
 function init() {
@@ -190,4 +178,3 @@ async function simon_exec() {
 }
 
 window.onload = start;
-//init();

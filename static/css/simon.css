@@ -18,6 +18,13 @@
 	background-color: gray;
 }
 
-.end {
-	background-color: black;
+.button {
+	/*margin: auto;*/
 }
+
+#game_window {
+	display: inline;
+	left: 50%;
+}
+
+
