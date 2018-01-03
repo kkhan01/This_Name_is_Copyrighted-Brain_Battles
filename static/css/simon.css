@@ -18,13 +18,8 @@
 	background-color: gray;
 }
 
-.button {
+.cell {
 	/*margin: auto;*/
+	height: 50px;
 }
-
-#game_window {
-	display: inline;
-	left: 50%;
-}
-
 

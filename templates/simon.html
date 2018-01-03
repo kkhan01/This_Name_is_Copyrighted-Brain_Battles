@@ -10,17 +10,20 @@ Simon
 {% endblock %}
 
 {% block c_content %}
-<div id="game_window">
-	<div class="button display disabled" id="display_blue_button"></div>
-	<div class="button display disabled" id="display_red_button"></div>
-	<div class="button display disabled" id="display_green_button"></div>
-	<div class="button display disabled" id="display_yellow_button"></div>
+<div class="grid-container">
+<div id="game_window" class="grid-x grid-margin-x">
+
+	<div class="button display cell small-3 disabled" id="display_blue_button"></div>
+	<div class="button display cell small-3 disabled" id="display_red_button"></div>
+	<div class="button display cell small-3 disabled" id="display_green_button"></div>
+	<div class="button display cell small-3 disabled" id="display_yellow_button"></div>
 	
 	<br>
 	
-	<div class="button user disabled" id="0"></div>
-	<div class="button user disabled" id="1"></div>
-	<div class="button user disabled" id="2"></div>
-	<div class="button user disabled" id="3"></div>
+	<div class="button user cell small-3 disabled" id="0"></div>
+	<div class="button user cell small-3 disabled" id="1"></div>
+	<div class="button user cell small-3 disabled" id="2"></div>
+	<div class="button user cell small-3 disabled" id="3"></div>
+</div>
 </div>
 {% endblock %}
