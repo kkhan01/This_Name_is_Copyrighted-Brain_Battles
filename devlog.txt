@@ -39,3 +39,6 @@ added a search results, need to actually search database. search button looks ug
 elsharawyM -- 2018-01-02 20:22:40
 Finished reaction timer, lacking good style
 
+elsharawyM -- 2018-01-03 14:36:26
+reworked some aesthetics of react, needs to be added to flask app
+

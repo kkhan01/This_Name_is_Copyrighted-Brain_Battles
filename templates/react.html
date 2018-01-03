@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <style>
-      .full {height: 100vh;}
-      .box {border: 1px solid black;}
-    </style>
-  </head>
+{% extends 'default.html' %}
 
-  <body class="full">
+{% block c_title %}
+Reaction Timer
+{% endblock %}
+
+{% block include %}
+<style>
+  .full {height: 100vh;}
+  .box {border: 1px solid black;text-align: center;}
+</style>
+<script src="../static/js/react.js"></script>
+{% endblock %}
+
+{% block c_content %}
     <div class="full box" id="box"></div>
-
-    <script src="../static/js/react.js"></script>
-  </body>
-</html>
+{% endblock %}
