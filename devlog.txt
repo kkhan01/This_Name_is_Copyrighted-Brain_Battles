@@ -42,3 +42,6 @@ Finished reaction timer, lacking good style
 elsharawyM -- 2018-01-03 14:36:26
 reworked some aesthetics of react, needs to be added to flask app
 
+linS -- 2018-01-03 14:34:44
+added start button to simon
+

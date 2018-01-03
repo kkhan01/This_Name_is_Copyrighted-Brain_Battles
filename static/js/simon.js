@@ -1,3 +1,5 @@
+"use strict";
+
 let display, user;
 let curIndex, pattern;
 let score, result;
@@ -9,12 +11,47 @@ const COLOR_MAP = {
 	3: "yellow"
 };
 
+function start() {
+	let startButton = document.createElement("div");
+	startButton.classList.add("button");
+	startButton.id = "start";
+	startButton.innerHTML = "Start Simon";
+	startButton.addEventListener("click", init);
+	
+	let temp = document.createElement("br");
+	temp.id = "temp";
+	
+	let gameDiv = document.getElementById("game_window");
+	gameDiv.appendChild(temp);
+	gameDiv.appendChild(startButton);
+	
+	/*
+	let restartButton = document.createElement("div");
+	restartButton.classList.add("button");
+	restartButton.id = "restart";
+	restartButton.addEventListener("click", restart);
+	restartButton.innerHTML = "Play Again";
+	
+	let gameDiv = document.getElementById("game_window");
+	gameDiv.appendChild(scoreElem);
+	gameDiv.appendChild(restartButton);
+	*/
+}
+
 function init() {
 	display = document.getElementsByClassName("display");
 	user = document.getElementsByClassName("user");
 	
 	curIndex = score = result = 0;
 	pattern = [];
+	
+	let gameDiv = document.getElementById("game_window");
+	let startButton = document.getElementById("start");
+	if (startButton !== null) {
+		let br = document.getElementById("temp");
+		gameDiv.removeChild(br);
+		gameDiv.removeChild(startButton);
+	}
 	
 	simon_exec().then(() => {
 		user_run();
@@ -152,6 +189,5 @@ async function simon_exec() {
 	return;
 }
 
-init();
-
-
+window.onload = start;
+//init();
