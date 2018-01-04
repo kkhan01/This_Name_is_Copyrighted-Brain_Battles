@@ -1,3 +1,6 @@
+marchiniM -- 2017-12-22 01:09:15
+Uploaded design document
+
 khanK -- 2017-12-23 19:42:51
 basic structure of navbar + footer with jinja done
 
@@ -19,6 +22,9 @@ Created endgame display
 khanK -- 2017-12-31 18:26:49
 completed logging in and signing up with database interaction!
 
+marchiniM -- 2018-01-01 18:42:13
+wrote basic database functions, not working need to test more
+
 linS -- 2018-01-02 14:41:24
 added restart button to simon
 
@@ -36,6 +42,7 @@ made search results, need to connect to actual database, but it's ready to displ
 
 khanK -- 2018-01-02 15:46:46
 added a search results, need to actually search database. search button looks ugly rn, need to fix later, devlog is a bit of a mess....
+
 elsharawyM -- 2018-01-02 20:22:40
 Finished reaction timer, lacking good style
 
@@ -53,4 +60,7 @@ Made simon look prettier
 
 elsharawyM -- 2018-01-04 15:18:25
 Successfully merged reaction timer game into site
+
+marchiniM -- 2018-01-04 17:26:33
+All database functions in database.py working
 
