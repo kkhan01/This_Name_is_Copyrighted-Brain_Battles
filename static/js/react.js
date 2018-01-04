@@ -1,5 +1,4 @@
-var box = document.getElementById("box");
-box.setAttribute("class","full");
+var box = document.getElementById("gamebox");
 var body = document.getElementsByTagName("body")[0];
 var start = document.getElementById("start");
 var boxHeight = box.offsetHeight;

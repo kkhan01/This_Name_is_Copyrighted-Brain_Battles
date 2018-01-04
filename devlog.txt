@@ -48,3 +48,6 @@ added start button to simon
 khanK -- 2018-01-03 15:42:34
 made a serach method, unsure if it works, working on react logistics with mansour
 
+elsharawyM -- 2018-01-04 15:18:25
+Successfully merged reaction timer game into site
+

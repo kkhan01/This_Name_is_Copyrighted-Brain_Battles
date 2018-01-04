@@ -9,9 +9,12 @@ Reaction Timer
   .full {height: 100vh;}
   .box {border: 1px solid black;text-align: center;}
 </style>
-<script src="../static/js/react.js"></script>
 {% endblock %}
 
 {% block c_content %}
-    <div class="full box" id="box"></div>
+<div class="full box" id="gamebox"></div>
 {% endblock %}
+
+{% block scripts %}
+<script src="../static/js/react.js"></script>    
+{% endblock  %}
