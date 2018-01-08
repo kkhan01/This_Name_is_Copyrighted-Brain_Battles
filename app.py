@@ -150,6 +150,22 @@ def simon():
 def react():
     return render_template('react.html')
 
+@app.route('/rename')
+def rename():
+    image = request.form['image']
+    path = "/static/img/temp/"
+    newpath = "/static/img/profile/"
+    base, ext = os.path.splitext(image)
+    if(ext != ".png" or ext != ".jpg" or ext != ".jpeg" or ext != ".gif"):
+        #delete file and flash invalid
+        pass
+    else:
+        #rename and flash changed?
+        #print base + "   "+ ext
+        #os.rename(os.path.join(newpath, image), os.path.join(path, str(session['user'])+ext))
+        pass
+    return redirect(url_for(profile))
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
