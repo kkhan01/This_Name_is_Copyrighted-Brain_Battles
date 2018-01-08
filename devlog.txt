@@ -64,13 +64,11 @@ Successfully merged reaction timer game into site
 marchiniM -- 2018-01-04 17:26:33
 All database functions in database.py working
 
-<<<<<<< HEAD
 elsharawyM -- 2018-01-08 14:45:33
 started wordsearch.html/js
-=======
+
 linS -- 2018-01-08 14:40:51
 added template for ajax
->>>>>>> 094374f3b93d68acf8791f7c02aad298b61ab892
 
 khanK -- 2018-01-08 15:48:40
 started renaming logic
