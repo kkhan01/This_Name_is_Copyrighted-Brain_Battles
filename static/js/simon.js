@@ -36,9 +36,12 @@ function init() {
 	let gameDiv = document.getElementById("game_window");
 	let startButton = document.getElementById("start");
 	if (startButton !== null) {
-		let br = document.getElementById("temp");
-		gameDiv.removeChild(br);
 		gameDiv.removeChild(startButton);
+	}
+	
+	let br = document.getElementById("temp");
+	if (br !== null) {
+		gameDiv.removeChild(br);
 	}
 	
 	simon_exec().then(() => {
@@ -77,6 +80,9 @@ function endGame() {
 	scoreElem.id = "finalScore";
 	scoreElem.innerHTML = "Final score: " + score;
 	
+	let temp = document.createElement("br");
+	temp.id = "temp";
+	
 	let restartButton = document.createElement("div");
 	restartButton.classList.add("button");
 	restartButton.id = "restart";
@@ -85,7 +91,10 @@ function endGame() {
 	
 	let gameDiv = document.getElementById("game_window");
 	gameDiv.appendChild(scoreElem);
+	gameDiv.appendChild(temp);
 	gameDiv.appendChild(restartButton);
+	
+	//call sendScore
 }
 
 //For some reason, this doesn't work inside of a promise
@@ -177,4 +186,18 @@ async function simon_exec() {
 	return;
 }
 
+function sendScore(username, score) {
+	//get username in here?
+	
+	$.ajax({
+		url: "<some path>",
+		method: "POST",
+		data: {
+			username,
+			score
+		}
+	});
+}
+
 window.onload = start;
+
