@@ -38,6 +38,19 @@ def remove_member(name, member):
     c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, members))
     db.commit()
 
+#finds all the teams a given user is a part of
+def find_teams(user):
+    c.execute('SELECT teamname FROM teams;')
+    teams = c.fetchall()[0][0]
+    teams_in = []
+    for team in teams:
+        c.execute('SELECT members FROM teams WHERE teamname = "%s";'%team)
+        members = c.fetchall()[0][0]
+        if members.find(user) != -1:
+            teams_in.append(team)
+    return teams_in
+
+
 #gets a user's highscore for a given game
 def get_user_highscore(game, user):
     c.execute('SELECT MAX(score) FROM scores WHERE game="%s" AND username="%s";'%(game, user))
