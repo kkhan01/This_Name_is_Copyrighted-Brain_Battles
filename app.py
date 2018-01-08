@@ -2,7 +2,7 @@ from __future__ import print_function
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 import sys
 import os
-import database
+import database.py
 import sqlite3   #enable control of an sqlite database
 f="data/database.db"
 
@@ -150,6 +150,7 @@ def simon():
 def react():
     return render_template('react.html')
 
+<<<<<<< HEAD
 @app.route('/rename')
 def rename():
     image = request.form['image']
@@ -165,6 +166,17 @@ def rename():
         #os.rename(os.path.join(newpath, image), os.path.join(path, str(session['user'])+ext))
         pass
     return redirect(url_for(profile))
+=======
+@app.route('/profile')
+def profile():
+    username = session['user']
+    simon = database.get_user_highscore('simon', username)
+    search = database.get_user_highscore('search', username)
+    react = database.get_user_highscore('react', username)
+    teams = find_teams(username)
+    return render_template('profile.html', user = username, simon = simon, search = search, react = react, teams = teams)
+    
+>>>>>>> 094374f3b93d68acf8791f7c02aad298b61ab892
 
 if __name__ == '__main__':
     app.debug = True
