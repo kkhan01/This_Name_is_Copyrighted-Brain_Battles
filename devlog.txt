@@ -64,3 +64,6 @@ Successfully merged reaction timer game into site
 marchiniM -- 2018-01-04 17:26:33
 All database functions in database.py working
 
+elsharawyM -- 2018-01-08 14:45:33
+started wordsearch.html/js
+
