@@ -4,6 +4,8 @@ let display, user;
 let curIndex, pattern;
 let score, result;
 
+let soundArray;
+
 const COLOR_MAP = {
 	0: "blue",
 	1: "red",
@@ -11,12 +13,27 @@ const COLOR_MAP = {
 	3: "yellow"
 };
 
+//elem is a DOM object. removes the elem if it exists
+function removeElem(elem) {
+	let gameDiv = document.getElementById("game_window");
+	if (elem !== null) {
+		gameDiv.removeChild(elem);
+	}
+}
+
 function start() {
+	display = document.getElementsByClassName("display");
+	user = document.getElementsByClassName("user");
+	
+	curIndex = score = result = 0;
+	pattern = [];
+	soundArray = [];
+
 	let startButton = document.createElement("div");
 	startButton.classList.add("button");
 	startButton.id = "start";
 	startButton.innerHTML = "Start Simon";
-	startButton.addEventListener("click", init);
+	startButton.addEventListener("click", restart);
 	
 	let temp = document.createElement("br");
 	temp.id = "temp";
@@ -26,45 +43,32 @@ function start() {
 	gameDiv.appendChild(startButton);
 }
 
-function init() {
-	display = document.getElementsByClassName("display");
-	user = document.getElementsByClassName("user");
-	
-	curIndex = score = result = 0;
-	pattern = [];
-	
-	let gameDiv = document.getElementById("game_window");
-	let startButton = document.getElementById("start");
-	if (startButton !== null) {
-		gameDiv.removeChild(startButton);
-	}
-	
-	let br = document.getElementById("temp");
-	if (br !== null) {
-		gameDiv.removeChild(br);
-	}
-	
-	simon_exec().then(() => {
-		user_run();
-	});
-}
-
 function restart() {
 	for (let x = 0; x < 4; x++) {
 		user[x].style = "";
 		display[x].style = "";
 	}
 	
-	//both restartButton and finalScore should exist together
-	let restartButton = document.getElementById("restart");
-	let finalScore = document.getElementById("finalScore");
+	curIndex = score = result = 0;
+	pattern = [];
 	
-	let gameDiv = document.getElementById("game_window");
+	//list of elem ids to remove
+	let targetElems = [
+		"restart",
+		"finalScore",
+		"start",
+		"temp",
+		"restart"
+	];
 	
-	gameDiv.removeChild(finalScore);
-	gameDiv.removeChild(restartButton);
+	for (let elem of targetElems) {
+		removeElem( document.getElementById(elem) );
+	}
 	
-	init();
+	simon_exec().then(() => {
+		user_run();
+	});
+	
 }
 
 //doesn't actually set to black, cuz the disabled CSS class does some stuff
@@ -153,10 +157,12 @@ function display_run(pattern) {
 			//change button color by adding it to another CSS class
 			display[index].classList.remove("disabled");
 			display[index].classList.add(COLOR_MAP[index]);
+			//play sound
 			
 			setTimeout(() => {
 				display[index].classList.remove(COLOR_MAP[index]);
 				display[index].classList.add("disabled");
+				//stop sound, reset timer on it
 				resolve(index);
 			}, 500);	//change this interval to change flashing speed
 			

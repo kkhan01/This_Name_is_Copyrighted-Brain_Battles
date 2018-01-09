@@ -73,3 +73,6 @@ added template for ajax
 khanK -- 2018-01-08 15:48:40
 started renaming logic
 
+linS -- 2018-01-09 14:34:54
+refactored simon
+
