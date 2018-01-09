@@ -150,6 +150,10 @@ def simon():
 def react():
     return render_template('react.html')
 
+@app.route('/wordsearch')
+def wordsearch():
+    return render_template('wordsearch.html')
+
 @app.route('/rename')
 def rename():
     image = request.form['image']
