@@ -162,23 +162,29 @@ def rename():
     base, ext = os.path.splitext(image)
     if(ext != ".png" or ext != ".jpg" or ext != ".jpeg" or ext != ".gif"):
         #delete file and flash invalid
-        pass
+        flash ('Invalid file! Please upload a valid image.')
+        os.remove((os.path.join(path, image)))
     else:
         #rename and flash changed?
-        #print base + "   "+ ext
-        #os.rename(os.path.join(newpath, image), os.path.join(path, str(session['user'])+ext))
-        pass
+        print base + "   "+ ext
+        #os.rename(os.path.join(newpath, image), os.path.join(path, session['user']+ext))
     return redirect(url_for(profile))
 
-@app.route('/profile')
+@app.route('/profile', methods=['POST', 'GET'])
 def profile():
-    username = session['user']
+    username = 'hello'
+    isuser = False
+    if request.method == 'POST':
+        username = request.form['user']
+        isuser = True
+    else:
+        username = session['user']
     simon = database.get_user_highscore('simon', username)
     search = database.get_user_highscore('search', username)
     react = database.get_user_highscore('react', username)
     teams = find_teams(username)
-    return render_template('profile.html', user = username, simon = simon, search = search, react = react, teams = teams)
-    
+    return render_template('profile.html', user = username, iu = isuser, simon = simon, search = search, react = react, teams = teams)
+
 
 if __name__ == '__main__':
     app.debug = True

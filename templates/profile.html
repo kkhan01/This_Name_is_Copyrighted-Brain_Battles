@@ -1,0 +1,22 @@
+{% extends 'default.html' %}
+
+{% block c_title %}
+{{user}} Profile
+{% endblock %}
+
+{% block c_content %}
+
+<!-- TEMP -->
+Simon: {{simon}}
+<br>
+Word Search: {{search}}
+<br>
+React: {{react}}
+<br>
+
+<form action="/rename">
+  <input name="myFile" type="file">
+  <input type="submit">
+</form> 
+
+{% endblock %}
