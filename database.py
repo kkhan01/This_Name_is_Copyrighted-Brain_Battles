@@ -19,6 +19,10 @@ def create_team(name, creator):
     c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, creator))
     db.commit()
 
+def delete_team(name):
+    c.execute('DELETE FROM teams WHERE teamname = "%s";'%name)
+    db.commit()
+
 #adds a member to a team 
 def add_member(name, member):
     c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
@@ -41,7 +45,8 @@ def remove_member(name, member):
 #finds all the teams a given user is a part of
 def find_teams(user):
     c.execute('SELECT teamname FROM teams;')
-    teams = c.fetchall()[0][0]
+    teams = c.fetchall()
+    #print teams
     teams_in = []
     for team in teams:
         c.execute('SELECT members FROM teams WHERE teamname = "%s";'%team)
@@ -69,5 +74,6 @@ def get_game_highscore(game):
     else:
         return result[0][0]
 
-print get_game_highscore('simon')
+print find_teams('michelamar')
+
               
