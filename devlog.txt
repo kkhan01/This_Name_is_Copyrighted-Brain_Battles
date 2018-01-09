@@ -73,3 +73,6 @@ added template for ajax
 khanK -- 2018-01-08 15:48:40
 started renaming logic
 
+marchiniM -- 2018-01-09 14:36:03
+Added a remove_team function to database.py and added a function to find all the teams a given user is a part of
+
