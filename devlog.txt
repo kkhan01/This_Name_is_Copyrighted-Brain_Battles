@@ -82,10 +82,6 @@ Added a remove_team function to database.py and added a function to find all the
 elsharawyM -- 2018-01-09 14:44:46
 did API ajax call for wordsearch
 
-
-
-
-
 khanK -- 2018-01-09 15:50:31
 worked out the profile + renaming interaction. need to make legit profiles and work out renaming logic
 
