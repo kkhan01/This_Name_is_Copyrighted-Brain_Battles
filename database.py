@@ -7,8 +7,6 @@ c.execute('CREATE TABLE IF NOT EXISTS accounts (username TEXT PRIMARY KEY, passw
 c.execute('CREATE TABLE IF NOT EXISTS scores (game TEXT, username TEXT, score INTEGER);')
 c.execute('CREATE TABLE IF NOT EXISTS teams (teamname TEXT, members TEXT);')
 
-
-
 #adds a users new score
 def add_score(game, user, score):
     c.execute('INSERT INTO scores VALUES("%s", "%s", %d);'%(game, user, score))
