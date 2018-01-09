@@ -9,7 +9,13 @@ Search Results
 <h2>Results matching "{{s_text}}" found:</h2>
 <hr>
 {% for i in results %}
-<center>{{i}}</center>
+<center>
+  {{i}}
+  <form method="POST" action="/profile">
+    <input type="hidden" name="user" value={{i}}>
+    <button type="submit"> View Profile </button>
+  </form>
+</center>
 {% endfor %}
 
 {% endblock %}

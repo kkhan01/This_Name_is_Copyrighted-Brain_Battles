@@ -166,7 +166,7 @@ def rename():
         os.remove((os.path.join(path, image)))
     else:
         #rename and flash changed?
-        print base + "   "+ ext
+        eprint (base + "   "+ ext)
         #os.rename(os.path.join(newpath, image), os.path.join(path, session['user']+ext))
     return redirect(url_for(profile))
 
