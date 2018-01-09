@@ -13,6 +13,8 @@ const COLOR_MAP = {
 	3: "yellow"
 };
 
+const SOUND_DIR = "static/audio";
+
 //elem is a DOM object. removes the elem if it exists
 function removeElem(elem) {
 	let gameDiv = document.getElementById("game_window");
@@ -29,6 +31,7 @@ function start() {
 	//pattern = [];
 	
 	soundArray = [];
+	
 
 	let startButton = document.createElement("div");
 	startButton.classList.add("button");
