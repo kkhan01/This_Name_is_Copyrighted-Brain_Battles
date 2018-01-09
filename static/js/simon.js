@@ -25,8 +25,9 @@ function start() {
 	display = document.getElementsByClassName("display");
 	user = document.getElementsByClassName("user");
 	
-	curIndex = score = result = 0;
-	pattern = [];
+	//curIndex = score = result = 0;
+	//pattern = [];
+	
 	soundArray = [];
 
 	let startButton = document.createElement("div");
