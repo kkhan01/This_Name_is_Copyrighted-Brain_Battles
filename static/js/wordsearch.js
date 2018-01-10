@@ -5,7 +5,7 @@ var transmit = function() {
     url: 'http://www.randomtext.me/api/gibberish/p-1/100',
     type: 'GET',
     success: function(d) {
-	var randomwords = d["text_out"].replace("<p>","").replace("</p>","");
+	var randomwords = d["text_out"].replace("<p>","").replace("</p>","").toUpperCase();
 	//console.log(randomwords);
 	construct_list(randomwords,10,4,8);
     } //end success callback

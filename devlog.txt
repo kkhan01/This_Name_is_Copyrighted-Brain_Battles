@@ -88,3 +88,6 @@ worked out the profile + renaming interaction. need to make legit profiles and w
 khanK -- 2018-01-09 15:12:19
 made searching buttons. unsure if they work because database has thread issues
 
+elsharawyM -- 2018-01-10 14:25:54
+updated ajax call to use uppercase
+
