@@ -2,7 +2,7 @@ from __future__ import print_function
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 import sys
 import os
-import database
+#import database
 import sqlite3   #enable control of an sqlite database
 f="data/database.db"
 
@@ -51,6 +51,77 @@ def search_user(username):
             pass        
     return array
 
+
+c.execute('CREATE TABLE IF NOT EXISTS accounts (username TEXT PRIMARY KEY, password TEXT);')
+c.execute('CREATE TABLE IF NOT EXISTS scores (game TEXT, username TEXT, score INTEGER);')
+c.execute('CREATE TABLE IF NOT EXISTS teams (teamname TEXT, members TEXT);')
+
+#adds a users new score
+def add_score(game, user, score):
+    c.execute('INSERT INTO scores VALUES("%s", "%s", %d);'%(game, user, score))
+    db.commit()
+    
+#creates a new team
+def create_team(name, creator):
+    c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, creator))
+    db.commit()
+
+def delete_team(name):
+    c.execute('DELETE FROM teams WHERE teamname = "%s";'%name)
+    db.commit()
+
+#adds a member to a team 
+def add_member(name, member):
+    c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
+    members = c.fetchall()[0][0]
+    members = members + "," + member
+    c.execute('DELETE FROM teams WHERE teamname = "%s";'%name)
+    c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, members))
+    db.commit()
+
+#removes a member from a team
+def remove_member(name, member):
+    c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
+    members = c.fetchall()[0][0]
+    member = "," + member
+    members = members.replace(member, "", 1)
+    c.execute('DELETE FROM teams WHERE teamname = "%s";'%name)
+    c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, members))
+    db.commit()
+
+#finds all the teams a given user is a part of
+def find_teams(user):
+    c.execute('SELECT teamname FROM teams;')
+    teams = c.fetchall()
+    #print teams
+    teams_in = []
+    for team in teams:
+        c.execute('SELECT members FROM teams WHERE teamname = "%s";'%team)
+        members = c.fetchall()[0][0]
+        if members.find(user) != -1:
+            teams_in.append(team)
+    return teams_in
+
+
+#gets a user's highscore for a given game
+def get_user_highscore(game, user):
+    c.execute('SELECT MAX(score) FROM scores WHERE game="%s" AND username="%s";'%(game, user))
+    result = c.fetchall()
+    if result == []:
+        return 0
+    else:
+        return result[0][0]
+
+#gets the all time highscore for a given game
+def get_game_highscore(game):
+    c.execute('SELECT MAX(score) FROM  scores WHERE game = "%s";'%game)
+    result = c.fetchall()
+    if result == []:
+        return 0
+    else:
+        return result[0][0]
+
+
 #==========================================================
 #flask code
 app = Flask(__name__)
@@ -61,7 +132,7 @@ app.secret_key = 'keysmithsmakekeys'
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
     return
-
+eprint (find_teams('michelamar'))
 @app.route('/')                                                                 
 def root():
     if 'user' in session:
@@ -154,9 +225,9 @@ def react():
 def wordsearch():
     return render_template('wordsearch.html')
 
-@app.route('/rename')
+@app.route('/rename', methods=['POST', 'GET'])
 def rename():
-    image = request.form['image']
+    image = request.form['myFile']
     path = "/static/img/temp/"
     newpath = "/static/img/profile/"
     base, ext = os.path.splitext(image)
@@ -179,9 +250,9 @@ def profile():
         isuser = True
     else:
         username = session['user']
-    simon = database.get_user_highscore('simon', username)
-    search = database.get_user_highscore('search', username)
-    react = database.get_user_highscore('react', username)
+    simon = get_user_highscore('simon', username)
+    search = get_user_highscore('search', username)
+    react = get_user_highscore('react', username)
     teams = find_teams(username)
     return render_template('profile.html', user = username, iu = isuser, simon = simon, search = search, react = react, teams = teams)
 
