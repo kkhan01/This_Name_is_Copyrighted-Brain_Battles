@@ -28,12 +28,12 @@
     <!-- NavBar -->
     <div class="top-bar">
       <div class="top-bar-left">
-	<ul class="dropdown menu" data-dropdown-menu="zrtbeq-dropdown-menu">
-	  <li class="menu-text"><a href= "/">Sample</a></li>
+	<ul class="dropdown menu" data-dropdown-menu>
+	  <li><a href="/">[INSERT SITE LOGO]</a></li>
 	  <li><a href="/">Dummy</a></li>
-	  <li>
+	  <li class="has-submenu">
             <a href="#">Games</a>
-            <ul class="menu vertical">
+            <ul class="submenu menu vertical" data-submenu>
               <li><a href="/simon">Simon</a></li>
               <li><a href="/react">React</a></li>
 	      <li><a href="/wordsearch">Word Search</a></li>
@@ -43,13 +43,19 @@
       </div>
       <div class="top-bar-right">
         <ul class="menu">
-	  <form method="POST" action="/search">
-            <li><input type="text" placeholder="Search" name="searchtext"></li>
+	  <form class="menu-text" method="POST" action="/search">
+	    <div class="input-group">
+              <li><input class="input-group-field" type="text" placeholder="Search" name="searchtext"></li>
 	    <li></li>
-            <li><button type="submit" class="button">Search</button></li>
+            <li>
+	      <div class="input-group-button">
+		<button type="submit" class="button">Search</button>
+	      </div>
+	    </div>
+	    </li>
 	    <li></li>
 	  </form>
-	  <li><a href="/logout">Logout</a></li>
+	  <li class="menu-text"><a href="/logout">Logout</a></li>
         </ul>
       </div>
     </div>
