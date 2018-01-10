@@ -94,3 +94,6 @@ updated ajax call to use uppercase
 linS -- 2018-01-10 14:40:11
 added sound to simon
 
+khanK -- 2018-01-10 15:00:33
+set up database method dirty, quick fix. bad coder etiquette, but good for demo deadline
+
