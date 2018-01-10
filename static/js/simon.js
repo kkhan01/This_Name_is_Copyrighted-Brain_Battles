@@ -13,7 +13,15 @@ const COLOR_MAP = {
 	3: "yellow"
 };
 
-const SOUND_DIR = "static/audio";
+//this is actually in terms of project root, not sure why
+const SOUND_DIR = "static/media/";
+
+const SOUND_FILES = [
+	"piano-a.wav",
+	"piano-b.wav",
+	"piano-c.wav",
+	"piano-d.wav"
+];
 
 //elem is a DOM object. removes the elem if it exists
 function removeElem(elem) {
@@ -23,6 +31,17 @@ function removeElem(elem) {
 	}
 }
 
+function initSounds() {
+	let res = [];
+	
+	for (let x = 0; x < SOUND_FILES.length; x++) {
+		res.push( document.createElement("audio") );
+		res[x].src = SOUND_DIR + SOUND_FILES[x];
+	}
+	
+	return res;
+}
+
 function start() {
 	display = document.getElementsByClassName("display");
 	user = document.getElementsByClassName("user");
@@ -30,8 +49,7 @@ function start() {
 	//curIndex = score = result = 0;
 	//pattern = [];
 	
-	soundArray = [];
-	
+	soundArray = initSounds();
 
 	let startButton = document.createElement("div");
 	startButton.classList.add("button");
@@ -162,11 +180,15 @@ function display_run(pattern) {
 			display[index].classList.remove("disabled");
 			display[index].classList.add(COLOR_MAP[index]);
 			//play sound
+			soundArray[index].play();
 			
 			setTimeout(() => {
 				display[index].classList.remove(COLOR_MAP[index]);
 				display[index].classList.add("disabled");
 				//stop sound, reset timer on it
+				soundArray[index].pause();
+				soundArray[index].currentTime = 0;
+				
 				resolve(index);
 			}, 500);	//change this interval to change flashing speed
 			
