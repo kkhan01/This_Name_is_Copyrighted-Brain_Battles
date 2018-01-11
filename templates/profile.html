@@ -6,18 +6,31 @@
 
 {% block c_content %}
 
-<!-- TEMP -->
-Simon: {{simon}}
-<br>
-Word Search: {{search}}
-<br>
-React: {{react}}
-<br>
+{% set messages = get_flashed_messages() %}
+{% for i in messages %}
+{{i}}
+{% endfor %}
+<div style="width:800px; margin:0 auto;">
+  <div class="media-object-section">
+    <img style="width:100px !important;" src={{pic}} " alt="You Shouldn't Be Downloading This... It's Copyrighted">
+  </div>
+  <pre>
+  <!-- TEMP -->
+                                               Simon:           {{simon}}
 
-<!-- https://www.tutorialspoint.com/flask/flask_file_uploading.htm -->
-<form action="/rename">
-  <input type="file" name="myFile" accept="image/*">
-  <input type="submit">
-</form> 
+                                               Word Search:     {{search}}
+  
+                                               React:           {{react}}
+  </pre>
+  <br>
 
+  {% if iu %}
+  <!-- https://www.tutorialspoint.com/flask/flask_file_uploading.htm -->
+  <form method="POST" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="image" accept="image/*" required>
+    <input type="submit" value="Upload Image">
+  </form> 
+  {% endif %}
+</div>
+<br><br><br>
 {% endblock %}

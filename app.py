@@ -4,10 +4,24 @@ import sys
 import os
 #import database
 import sqlite3   #enable control of an sqlite database
+from werkzeug import secure_filename #uploading files
 f="data/database.db"
 
 db = sqlite3.connect(f, check_same_thread=False) #open if f exists, otherwise create
 c = db.cursor()    #facilitate db ops
+
+app = Flask(__name__)
+
+app.secret_key = 'keysmithsmakekeys'
+
+#PRINTS STUFF!!!!
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+    return
+
+#==========================================================
+#uploading prereqs
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 #==========================================================
 #sql code
@@ -124,15 +138,7 @@ def get_game_highscore(game):
 
 #==========================================================
 #flask code
-app = Flask(__name__)
 
-app.secret_key = 'keysmithsmakekeys'
-
-#PRINTS STUFF!!!!
-def eprint(*args, **kwargs):
-    print(*args, file=sys.stderr, **kwargs)
-    return
-eprint (find_teams('michelamar'))
 @app.route('/')                                                                 
 def root():
     if 'user' in session:
@@ -225,36 +231,79 @@ def react():
 def wordsearch():
     return render_template('wordsearch.html')
 
-@app.route('/rename', methods=['POST', 'GET'])
-def rename():
-    image = request.form['myFile']
-    path = "/static/img/temp/"
-    newpath = "/static/img/profile/"
-    base, ext = os.path.splitext(image)
-    if(ext != ".png" or ext != ".jpg" or ext != ".jpeg" or ext != ".gif"):
-        #delete file and flash invalid
-        flash ('Invalid file! Please upload a valid image.')
-        os.remove((os.path.join(path, image)))
-    else:
-        #rename and flash changed?
-        eprint (base + "   "+ ext)
-        #os.rename(os.path.join(newpath, image), os.path.join(path, session['user']+ext))
-    return redirect(url_for(profile))
+#check if valid ext
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+#saves to the root, unsure how to fix that, but renaming will do it!
+@app.route('/upload', methods=['POST', 'GET'])
+def upload():
+    if request.method == 'POST':
+        eprint(1)
+        fil = request.files['image']
+        if allowed_file(fil.filename):
+            eprint(2)
+            filn = secure_filename(fil.filename)
+            fil.save(filn)
+            eprint(3)
+            rename(filn)
+            eprint(4)
+            flash ('Successfully changed profile pictures!')
+        else:
+            flash ('Invalid file! Please upload a valid image.')
+    eprint(5)
+    return redirect(url_for('profile'))
+
+def rename(image):
+    eprint(11)
+    path = "static/img/profile"
+    files = os.listdir(path)
+    for filen in files:
+        base, ext = os.path.splitext(filen)
+        if(base == session['user']):
+            old = os.path.join("./static/img/profile", filen)
+            os.remove(old)
+            eprint("REMOVED!")
+    eprint(12)
+    base, ext = os.path.splitext(str(image))
+    eprint(13)
+    #eprint (base + "   "+ ext)
+    source = os.path.join("./", str(image))
+    #eprint(os.path.isfile(image)) 
+    eprint(source)
+    newfile = session['user'] + ext
+    eprint(newfile)
+    dest = os.path.join("./static/img/profile", newfile)
+    eprint(dest)
+    os.rename(source, dest)
+    return
 
 @app.route('/profile', methods=['POST', 'GET'])
 def profile():
+    #which user is it?
     username = 'hello'
     isuser = False
     if request.method == 'POST':
         username = request.form['user']
-        isuser = True
     else:
         username = session['user']
+    #if it's THE user, they get extra settings
+    if username == session['user']:
+        isuser = True
+    pic = 'static/img/generic.png'
+    path = "static/img/profile"
+    files = os.listdir(path)
+    for filen in files:
+        base, ext = os.path.splitext(filen)
+        if(base == username):
+            pic = path + "/" + filen
+    eprint(pic)
     simon = get_user_highscore('simon', username)
     search = get_user_highscore('search', username)
     react = get_user_highscore('react', username)
     teams = find_teams(username)
-    return render_template('profile.html', user = username, iu = isuser, simon = simon, search = search, react = react, teams = teams)
+    eprint(isuser)
+    return render_template('profile.html', pic = pic, user = username, iu = isuser, simon = simon, search = search, react = react, teams = teams)
 
 
 if __name__ == '__main__':
