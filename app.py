@@ -5,6 +5,10 @@ import os
 #import database
 import sqlite3   #enable control of an sqlite database
 from werkzeug import secure_filename #uploading files
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 f="data/database.db"
 
 db = sqlite3.connect(f, check_same_thread=False) #open if f exists, otherwise create

@@ -100,3 +100,6 @@ set up database method dirty, quick fix. bad coder etiquette, but good for demo 
 khanK -- 2018-01-10 23:48:44
 finished most of image upload, rename, and display. need to make profile page cleaner
 
+elsharawyM -- 2018-01-11 18:53:46
+unicode fix?
+
