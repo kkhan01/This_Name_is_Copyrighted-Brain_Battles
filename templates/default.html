@@ -16,8 +16,12 @@
     <!-- Proper Calls for Flask + Foundation -->
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/foundation.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/app.css') }}">
-    
 
+    <!-- disable browser caching -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
     <!-- javascript/css if necessary -->
     {% block include %}
     {% endblock %}
