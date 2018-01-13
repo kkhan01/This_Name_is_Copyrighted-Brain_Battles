@@ -39,7 +39,7 @@
     <div class="top-bar navbar" id="the-navbar">
       <div class="top-bar-left">
 	<ul class="dropdown menu" data-dropdown-menu>
-	  <li><a class="logo-link" href="/"><img class="logo" src="../static/img/logo.png"></a></li>
+	  <li><a class="logo-link" href="/"><img class="logo" src="../static/img/transparent _logo.png"></a></li>
 	  <li class="navbar"><a class="left-link" href="/">About</a></li>
 	  <li class="has-submenu navbar">
             <a class="left-link" href="#">Games</a>
@@ -71,12 +71,13 @@
       </div>
     </div>
     
-
-    {% block c_content %}
-    {% endblock %}
+    <div class="wrapper">
+  {% block c_content %}
+  {% endblock %}
+    </div>
     
     <!-- Footer -->
-    <div class="container" style="background-color:#F1F1F1">
+    <div class="container" id="copyright-bar" style="background-color:#F1F1F1">
       <center>
 	This Name is Copyrighted &copy;
 	<span id="copyright">
