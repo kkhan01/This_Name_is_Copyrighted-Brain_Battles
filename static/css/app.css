@@ -1,0 +1,40 @@
+.navbar {
+    background-color: rgb(126, 208, 126);
+    color: black;
+}
+
+.top-bar ul{
+    background-color: inherit;
+}
+
+.button{
+    background-color: yellow;
+    color: black;
+    border-radius: 15px;
+}
+
+
+.input-group{
+    margin-bottom: 0rem;
+}
+
+a {
+    color: black;
+    font-size:20px;
+    border-left: 2px solid #73AD21;
+    border-left-style: groove;
+}
+
+.dropdown.menu > li.is-dropdown-submenu-parent > a::after {
+    display: block;
+    width: 0;
+    height: 0;
+    border: inset 6px;
+    content: '';
+    border-bottom-width: 0;
+    border-top-style: solid;
+    border-color: black transparent transparent;
+    right: 5px;
+    left: auto;
+    margin-top: -3px;
+}

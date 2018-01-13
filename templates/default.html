@@ -30,14 +30,14 @@
   <body>
     
     <!-- NavBar -->
-    <div class="top-bar">
+    <div class="top-bar navbar">
       <div class="top-bar-left">
 	<ul class="dropdown menu" data-dropdown-menu>
-	  <li><a href="/">[INSERT SITE LOGO]</a></li>
-	  <li><a href="/">About</a></li>
-	  <li class="has-submenu">
+	  <li class="navbar"><a href="/">[INSERT SITE LOGO]</a></li>
+	  <li class="navbar"><a href="/">About</a></li>
+	  <li class="has-submenu navbar">
             <a href="#">Games</a>
-            <ul class="submenu menu vertical" data-submenu>
+            <ul class="submenu menu vertical navbar" data-submenu>
               <li><a href="/simon">Simon</a></li>
               <li><a href="/react">React</a></li>
 	      <li><a href="/wordsearch">Word Search</a></li>
@@ -45,24 +45,26 @@
           </li>
         </ul>
       </div>
-      <div class="top-bar-right">
-        <ul class="menu">
-	  <form class="menu-text" method="POST" action="/search">
-	    <div class="input-group">
-              <li><input class="input-group-field" type="text" placeholder="Search" name="searchtext"></li>
-	    <li></li>
-            <li>
-	      <div class="input-group-button">
-		<button type="submit" class="button">Search</button>
+      
+      <div class="top-bar-right navbar">
+          <ul class="menu navbar" data-dropdown-menu>
+	    <form class="menu-text navbar" method="POST" action="/search">
+	      <div class="row">
+		<div class="input-group">
+		  <input class="input-group-field" type="text" placeholder="Search" name="searchtext">
+		  <div class="input-group-button">
+		    <button type="submit" class="button">Search</button>
+		  </div>
+		</div>
 	      </div>
-	    </div>
+	    </form>
+	    <li class="menu-text navbar">
+	      <a href="/logout">Logout</a>
 	    </li>
-	    <li></li>
-	  </form>
-	  <li class="menu-text"><a href="/logout">Logout</a></li>
-        </ul>
+	  </ul>
       </div>
     </div>
+    
 
     {% block c_content %}
     {% endblock %}

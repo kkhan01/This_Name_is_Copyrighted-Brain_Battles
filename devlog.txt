@@ -103,3 +103,6 @@ finished most of image upload, rename, and display. need to make profile page cl
 elsharawyM -- 2018-01-11 18:53:46
 unicode fix?
 
+elsharawyM -- 2018-01-12 23:44:36
+started custom navbar CSS
+
