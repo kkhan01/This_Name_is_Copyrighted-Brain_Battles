@@ -109,3 +109,6 @@ started custom navbar CSS
 elsharawyM -- 2018-01-13 13:33:54
 dynamic menu, added image logo
 
+elsharawyM -- 2018-01-13 14:51:22
+made navbar fixed
+
