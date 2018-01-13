@@ -106,3 +106,6 @@ unicode fix?
 elsharawyM -- 2018-01-12 23:44:36
 started custom navbar CSS
 
+elsharawyM -- 2018-01-13 13:33:54
+dynamic menu, added image logo
+

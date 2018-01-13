@@ -10,7 +10,6 @@
 .button{
     background-color: yellow;
     color: black;
-    border-radius: 15px;
 }
 
 
@@ -21,9 +20,30 @@
 a {
     color: black;
     font-size:20px;
-    border-left: 2px solid #73AD21;
+}
+
+.left-link{
+    border-left: 2px #53b54b;
     border-left-style: groove;
 }
+
+.item-link{
+    border-bottom: 2px #53b54b;
+    border-bottom-style: groove;
+}
+
+.dropdown.menu a.logo-link{
+    padding-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 1rem;
+    padding-top: 0px;
+}
+
+.logo{
+    height: 42.38px;
+    width: 42.38px;
+}
+
 
 .dropdown.menu > li.is-dropdown-submenu-parent > a::after {
     display: block;

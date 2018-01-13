@@ -30,17 +30,22 @@
   <body>
     
     <!-- NavBar -->
-    <div class="top-bar navbar">
+    <div class="title-bar" data-responsive-toggle="the-navbar" data-hide-for="medium">
+      <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+  <div class="title-bar-title">Menu</div>
+    </div>
+    
+    <div class="top-bar navbar" id="the-navbar">
       <div class="top-bar-left">
 	<ul class="dropdown menu" data-dropdown-menu>
-	  <li class="navbar"><a href="/">[INSERT SITE LOGO]</a></li>
-	  <li class="navbar"><a href="/">About</a></li>
+	  <li><a class="logo-link" href="/"><img class="logo" src="../static/img/logo.png"></a></li>
+	  <li class="navbar"><a class="left-link" href="/">About</a></li>
 	  <li class="has-submenu navbar">
-            <a href="#">Games</a>
+            <a class="left-link" href="#">Games</a>
             <ul class="submenu menu vertical navbar" data-submenu>
-              <li><a href="/simon">Simon</a></li>
-              <li><a href="/react">React</a></li>
-	      <li><a href="/wordsearch">Word Search</a></li>
+              <li><a class="item-link" href="/simon">Simon</a></li>
+              <li><a class="item-link" href="/react">React</a></li>
+	      <li><a class="item-link" href="/wordsearch">Word Search</a></li>
             </ul>
           </li>
         </ul>
@@ -51,7 +56,7 @@
 	    <form class="menu-text navbar" method="POST" action="/search">
 	      <div class="row">
 		<div class="input-group">
-		  <input class="input-group-field" type="text" placeholder="Search" name="searchtext">
+		  <input class="input-group-field" type="text" placeholder="Search for other players!" name="searchtext">
 		  <div class="input-group-button">
 		    <button type="submit" class="button">Search</button>
 		  </div>
@@ -59,7 +64,7 @@
 	      </div>
 	    </form>
 	    <li class="menu-text navbar">
-	      <a href="/logout">Logout</a>
+	      <a href="/logout" id="logout">Logout</a>
 	    </li>
 	  </ul>
       </div>
