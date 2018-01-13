@@ -118,3 +118,6 @@ made navbar sticky instead
 elsharawyM -- 2018-01-13 15:48:48
 formatting simon to look better
 
+elsharawyM -- 2018-01-13 16:14:41
+css for react game
+
