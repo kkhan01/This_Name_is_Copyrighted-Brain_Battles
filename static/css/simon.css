@@ -23,3 +23,14 @@
 	height: 50px;
 }
 
+.grid-container{
+    margin-top: 2rem;
+    width: 50%;
+    text-align: center;
+	     
+}
+
+.button{
+    margin-top: 1rem;
+}
+

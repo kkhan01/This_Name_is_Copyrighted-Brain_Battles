@@ -115,3 +115,6 @@ made navbar fixed
 elsharawyM -- 2018-01-13 15:09:04
 made navbar sticky instead
 
+elsharawyM -- 2018-01-13 15:48:48
+formatting simon to look better
+
