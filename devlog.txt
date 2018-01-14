@@ -130,3 +130,6 @@ spicy shadows and navbar awesome
 linS -- 2018-01-13 20:34:54
 working on wordsearch
 
+elsharawyM -- 2018-01-13 22:29:59
+beautified search results page
+

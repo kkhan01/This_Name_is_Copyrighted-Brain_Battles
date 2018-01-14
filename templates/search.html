@@ -4,18 +4,28 @@
 Search Results
 {% endblock %}
 
+{% block include %}
+<link rel="stylesheet" type="text/css" href="../static/css/search.css">
+{% endblock %}
+
 {% block c_content %}
 
-<h2>Results matching "{{s_text}}" found:</h2>
+<h3>Search results for "{{s_text}}"</h3>
 <hr>
+<table>
 {% for i in results %}
-<center>
-  {{i}}
-  <form method="POST" action="/profile">
-    <input type="hidden" name="user" value={{i}}>
-    <button type="submit"> View Profile </button>
-  </form>
-</center>
-{% endfor %}
+    <tr id="result">
+      <form method="POST" action="/profile">
+	<td class="name">
+	  <p>{{i}}</p>
+	  <input type="hidden" name="user" value={{i}}>
+	</td>
+	<td class="go">
+	  <button class="button" id="link" type="submit"> View Profile </button>
+	</td>
+      </form>      
+    </tr>
+    {% endfor %}
+</table>
 
 {% endblock %}

@@ -97,9 +97,14 @@ body{
     background-image: url("../img/pattern.jpg");
     background-position: center top;
     background-attachment: fixed;
+    font-family: 'Lato', sans-serif;
     text-align: justify;
 }
 
+h3{
+    font-family: 'Lato', sans-serif;
+    margin-left: 20px;
+}
 .wrapper{
     padding-top: 6rem;
     padding-bottom: 6rem;    
@@ -109,6 +114,7 @@ body{
     width: 80%;
     margin: auto;    
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
 }
 
 #copyright-bar{

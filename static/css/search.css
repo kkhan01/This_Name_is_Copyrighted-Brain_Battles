@@ -1,0 +1,19 @@
+#link{
+    margin-bottom: 1rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+}
+
+.go{
+    text-align: right;
+}
+
+table, tr, td, table tbody{
+    border: 0px black solid;
+    background-color: lightsteelblue;
+
+}
+
+td p{
+    margin-bottom: 0;
+}
