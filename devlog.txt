@@ -124,3 +124,6 @@ css for react game
 elsharawyM -- 2018-01-13 18:33:22
 added background, more aesthetic adjustments
 
+elsharawyM -- 2018-01-13 19:29:33
+spicy shadows and navbar awesome
+
