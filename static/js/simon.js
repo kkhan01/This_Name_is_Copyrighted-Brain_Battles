@@ -203,32 +203,31 @@ function display_run(pattern) {
 //main reason this is async is so program will "block" on display_run
 //also legacy reasons
 async function simon_exec() {
-	if (result == -1) {
-		console.log("final score: " + score);
-		endGame();
-		return;
-	}
-	
-	pattern.push(Math.floor(Math.random() * 4));
-	console.log("pattern: " + pattern);
-	
-	await display_run(pattern);
-	console.log("display_run finished");
-	
+    if (result == -1) {
+	console.log("final score: " + score);
+	sendScore(score);
+	endGame();
 	return;
+    }
+    
+    pattern.push(Math.floor(Math.random() * 4));
+    console.log("pattern: " + pattern);
+    
+    await display_run(pattern);
+    console.log("display_run finished");
+    
+    return;
 }
 
-function sendScore(username, score) {
-	//get username in here?
-	
+function sendScore(uscore) {
 	$.ajax({
-		url: "<some path>",
-		method: "POST",
-		data: {
-			username,
-			score
-		}
-	});
+	    url: '/addscore',
+	    data : { game : 'simon', score : ''+uscore },
+	    type: 'POST',
+	    success: function(d) {
+		console.log(d);
+	    } //end success callback
+	});//end ajax call
 }
 
 window.onload = start;
