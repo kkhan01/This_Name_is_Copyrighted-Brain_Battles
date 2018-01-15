@@ -142,3 +142,6 @@ disabled cache for flask app, made add score ajax responsive, added it to react 
 linS -- 2018-01-15 16:31:00
 wordsearch adds a single word
 
+linS -- 2018-01-15 17:26:52
+adding multiple words
+

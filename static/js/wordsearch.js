@@ -1,9 +1,10 @@
 "use strict";
 
 let wordlist, grid;
+let wordsAdded;
 
 const BLANK_CHAR = "-";
-const GRID_LEN = 8;
+const GRID_LEN = 10;
 const DIRECTIONS = {
 	NORTH: [0, -1],
 	NORTHEAST: [1, -1],
@@ -26,7 +27,9 @@ function transmit() {
 			let randomwords = d["text_out"].replace("<p>","").replace("</p>","").toUpperCase();
 			//console.log(randomwords);
 			constructList(randomwords,10,4,8);
-			addSingleWord(wordlist[0], 0, 0);
+			addWords();
+			//addSingleWord(wordlist[0], 0, 0);
+			//fillRandom();
 		} //end success callback
 	});//end ajax call
 }; //end transmit function
@@ -73,6 +76,33 @@ function printGrid(grid) {
 	}
 }
 
+function fillRandom() {
+	let lo = "A".charCodeAt(0);
+	let hi = "Z".charCodeAt(0)+1;
+	
+	for (let x = 0; x < GRID_LEN; x++) {
+		for (let y = 0; y < GRID_LEN; y++) {
+			if (grid[x][y] == BLANK_CHAR) {
+				grid[x][y] = String.fromCharCode( Math.floor(Math.random() * (hi-lo) + lo));
+			}
+		}
+	}
+	
+	printGrid(grid);
+}
+
+function addWords() {
+	let row, col;
+	for (let word of wordlist) {
+		row = Math.floor(Math.random() * DIRECTIONS_LEN);
+		col = Math.floor(Math.random() * DIRECTIONS_LEN);
+		
+		addSingleWord(word, row, col);
+	}
+	
+	printGrid(grid);
+}
+
 function addSingleWord(word, row, col){
 	let counter;
 	let tRow, tCol;
@@ -80,7 +110,7 @@ function addSingleWord(word, row, col){
 	
 	for (let turn = 0; turn < 2; word = reverse(word), turn++) {	//forward and reverse
 		for (let x = 0; x < 3; x++) {
-			delta = DIRECTIONS[ Object.keys(DIRECTIONS)[Math.floor(Math.random() * DIRECTIONS_LEN)] ];
+			delta = DIRECTIONS[ Object.keys(DIRECTIONS)[ Math.floor(Math.random() * DIRECTIONS_LEN)] ];
 		//for (let delta in DIRECTIONS) {				//for each direction
 			tRow = row;
 			tCol = col;
@@ -115,7 +145,7 @@ function addSingleWord(word, row, col){
 			}
 			
 			//console.log(grid);
-			printGrid(grid);
+			//printGrid(grid);
 			return true;
 		}
 	}
