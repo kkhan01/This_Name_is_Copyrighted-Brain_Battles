@@ -139,3 +139,6 @@ added fade to menu items
 khanK -- 2018-01-15 15:04:48
 disabled cache for flask app, made add score ajax responsive, added it to react (need to fix add score for react to use min instead of max because counter intuitive).
 
+linS -- 2018-01-15 16:31:00
+wordsearch adds a single word
+

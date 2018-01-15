@@ -2,7 +2,8 @@
 
 let wordlist, grid;
 
-const GRID_LEN = 6;
+const BLANK_CHAR = "-";
+const GRID_LEN = 8;
 const DIRECTIONS = {
 	NORTH: [0, -1],
 	NORTHEAST: [1, -1],
@@ -15,18 +16,19 @@ const DIRECTIONS = {
 };
 Object.freeze(DIRECTIONS);
 for (let d in DIRECTIONS) Object.freeze(DIRECTIONS[d]);	//effectively an enum now
+const DIRECTIONS_LEN = 8;
 
 function transmit() {
-
-  $.ajax({
-    url: 'http://www.randomtext.me/api/gibberish/p-1/100',
-    type: 'GET',
-    success: function(d) {
-	let randomwords = d["text_out"].replace("<p>","").replace("</p>","").toUpperCase();
-	//console.log(randomwords);
-	constructList(randomwords,10,4,8);
-    } //end success callback
-  });//end ajax call
+	$.ajax({
+		url: 'http://www.randomtext.me/api/gibberish/p-1/100',
+		type: 'GET',
+		success: function(d) {
+			let randomwords = d["text_out"].replace("<p>","").replace("</p>","").toUpperCase();
+			//console.log(randomwords);
+			constructList(randomwords,10,4,8);
+			addSingleWord(wordlist[0], 0, 0);
+		} //end success callback
+	});//end ajax call
 }; //end transmit function
 
 function constructList(s, num, min, max) {
@@ -48,54 +50,81 @@ function init() {
 	for (let y = 0; y < GRID_LEN; y++) {
 		grid.push([]);
 		for (let x = 0; x < GRID_LEN; x++) {
-			grid[y].push("-");
+			grid[y].push(BLANK_CHAR);
 		}
 		
 	}
 	
-	console.log(grid);
+	//console.log(grid);
 }
 
-function addSingleWord(word, row, col, direction){
+function reverse(s) {
+	return s.split("").reverse().join("");
+}
+
+function printGrid(grid) {
+	let temp;
+	for (let x of grid) {
+		temp = "";
+		for (let y of x) {
+			temp += y + " ";
+		}
+		console.log(temp);
+	}
+}
+
+function addSingleWord(word, row, col){
 	let counter;
-	let tRow, tCol; 
-	let runs = word;
-	for (	let turn = 0;
-			turn < 2;
-			runs = new StringBuilder(word).reverse().toString(), turn++) {
-		if ((mData[row].length - col) < runs.length()) continue;
+	let tRow, tCol;
+	let delta;
 	
-			try {
-				tRow = row;
-				tCol = col;
-				counter = 0;
-				for (counter = 0; counter < runs.length(); counter++) {
-					if (mData[tRow][tCol] != '_' && 
-						mData[tRow][tCol] != runs.charAt(counter)) {
-						break;
-					}
-					tRow += direction.getDeltaY();
-					tCol += direction.getDeltaX();
-				}
+	for (let turn = 0; turn < 2; word = reverse(word), turn++) {	//forward and reverse
+		for (let x = 0; x < 3; x++) {
+			delta = DIRECTIONS[ Object.keys(DIRECTIONS)[Math.floor(Math.random() * DIRECTIONS_LEN)] ];
+		//for (let delta in DIRECTIONS) {				//for each direction
+			tRow = row;
+			tCol = col;
+			
+			//console.log(grid[tRow]);
+			
+			//first, check if we can place it
+			for (counter = 0; counter < word.length; counter++) {
+				//if out of bounds
+				if (tRow < 0 || tRow >= grid.length || tCol < 0 || tCol >= grid[0].length) break;
+				
+				//console.log(tRow);
+				//console.log(grid[tRow]);
+				//if word can't overlap
+				if (grid[tRow][tCol] !== BLANK_CHAR && grid[tRow][tCol] !== word[counter]) break;
+				
+				tRow += delta[0];
+				tCol += delta[1];
 			}
-			catch(ArrayIndexOutOfBoundsException e) {
-				return false;
+			
+			//try a new direction
+			if (counter != word.length) break;
+			tRow = row;
+			tCol = col;
+			
+			//now actually place it
+			for (counter = 0; counter < word.length; counter++) {
+				grid[tRow][tCol] = word[counter];
+					
+				tRow += delta[0];
+				tCol += delta[1];
 			}
-	
-		if (counter == runs.length()) {
-			for (counter = 0; counter < runs.length(); counter++) {
-				mData[row][col] = runs.charAt(counter);
-				col += direction.getDeltaX();
-					row += direction.getDeltaY();
-			}
+			
+			//console.log(grid);
+			printGrid(grid);
 			return true;
 		}
-		else continue;
 	}
+	
 	return false;
 }
 
 
 init();
-//transmit();
+//addSingleWord();
+transmit();
 //document.getElementById("input").addEventListener('input', transmit);
