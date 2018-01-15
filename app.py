@@ -75,10 +75,16 @@ c.execute('CREATE TABLE IF NOT EXISTS scores (game TEXT, username TEXT, score IN
 c.execute('CREATE TABLE IF NOT EXISTS teams (teamname TEXT, members TEXT);')
 
 #adds a users new score
-def add_score(game, user, score):
+@app.route('/addscore', methods=['POST'])
+def add_score():
+    game = request.form['game']
+    score = int(request.form['score'])
+    user = session['user']
+    #eprint(game+"$$$"+score+"$$$"+user)
     c.execute('INSERT INTO scores VALUES("%s", "%s", %d);'%(game, user, score))
     db.commit()
-    
+    return True
+
 #creates a new team
 def create_team(name, creator):
     c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, creator))

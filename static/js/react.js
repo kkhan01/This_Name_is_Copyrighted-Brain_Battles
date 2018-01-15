@@ -35,6 +35,17 @@ var onClick = function(e){
 	var clicktime = newdate.getTime();
 	this.setAttribute("style","background-color:#0099CC;");
 	var reacttime = (clicktime - activate);
+
+	//sending score
+	$.ajax({
+	    url: '/addscore',
+	    data : { game : 'react', score : ''+reacttime },
+	    type: 'POST',
+	    success: function(d) {
+		console.log(d);
+	    } //end success callback
+	});//end ajax call
+	
 	directions.innerHTML = "" + reacttime + " ms";
 	needclick = 2;
     }
@@ -50,6 +61,7 @@ var onClick = function(e){
     }
     
 };
+
 
 console.log(start);
 box.addEventListener("click", onClick);
