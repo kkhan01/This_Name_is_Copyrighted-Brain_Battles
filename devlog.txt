@@ -155,3 +155,6 @@ elsharawyM -- 2018-01-16 14:45:14
 merged login.html into existing frontend setup
 
 
+linS -- 2018-01-16 14:44:48
+using promises with ajax
+

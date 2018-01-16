@@ -44,7 +44,15 @@ function constructList(s, num, min, max) {
 	}
     }
     console.log(wordlist);
-};
+}
+
+//elem is a DOM object. removes the elem if it exists
+function removeElem(elem) {
+	let gameDiv = document.getElementById("gridContainer");
+	if (elem !== null) {
+		gameDiv.removeChild(elem);
+	}
+}
 
 function init() {
 	wordlist = [];
@@ -58,6 +66,53 @@ function init() {
 		}
 		
 	}
+}
+
+//ajax with promise
+function ajaxP(settings) {
+	return new Promise((resolve, reject) => {
+		$.ajax(settings).done(resolve).fail(reject);
+	});
+}
+
+function start() {
+	ajaxP({
+		url: 'http://www.randomtext.me/api/gibberish/p-1/100',
+		type: 'GET'
+	})
+	.then( data => {			//we don't plan on using the status
+		console.log("constructing word list");
+		let randomwords = data["text_out"].replace("<p>","").replace("</p>","").toUpperCase();
+		constructList(randomwords,10,4,8);
+	})
+	.then(() => {
+		console.log("filling word grid");
+		addWords();
+		fillRandom();
+	})
+	.then(() => {
+		console.log("printing grid");
+		printGrid(grid);
+	})
+	.then(() => {
+		return new Promise((resolve) => {
+			setTimeout(() => { resolve(5) }, 5000);
+		});
+	})
+	.then( data => {
+		console.log(data);
+		let waitMsg = document.getElementById("wait");
+		//console.log(waitMsg);
+		removeElem(waitMsg);
+	});
+	
+	//add a "please wait notification"
+	let gridContainer = document.getElementById("gridContainer");
+	
+	let waitMsg = document.createElement("h4");
+	waitMsg.innerHTML = "Please wait";
+	waitMsg.id = "wait";
+	gridContainer.appendChild(waitMsg);
 }
 
 function reverse(s) {
@@ -86,8 +141,6 @@ function fillRandom() {
 			}
 		}
 	}
-	
-	printGrid(grid);
 }
 
 function addWords() {
@@ -151,5 +204,6 @@ function addSingleWord(word, row, col){
 
 init();
 //addSingleWord();
-transmit();
+//transmit();
+start();
 //document.getElementById("input").addEventListener('input', transmit);
