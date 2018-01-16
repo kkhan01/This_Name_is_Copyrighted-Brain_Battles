@@ -27,7 +27,7 @@ function transmit() {
 			let randomwords = d["text_out"].replace("<p>","").replace("</p>","").toUpperCase();
 			//console.log(randomwords);
 			constructList(randomwords,10,4,8);
-			addWords();
+			//addWords();
 			//addSingleWord(wordlist[0], 0, 0);
 			//fillRandom();
 		} //end success callback
@@ -49,6 +49,7 @@ function constructList(s, num, min, max) {
 function init() {
 	wordlist = [];
 	grid = [];
+	wordsAdded = [];
 	
 	for (let y = 0; y < GRID_LEN; y++) {
 		grid.push([]);
@@ -57,8 +58,6 @@ function init() {
 		}
 		
 	}
-	
-	//console.log(grid);
 }
 
 function reverse(s) {
@@ -110,20 +109,17 @@ function addSingleWord(word, row, col){
 	
 	for (let turn = 0; turn < 2; word = reverse(word), turn++) {	//forward and reverse
 		for (let x = 0; x < 3; x++) {
+			//random direction
 			delta = DIRECTIONS[ Object.keys(DIRECTIONS)[ Math.floor(Math.random() * DIRECTIONS_LEN)] ];
-		//for (let delta in DIRECTIONS) {				//for each direction
 			tRow = row;
 			tCol = col;
 			
-			//console.log(grid[tRow]);
 			
 			//first, check if we can place it
 			for (counter = 0; counter < word.length; counter++) {
 				//if out of bounds
 				if (tRow < 0 || tRow >= grid.length || tCol < 0 || tCol >= grid[0].length) break;
 				
-				//console.log(tRow);
-				//console.log(grid[tRow]);
 				//if word can't overlap
 				if (grid[tRow][tCol] !== BLANK_CHAR && grid[tRow][tCol] !== word[counter]) break;
 				
@@ -144,8 +140,7 @@ function addSingleWord(word, row, col){
 				tCol += delta[1];
 			}
 			
-			//console.log(grid);
-			//printGrid(grid);
+			wordsAdded.push(word);
 			return true;
 		}
 	}
