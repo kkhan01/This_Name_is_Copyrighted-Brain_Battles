@@ -148,6 +148,10 @@ adding multiple words
 linS -- 2018-01-15 19:06:54
 testing html display
 
--e marchiniM -- 2018-01-16 14:42:02
+marchiniM -- 2018-01-16 14:42:02
 Wrote team route, wrote get_members(), fixed highscore method to work with react
+
+elsharawyM -- 2018-01-16 14:45:14
+merged login.html into existing frontend setup
+
 
