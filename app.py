@@ -113,6 +113,17 @@ def remove_member(name, member):
     c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, members))
     db.commit()
 
+#retuns all members of a team
+def get_members(name):
+    c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
+    members = c.fetchall()[0][0]
+    return members
+
+#returns hightest scores of each game dict
+#def get_team_stats(name):
+#    scores = {}
+#    simon = c.execute('SELECT MAX(score) FROM scores WHERE game = "simon" AND username IN teams.
+
 #finds all the teams a given user is a part of
 def find_teams(user):
     c.execute('SELECT teamname FROM teams;')
@@ -129,7 +140,10 @@ def find_teams(user):
 
 #gets a user's highscore for a given game
 def get_user_highscore(game, user):
-    c.execute('SELECT MAX(score) FROM scores WHERE game="%s" AND username="%s";'%(game, user))
+    if game != "react":
+        c.execute('SELECT MAX(score) FROM scores WHERE game="%s" AND username="%s";'%(game, user))
+    else:
+        c.execute('SELECT MIN(score) FROM scores WHERE game="%s" AND username="%s";'%(game, user))
     result = c.fetchall()
     if result == []:
         return 0
@@ -326,6 +340,17 @@ def profile():
     teams = find_teams(username)
     eprint(isuser)
     return render_template('profile.html', pic = pic, user = username, iu = isuser, simon = simon, search = search, react = react, teams = teams)
+
+@app.route('/team', methods = ["POST", "GET"])
+def team():
+    if request.method == 'POST':
+        teamname = request.form['team']
+    else:
+        teamname = request.args['team']
+    members = get_members(teamname) #list of members
+    #dict of highscores key is game, value is list of member and score
+    stats = get_team_stats(teamname) 
+    return render_template('team.html', name = teamname, members = members, stats = stats)
 
 
 if __name__ == '__main__':
