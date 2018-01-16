@@ -1,55 +1,45 @@
-html{
-    background-color: white;
+.top-bar-left .top-bar-right{
+    display: none; !important
+}
+
+.menu a {
+    display: none; !important
+}
+
+.input-group{
+    display: none; !important
+}
+
+div#the-navbar.top-bar.navbar {
+    display: none; !important
+}
+
+.wrapper {
     text-align: center;
 }
 
-.container {
-    padding: 16px;
+input[type="text"]{
+    width: 30%;
+    margin: auto;
+    margin-bottom: 2rem;
+    border-radius: 30px;
 }
 
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid gray;
-    box-sizing: border-box;
+input[type="password"]{
+    width: 30%;
+    margin: auto;
+    margin-bottom: 1rem;
+    border-radius: 30px;
 }
 
-button {
-    background-color: midnightblue;
-    color: white;
-    padding: 15px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
+#signup{
+    background-color: crimson;
 }
 
-button:hover {
-    opacity: 0.8;
+#login{
+    background-color: rgb(126, 208, 126);
 }
 
-.rbutton, .lbutton{
-    width: auto;
-    padding: 10px 18px;
-    background-color: red;
-}
-
-.lbutton{
-    float: left;
-}
-
-.rbutton{
-    float: right;
-}
-
-.bottom{
-    background-color:#f1f1f1;
-}
-
-footer {
-   position:absolute;
-   bottom:0;
-   width:100%;
+h1{
+    margin-bottom: 50px;
 }

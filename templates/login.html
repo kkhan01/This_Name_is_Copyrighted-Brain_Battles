@@ -1,69 +1,36 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>
-      {% block c_title %}
-      Login
-      {% endblock %}
-    </title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login_custom.css') }}">
-  </head>
-  
-  <body>
-    <!-- Messages -->
-    <center>
-      {% set messages = get_flashed_messages() %}
-      {% for i in messages %}
-      {{i}}
-      {% endfor %}
-    </center>
-    
-    <!-- Makes middle look smaller + good. May switch to Grid later -->
-    <div style="width:800px; margin:0 auto;">
-      <h1 style="font-size: 50px;">{% block c_title2 %} LOGIN {% endblock %}</h1>
-      <!-- LOGO! -->
-      <div class="media-object-section">
-	<img style="width:100px !important;" src="{{ url_for('static',filename='img/logo.png') }}" alt="You Shouldn't Be Downloading This... It's Copyrighted">
-      </div>
-      {% block content %}
-      <!-- Actual Info -->
-      <div class="container">
-	<form method="POST" action="/home">
-	  <label><b>Username</b></label>
-	  <input type="text" placeholder="Enter Username" name="uname" required>
+{% extends 'default.html' %}
 
-	  <label><b>Password</b></label>
-	  <input type="password" placeholder="Enter Password" name="upass" required>
-	  
-	  <button type="submit">Login</button>
-	</form>
-	<!-- If user cant login straight away -->
+{% block c_title %}
+Log In
+{% endblock %}
 
-	<!-- Later addition -->
-	<!-- <button type="button" class="lbutton">Forgot Password</button> -->
-	<form method="POST" action="/create">
-	  <button type="submit" class="rbutton">Sign Up</button>
-	</form>
-      </div>
-      {% endblock %}
-    </div>
+{% block include %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login_custom.css') }}">
+{% endblock %}
+
+{% block c_content %}
+<!-- Actual Info -->
+<h1>Please Log In</h1>
+<div class="container">
+  <form method="POST" action="/home">
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
     
-    <footer>
-      <div class="bottom">
-	{% block breaks %}
-	<br>
-	<br>
-	<br>
-	{% endblock %}
-	<center>
-	  This Name is Copyrighted &copy;
-	  <span id="copyright">
-	    <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
-	  </span>
-	</center>
-      </div>
-    </footer>
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="upass" required>
     
-  </body>
+    <button class="button" type="submit" id="login">Login</button>
+  </form>
+  <!-- If user cant login straight away -->
   
-</html>
+  <!-- Later addition -->
+  <!-- <button type="button" class="lbutton">Forgot Password</button> -->
+  <form method="POST" action="/create">
+    <button class="button" type="submit" id="signup">Sign Up</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="../static/js/react.js"></script>    
+{% endblock  %}
