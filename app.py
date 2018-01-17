@@ -157,24 +157,35 @@ def get_game_highscore(game):
     else:
         return result[0][0]
 
-#returns hightest scores of each game dict
+#returns highest scores of each game dict
 def get_team_stats(name):
     scores = {}
-    scores['simon'] = [0, 0]
-    scores['react'] = [0, 0]
-    scores['search'] = [0, 0]
+    scores['simon'] = []
+    scores['react'] = []
+    scores['search'] = []
     games = ['simon', 'react', 'search']
     members = get_members(name)
+    eprint(members)
     for game in games:
         for member in members:
-            high_score =  get_user_highscore(game, member)
-            #eprint(member)
-            #eprint(high_score)
-            if high_score  > scores[game][0]:
-                scores[game] = [high_score, member]
+            high_score = get_user_highscore(game, member)
+            scores[game].append([high_score, member])
+        sorted(scores[game])
     return scores
 
-eprint(get_team_stats('team_meme'))
+#returns top 5 scores for each game
+#def get_leaderboards():
+ #   scores{}
+  #  scores['simon'] = []
+   # scores['react'] = []
+   # scores['search'] = []
+   # games = ['simon', 'react', 'search']
+   # for game in games:
+    #    highscore = 0
+     #   count = 0
+      #  while count < 5:
+       #     score = 
+    
 
 #==========================================================
 #flask code
@@ -364,7 +375,7 @@ def team():
     else:
         teamname = request.args['team']
     members = get_members(teamname) #list of members
-    stats = get_team_stats(teamname) #highscore dict game: [score, user]
+    stats = get_team_stats(teamname) #highscore dict game: [score, user] sorted
     return render_template('team.html', name = teamname, members = members, stats = stats)
 
 
