@@ -94,6 +94,7 @@ def delete_team(name):
     c.execute('DELETE FROM teams WHERE teamname = "%s";'%name)
     db.commit()
 
+
 #adds a member to a team 
 def add_member(name, member):
     c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
@@ -102,6 +103,7 @@ def add_member(name, member):
     c.execute('DELETE FROM teams WHERE teamname = "%s";'%name)
     c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, members))
     db.commit()
+
 
 #removes a member from a team
 def remove_member(name, member):
@@ -117,12 +119,8 @@ def remove_member(name, member):
 def get_members(name):
     c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
     members = c.fetchall()[0][0]
-    return members
+    return members.split(',')
 
-#returns hightest scores of each game dict
-#def get_team_stats(name):
-#    scores = {}
-#    simon = c.execute('SELECT MAX(score) FROM scores WHERE game = "simon" AND username IN teams.
 
 #finds all the teams a given user is a part of
 def find_teams(user):
@@ -159,6 +157,24 @@ def get_game_highscore(game):
     else:
         return result[0][0]
 
+#returns hightest scores of each game dict
+def get_team_stats(name):
+    scores = {}
+    scores['simon'] = [0, 0]
+    scores['react'] = [0, 0]
+    scores['search'] = [0, 0]
+    games = ['simon', 'react', 'search']
+    members = get_members(name)
+    for game in games:
+        for member in members:
+            high_score =  get_user_highscore(game, member)
+            #eprint(member)
+            #eprint(high_score)
+            if high_score  > scores[game][0]:
+                scores[game] = [high_score, member]
+    return scores
+
+eprint(get_team_stats('team_meme'))
 
 #==========================================================
 #flask code
@@ -348,8 +364,7 @@ def team():
     else:
         teamname = request.args['team']
     members = get_members(teamname) #list of members
-    #dict of highscores key is game, value is list of member and score
-    stats = get_team_stats(teamname) 
+    stats = get_team_stats(teamname) #highscore dict game: [score, user]
     return render_template('team.html', name = teamname, members = members, stats = stats)
 
 
