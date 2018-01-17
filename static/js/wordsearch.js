@@ -48,7 +48,7 @@ function constructList(s, num, min, max) {
 
 //elem is a DOM object. removes the elem if it exists
 function removeElem(elem) {
-	let gameDiv = document.getElementById("gridContainer");
+	let gameDiv = document.getElementById("gameContainer");
 	if (elem !== null) {
 		gameDiv.removeChild(elem);
 	}
@@ -94,25 +94,65 @@ function start() {
 		console.log("printing grid");
 		printGrid(grid);
 	})
+	/*
 	.then(() => {
 		return new Promise((resolve) => {
 			setTimeout(() => { resolve(5) }, 5000);
 		});
 	})
-	.then( data => {
-		console.log(data);
+	*/
+	.then(() => {			//remove please wait
+		//console.log(data);
 		let waitMsg = document.getElementById("wait");
 		//console.log(waitMsg);
 		removeElem(waitMsg);
-	});
+	})
+	.then(() => {			//construct html table
+		let wordTable = document.createElement("table");
+		let body = document.createElement("tbody");
+		wordTable.id = "wordTable";
+		let row, data;
+		
+		for (let x of grid) {
+			row = document.createElement("tr");
+			
+			for (let y of x) {
+				data = document.createElement("td");
+				data.className = "letter";
+				data.innerHTML = y;
+				
+				data.addEventListener("click", e => {
+					let elem = e.target;
+					
+					if (elem.classList.contains("letter")) {
+						elem.classList.remove("letter");
+						elem.classList.add("selected");
+					}
+					else if (elem.classList.contains("selected")) {
+						elem.classList.remove("selected");
+						elem.classList.add("letter");
+					}
+				});
+				
+				row.appendChild(data);
+			}
+			
+			//wordTable.appendChild(row);
+			body.appendChild(row);
+		}
+		
+		let gameContainer = document.getElementById("gameContainer");
+		wordTable.appendChild(body);
+		gameContainer.appendChild(wordTable);
+	})
 	
 	//add a "please wait notification"
-	let gridContainer = document.getElementById("gridContainer");
+	let gameContainer = document.getElementById("gameContainer");
 	
 	let waitMsg = document.createElement("h4");
 	waitMsg.innerHTML = "Please wait";
 	waitMsg.id = "wait";
-	gridContainer.appendChild(waitMsg);
+	gameContainer.appendChild(waitMsg);
 }
 
 function reverse(s) {

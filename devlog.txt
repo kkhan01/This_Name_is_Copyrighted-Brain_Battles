@@ -158,3 +158,6 @@ merged login.html into existing frontend setup
 linS -- 2018-01-16 14:44:48
 using promises with ajax
 
+linS -- 2018-01-16 23:32:06
+added wordsearch table generation
+

@@ -1,4 +1,14 @@
-td {
+.letter {
 	text-align: center;
+	background-color: BlanchedAlmond;
+}
+
+.selected {
+	text-align: center;
+	background-color: #A6C36F;
+}
+
+#wordTable {
+	border: 1px solid black;
 }
 
