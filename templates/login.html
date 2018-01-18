@@ -12,22 +12,32 @@ Log In
 <!-- Actual Info -->
 <h1>Please Log In</h1>
 <div class="container">
-  <form method="POST" action="/home">
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-    
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="upass" required>
-    
-    <button class="button" type="submit" id="login">Login</button>
-  </form>
-  <!-- If user cant login straight away -->
-  
-  <!-- Later addition -->
-  <!-- <button type="button" class="lbutton">Forgot Password</button> -->
-  <form method="POST" action="/create">
-    <button class="button" type="submit" id="signup">Sign Up</button>
-  </form>
+  <div class="grid-container">
+    <div class="grid-x grid-padding-x">
+      <div class="medium-12 cell">
+	<form method="POST" action="/home">
+	  <label><b>Username</b></label>
+	  <input type="text" placeholder="Enter Username" name="uname" required>
+      </div>
+      <div class="medium-12 cell">
+	<label><b>Password</b></label>
+	<input type="password" placeholder="Enter Password" name="upass" required>
+      </div>
+      <div class="medium-6 cell" id="alignthisright">
+	<button class="button" type="submit" id="login">Login</button>
+      </form>
+      </div>
+      <!-- If user cant login straight away -->
+      
+      <!-- Later addition -->
+      <!-- <button type="button" class="lbutton">Forgot Password</button> -->
+      <div class="medium-6 cell" id="alignthisleft">
+	<form method="POST" action="/create">
+	  <button class="button" type="submit">Sign Up</button>
+	</form>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
 
