@@ -20,6 +20,26 @@ let answers = {
 	*/
 };
 
+/*
+plan for validation:
+limit user to one word selection at a time
+maintain another array of correct selections (aethetic thing)
+
+check from top left:
+	should never encounter the middle of a selection first
+if selected cell encountered:
+	look in all eight directions
+	if a selected cell is found:
+		find appropiate direction
+		recursive:
+			go to next cell based on direction
+			if no more cell in the direction:
+				validate all letters encountered up to the point
+
+important notes:
+	will not check for invalid selections, will just use first valid subpattern
+*/
+
 const BLANK_CHAR = "-";
 const GRID_LEN = 10;
 const DIRECTIONS = {
@@ -35,21 +55,6 @@ const DIRECTIONS = {
 Object.freeze(DIRECTIONS);
 for (let d in DIRECTIONS) Object.freeze(DIRECTIONS[d]);	//effectively an enum now
 const DIRECTIONS_LEN = 8;
-
-function transmit() {
-	$.ajax({
-		url: 'http://www.randomtext.me/api/gibberish/p-1/100',
-		type: 'GET',
-		success: function(d) {
-			let randomwords = d["text_out"].replace("<p>","").replace("</p>","").toUpperCase();
-			//console.log(randomwords);
-			constructList(randomwords,10,4,8);
-			//addWords();
-			//addSingleWord(wordlist[0], 0, 0);
-			//fillRandom();
-		} //end success callback
-	});//end ajax call
-}; //end transmit function
 
 function constructList(s, num, min, max) {
     let temp = s.split(" ");
@@ -111,10 +116,8 @@ function createTable() {
 		body.appendChild(row);
 	}
 	
-	//let gameContainer = document.getElementById("gameContainer");
 	wordTable.appendChild(body);
 	appendMain(wordTable);
-	//gameContainer.appendChild(wordTable);
 }
 
 //create the word bank
@@ -123,7 +126,7 @@ function createBank() {
 	wordBank.id = "wordBank";
 	let item;
 	
-	for (let word in Object.keys(answers)) {
+	for (let word of Object.keys(answers)) {
 		item = document.createElement("li");
 		item.className = "word";
 		
@@ -137,7 +140,38 @@ function createBank() {
 		wordBank.appendChild(item);
 	}
 	
+	appendMain(wordBank);
+}
+
+function checkSelection() {
+	//holds all selected cells
+	/*
+	for each elem:
 	
+	{
+		elem: <DOM element>,
+		row: <num>,
+		col: <num>
+	}
+	*/
+	let selected = [];
+	let elem;
+	let body = wordTable.children.item(0);	//everything is in a <tbody>
+	
+	for (let row = 0; row < body.children.length; row++) {
+		for (let col = 0; col < body.children.item(row).children.length; col++) {
+			elem = body.children.item(row).children.item(col);
+			if (elem.classList.contains("selected")) {
+				selected.push({
+					elem,
+					row,
+					col
+				});
+			}
+		}
+	}
+	
+	console.log(selected);
 }
 
 function init() {
@@ -197,14 +231,26 @@ function start() {
 		console.log("creating word bank");
 		createBank();
 	})
+	.then(() => {
+		console.log("temp");
+		console.log(wordTable);
+	})
+	.then(() => {
+		console.log("adding validation button");
+		let validate = document.createElement("div");
+		validate.className = "button";
+		validate.innerHTML = "Check";
+		validate.addEventListener("click", e => {
+			checkSelection();
+		});
+		appendMain(validate);
+	})
 	
 	//add a "please wait notification"
-	let gameContainer = document.getElementById("gameContainer");
-	
 	let waitMsg = document.createElement("h4");
 	waitMsg.innerHTML = "Please wait";
 	waitMsg.id = "wait";
-	gameContainer.appendChild(waitMsg);
+	appendMain(waitMsg);
 }
 
 function reverse(s) {
@@ -303,7 +349,5 @@ function addSingleWord(word, row, col){
 
 
 init();
-//addSingleWord();
-//transmit();
 start();
-//document.getElementById("input").addEventListener('input', transmit);
+
