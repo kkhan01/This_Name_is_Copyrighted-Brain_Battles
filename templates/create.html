@@ -8,21 +8,36 @@ Sign Up!
 Sign Up Form
 {% endblock %}
 
-{% block content %}
+{% block c_content %}
+<h1>Create an Account!</h1>
 <div class="container">
-  <form method="POST" action="/creation">
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="upass" required>
-
-    <label><b>Verify Password</b></label>
-    <input type="password" placeholder="Enter Password Again" name="upass2" required>
-    <button type="submit">Sign Up</button>
+  <div class="grid-container">
+    <div class="grid-x grid-padding-x">
+      <div class="medium-12 cell">
+	<form method="POST" action="/creation">
+	  <label><b>Username</b></label>
+	  <input type="text" placeholder="Enter Username" name="uname" required>
+      </div>
+      
+      <div class="medium-12 cell">
+	<label><b>Password</b></label>
+	<input type="password" placeholder="Enter Password" name="upass" required>
+      </div>
+      
+      <div class="medium-12 cell">
+	<label><b>Verify Password</b></label>
+	<input type="password" placeholder="Enter Password Again" name="upass2" id="verify"required>
+      </div>
+      <div class="medium-6 cell" id="alignthisright">
+        <button class="button" type="submit" id="submit">Sign Up</button>
+      </div>
   </form>
-  <form method="POST" action="/login">
-    <button type="submit" class="rbutton">Cancel</button>
-  </form>
+      <div class="medium-6 cell" id="alignthisleft">
+	<form method="POST" action="/login">
+	  <button class="button" type="submit" id="signup">Cancel</button>
+	</form>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

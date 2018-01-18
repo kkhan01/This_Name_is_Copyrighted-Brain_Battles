@@ -2,6 +2,23 @@
 
 let wordlist, grid;
 let wordsAdded;
+let wordTable, wordBank;
+
+let answers = {
+	/*
+	format:
+	
+	word: {
+		row: <num>,
+		col: <num>,
+		reverse: <false or true>,
+		direction: [
+			<deltaRow>, <deltaCol>
+		]
+	},
+	...
+	*/
+};
 
 const BLANK_CHAR = "-";
 const GRID_LEN = 10;
@@ -46,12 +63,81 @@ function constructList(s, num, min, max) {
     console.log(wordlist);
 }
 
+//appends DOM elem to gameContainer
+function appendMain(elem) {
+	let gameDiv = document.getElementById("gameContainer");
+	gameDiv.appendChild(elem);
+}
+
 //elem is a DOM object. removes the elem if it exists
 function removeElem(elem) {
 	let gameDiv = document.getElementById("gameContainer");
 	if (elem !== null) {
 		gameDiv.removeChild(elem);
 	}
+}
+
+//create the html word table
+function createTable() {
+	wordTable = document.createElement("table");
+	wordTable.id = "wordTable";
+	let body = document.createElement("tbody");
+	let row, data;
+	
+	for (let x of grid) {
+		row = document.createElement("tr");
+		
+		for (let y of x) {
+			data = document.createElement("td");
+			data.className = "letter";
+			data.innerHTML = y;
+			
+			data.addEventListener("click", e => {
+				let elem = e.target;
+				
+				if (elem.classList.contains("letter")) {
+					elem.classList.remove("letter");
+					elem.classList.add("selected");
+				}
+				else if (elem.classList.contains("selected")) {
+					elem.classList.remove("selected");
+					elem.classList.add("letter");
+				}
+			});
+			
+			row.appendChild(data);
+		}
+		
+		body.appendChild(row);
+	}
+	
+	//let gameContainer = document.getElementById("gameContainer");
+	wordTable.appendChild(body);
+	appendMain(wordTable);
+	//gameContainer.appendChild(wordTable);
+}
+
+//create the word bank
+function createBank() {
+	wordBank = document.createElement("ul");
+	wordBank.id = "wordBank";
+	let item;
+	
+	for (let word in Object.keys(answers)) {
+		item = document.createElement("li");
+		item.className = "word";
+		
+		if (answers[word]["reverse"]) {
+			item.innerHTML = reverse(word);
+		}
+		else {
+			item.innerHTML = word;
+		}
+		
+		wordBank.appendChild(item);
+	}
+	
+	
 }
 
 function init() {
@@ -91,59 +177,25 @@ function start() {
 		fillRandom();
 	})
 	.then(() => {
+		console.log("printing answers");
+		console.log(answers);
+	})
+	.then(() => {
 		console.log("printing grid");
 		printGrid(grid);
 	})
-	/*
-	.then(() => {
-		return new Promise((resolve) => {
-			setTimeout(() => { resolve(5) }, 5000);
-		});
-	})
-	*/
 	.then(() => {			//remove please wait
-		//console.log(data);
+		console.log("removing wait notification");
 		let waitMsg = document.getElementById("wait");
-		//console.log(waitMsg);
 		removeElem(waitMsg);
 	})
 	.then(() => {			//construct html table
-		let wordTable = document.createElement("table");
-		let body = document.createElement("tbody");
-		wordTable.id = "wordTable";
-		let row, data;
-		
-		for (let x of grid) {
-			row = document.createElement("tr");
-			
-			for (let y of x) {
-				data = document.createElement("td");
-				data.className = "letter";
-				data.innerHTML = y;
-				
-				data.addEventListener("click", e => {
-					let elem = e.target;
-					
-					if (elem.classList.contains("letter")) {
-						elem.classList.remove("letter");
-						elem.classList.add("selected");
-					}
-					else if (elem.classList.contains("selected")) {
-						elem.classList.remove("selected");
-						elem.classList.add("letter");
-					}
-				});
-				
-				row.appendChild(data);
-			}
-			
-			//wordTable.appendChild(row);
-			body.appendChild(row);
-		}
-		
-		let gameContainer = document.getElementById("gameContainer");
-		wordTable.appendChild(body);
-		gameContainer.appendChild(wordTable);
+		console.log("generating html table");
+		createTable();
+	})
+	.then(() => {
+		console.log("creating word bank");
+		createBank();
 	})
 	
 	//add a "please wait notification"
@@ -232,6 +284,14 @@ function addSingleWord(word, row, col){
 				tRow += delta[0];
 				tCol += delta[1];
 			}
+			
+			//add to answer key
+			answers[word] = {
+				row,
+				col,
+				reverse: turn == 1,
+				direction: delta
+			};
 			
 			wordsAdded.push(word);
 			return true;
