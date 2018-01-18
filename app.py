@@ -302,20 +302,32 @@ def home():
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
-    s = request.form['searchtext']
-    return render_template('search.html', s_text = s, results = search_user(s))
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    else:
+        s = request.form['searchtext']
+        return render_template('search.html', s_text = s, results = search_user(s))
 
 @app.route('/simon')
 def simon():
-    return render_template('simon.html')
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    else:
+        return render_template('simon.html')
 
 @app.route('/react')
 def react():
-    return render_template('react.html')
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    else:
+        return render_template('react.html')
 
 @app.route('/wordsearch')
 def wordsearch():
-    return render_template('wordsearch.html')
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    else:
+        return render_template('wordsearch.html')
 
 #check if valid ext
 def allowed_file(filename):
@@ -366,40 +378,46 @@ def rename(image):
 
 @app.route('/profile', methods=['POST', 'GET'])
 def profile():
-    #which user is it?
-    username = 'hello'
-    isuser = False
-    if request.method == 'POST':
-        username = request.form['user']
+    if 'user' not in session:
+        return redirect(url_for('login'))
     else:
-        username = session['user']
-    #if it's THE user, they get extra settings
-    if username == session['user']:
-        isuser = True
-    pic = 'static/img/generic.png'
-    path = "static/img/profile"
-    files = os.listdir(path)
-    for filen in files:
-        base, ext = os.path.splitext(filen)
+        #which user is it?
+        username = 'hello'
+        isuser = False
+        if request.method == 'POST':
+            username = request.form['user']
+        else:
+            username = session['user']
+         #if it's THE user, they get extra settings
+        if username == session['user']:
+            isuser = True
+        pic = 'static/img/generic.png'
+        path = "static/img/profile"
+        files = os.listdir(path)
+        for filen in files:
+            base, ext = os.path.splitext(filen)
         if(base == username):
             pic = path + "/" + filen
-    eprint(pic)
-    simon = get_user_highscore('simon', username)
-    search = get_user_highscore('search', username)
-    react = get_user_highscore('react', username)
-    teams = find_teams(username)
-    eprint(isuser)
-    return render_template('profile.html', pic = pic, user = username, iu = isuser, simon = simon, search = search, react = react, teams = teams)
-
+            eprint(pic)
+        simon = get_user_highscore('simon', username)
+        search = get_user_highscore('search', username)
+        react = get_user_highscore('react', username)
+        teams = find_teams(username)
+        eprint(isuser)
+        return render_template('profile.html', pic = pic, user = username, iu = isuser, simon = simon, search = search, react = react, teams = teams)
+    
 @app.route('/team', methods = ["POST", "GET"])
 def team():
-    if request.method == 'POST':
-        teamname = request.form['team']
+    if 'user' not in session:
+        return redirect(url_for('login'))
     else:
-        teamname = request.args['team']
-    members = get_members(teamname) #list of members
-    stats = get_team_stats(teamname) #highscore dict game: [score, user] sorted
-    return render_template('team.html', name = teamname, members = members, stats = stats)
+        if request.method == 'POST':
+            teamname = request.form['team']
+        else:
+            teamname = request.args['team']
+        members = get_members(teamname) #list of members
+        stats = get_team_stats(teamname) #highscore dict game: [score, user] sorted
+        return render_template('team.html', name = teamname, members = members, stats = stats)
 
 
 if __name__ == '__main__':
