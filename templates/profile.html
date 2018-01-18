@@ -4,16 +4,18 @@
 {{user}} Profile
 {% endblock %}
 
+{% block include %}
+<link rel="stylesheet" type="text/css" href="../static/css/profile.css">
+{% endblock %}
+
 {% block c_content %}
 
 {% set messages = get_flashed_messages() %}
 {% for i in messages %}
 {{i}}
 {% endfor %}
-<div style="width:800px; margin:0 auto;">
-  <div class="media-object-section">
-    <img style="width:100px !important;" src={{pic}} " alt="You Shouldn't Be Downloading This... It's Copyrighted">
-  </div>
+<div class="media-object-section">
+  <img class="thumbnail" src={{pic}} " alt="You Shouldn't Be Downloading This... It's Copyrighted">
   <pre>
   <!-- TEMP -->
                                                Simon:           {{simon}}

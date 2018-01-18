@@ -63,3 +63,7 @@ body{
     height: 100vh;
     flex-shrink: 0;
 }
+
+.button{
+    border-radius: 30px;
+}
