@@ -157,25 +157,60 @@ def get_game_highscore(game):
     else:
         return result[0][0]
 
-#returns hightest scores of each game dict
+#returns highest scores of each game dict
 def get_team_stats(name):
     scores = {}
-    scores['simon'] = [0, 0]
-    scores['react'] = [0, 0]
-    scores['search'] = [0, 0]
+    scores['simon'] = []
+    scores['react'] = []
+    scores['search'] = []
     games = ['simon', 'react', 'search']
     members = get_members(name)
+    eprint(members)
     for game in games:
         for member in members:
-            high_score =  get_user_highscore(game, member)
-            #eprint(member)
-            #eprint(high_score)
-            if high_score  > scores[game][0]:
-                scores[game] = [high_score, member]
+            high_score = get_user_highscore(game, member)
+            scores[game].append([high_score, member])
+        sorted(scores[game])
     return scores
 
-eprint(get_team_stats('team_meme'))
+#returns top 5 scores for each game
+def get_leaderboards():
+    scores = {}
+    scores['simon'] = []
+    scores['react'] = []
+    scores['search'] = []
+    games = ['simon', 'react', 'search']
+    for game in games:
+        if game == 'react':
+            c.execute('SELECT MIN(score),username FROM scores WHERE game="%s";'%game)
+            scores[game].append(c.fetchall()[0])
+        else:
+            c.execute('SELECT MAX(score),username FROM scores WHERE game="%s";'%game)
+            scores[game].append(c.fetchall()[0])
+        if scores[game][0][0] is None:
+            del scores[game][0]
+            break
+        highscore = scores[game][0][0]
+        count = 0
+        while count < 4:
+            if game == 'react':
+                c.execute('SELECT MIN(score),username FROM scores WHERE game="%s" AND score > %d;'%(game, highscore))
+                scores[game].append(c.fetchall()[0])
+                if scores[game][count+1][0] is None:
+                    del scores[game][count+1]
+                    break
+                highscore = scores[game][count+1][0]
+            else:
+                c.execute('SELECT MAX(score),username FROM scores WHERE game="%s" AND score <  %d;'%(game, highscore))
+                scores[game].append(c.fetchall()[0])
+                if scores[game][count+1][0] is None:
+                    del scores[game][count+1]
+                    break
+                highscore = scores[game][count+1][0]
+            count = count + 1
+    return scores
 
+            
 #==========================================================
 #flask code
 
