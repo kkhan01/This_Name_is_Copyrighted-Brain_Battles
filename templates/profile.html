@@ -14,27 +14,32 @@
 {% for i in messages %}
 {{i}}
 {% endfor %}
-<div class="media-object-section">
-  <img class="thumbnail" src={{pic}} " alt="You Shouldn't Be Downloading This... It's Copyrighted">
-  <pre>
-  <!-- TEMP -->
-                                               Simon:           {{simon}}
-
-                                               Word Search:     {{search}}
-  
-                                               React:           {{react}}
+<div class="grid-container">
+  <div class="grid-x grid-padding-x">
+    <div class="medium-6 cell">
+      <div class="media-object-section">
+	<img class="thumbnail" src={{pic}}  alt="You Shouldn't Be Downloading This... It's Copyrighted">
+      </div>
+    </div>
+    <div class="medium-6 cell">
+      <div class="scores">
+	<h3>Simon:           {{simon}}</h3>
+	<h3>Word Search:     {{search}}</h3>
+	<h3>React:           {{react}}</h3>
+      </div>
+    </div>
+  </div>
+</div>
   Teams: 
   {% for team in teams %}
   {{team}} 
   {% endfor %}
-  </pre>
   <br>
 
   {% if iu %}
-  <!-- https://www.tutorialspoint.com/flask/flask_file_uploading.htm -->
   <form method="POST" action="/upload" enctype="multipart/form-data">
     <input type="file" name="image" accept="image/*" required>
-    <input type="submit" value="Upload Image">
+    <input class="button" type="submit" value="Upload Image">
   </form> 
   {% endif %}
 </div>
