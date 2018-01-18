@@ -1,3 +1,9 @@
 .thumbnail{
-    max-width: 50%;
+    max-width: 60%;
+    max-height: 60%;
+    margin-left: 5%;
+}
+
+.scores{
+    width: 80%;
 }
