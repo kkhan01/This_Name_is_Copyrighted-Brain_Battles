@@ -43,13 +43,13 @@ important notes:
 const BLANK_CHAR = "-";
 const GRID_LEN = 10;
 const DIRECTIONS = {
-	NORTH: [0, -1],
-	NORTHEAST: [1, -1],
-	EAST: [1, 0],
+	WEST: [0, -1],
+	SOUTHWEST: [1, -1],
+	SOUTH: [1, 0],
 	SOUTHEAST: [1, 1],
-	SOUTH: [0, 1],
-	SOUTHWEST: [-1, 1],
-	WEST: [-1, 0],
+	EAST: [0, 1],
+	NORTHEAST: [-1, 1],
+	NORTH: [-1, 0],
 	NORTHWEST: [-1, -1]
 };
 Object.freeze(DIRECTIONS);
@@ -143,6 +143,18 @@ function createBank() {
 	appendMain(wordBank);
 }
 
+function getWordTableElem(row, col) {
+	return wordTable.children.item(0).children.item(row).children.item(col);
+}
+
+//based on GRID_LEN
+function outOfRange(row, col, delta) {
+	let r = row+delta[0];
+	let c = col+delta[1];
+	
+	return r < 0 || r >= GRID_LEN || c < 0 || c >= GRID_LEN;
+}
+
 function checkSelection() {
 	//holds all selected cells
 	/*
@@ -159,16 +171,39 @@ function checkSelection() {
 	let body = wordTable.children.item(0);	//everything is in a <tbody>
 	
 	for (let row = 0; row < body.children.length; row++) {
-		for (let col = 0; col < body.children.item(row).children.length; col++) {
-			elem = body.children.item(row).children.item(col);
-			if (elem.classList.contains("selected")) {
-				selected.push({
-					elem,
-					row,
-					col
-				});
+	for (let col = 0; col < body.children.item(row).children.length; col++) {
+		//elem = body.children.item(row).children.item(col);
+		elem = getWordTableElem(row, col);
+		if (elem.classList.contains("selected")) {
+			/*
+			selected.push({
+				elem,
+				row,
+				col
+			});
+			*/
+			let tRow = row, tCol = col;
+			for (let key of Object.keys(DIRECTIONS)) {
+				let delta = DIRECTIONS[key];
+				if (outOfRange(row, col, delta)) continue;
+				
+				tRow += delta[0]; 
+				tCol += delta[1]; 
+				let temp = getWordTableElem(tRow, tCol);
+				let letterList = [];
+				
+				//search for surrounding selected squares
+				if (temp.classList.contains("selected")) {
+					console.log(key);
+					
+					//now keep going until out of range or no more selected squares
+					while ( !outOfRange(tRow, tCol, delta) && getWordTableElem(tRow, tCol).classList.contains("selected") ) {
+						temp = getWordTableElem(tRow, tCol);
+					}
+				}
 			}
 		}
+	}
 	}
 	
 	console.log(selected);

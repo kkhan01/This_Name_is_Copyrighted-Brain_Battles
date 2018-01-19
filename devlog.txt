@@ -184,3 +184,6 @@ profile frontend work
 marchiniM -- 2018-01-18 14:49:02
 all roots redirect back to login if not logged in
 
+linS -- 2018-01-19 14:45:12
+more work on validation
+
