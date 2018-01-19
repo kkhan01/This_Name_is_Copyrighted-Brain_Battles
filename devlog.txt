@@ -154,14 +154,13 @@ Wrote team route, wrote get_members(), fixed highscore method to work with react
 elsharawyM -- 2018-01-16 14:45:14
 merged login.html into existing frontend setup
 
-
 linS -- 2018-01-16 14:44:48
 using promises with ajax
 
 linS -- 2018-01-16 23:32:06
 added wordsearch table generation
 
--e marchiniM -- 2018-01-17 11:23:13
+marchiniM -- 2018-01-17 11:23:13
 Wrote get_team_stats() to return the highscores of each game within a team
 
 elsharawyM -- 2018-01-17 14:37:06
@@ -170,7 +169,7 @@ create.html CSS work
 linS -- 2018-01-17 14:45:53
 adding word bank functionality
 
--e marchiniM -- 2018-01-17 20:26:54
+marchiniM -- 2018-01-17 20:26:54
 fixed get_team_stats() to return all highscores in order; wrote get_leaderboards()
 
 elsharayM + khanK -- 2018-01-18 14:48:24
