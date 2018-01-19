@@ -179,3 +179,6 @@ profile frontend work
 linS -- 2018-01-18 14:44:50
 more work on validation
 
+elsharawyM + khanK -- 2018-01-19 14:48:15
+more profile css added
+

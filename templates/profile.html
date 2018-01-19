@@ -14,6 +14,8 @@
 {% for i in messages %}
 {{i}}
 {% endfor %}
+<h1> {{user}}'s Profile</h1>
+<hr>
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
     <div class="medium-6 cell">
@@ -23,25 +25,59 @@
     </div>
     <div class="medium-6 cell">
       <div class="scores">
-	<h3>Simon:           {{simon}}</h3>
-	<h3>Word Search:     {{search}}</h3>
-	<h3>React:           {{react}}</h3>
+	<h2>High Scores</h2>
+	<div class="row">
+	  <div class="columns">
+	    <div class="orbit" role="region" aria-label="Favorite Text Ever" data-orbit>
+	      <ul class="orbit-container">
+		<button class="orbit-previous" aria-label="previous"><span class="show-for-sr">Previous Slide</span>&#9664;</button>
+		<button class="orbit-next" aria-label="next"><span class="show-for-sr">Next Slide</span>&#9654;</button>
+		<li class="is-active orbit-slide">
+		  <div class="docs-example-orbit-slide" id="one">
+		    <h3>Simon</h3>
+		    <p>{{simon}}</p>
+		    <!-- SCORE INFO-->
+		  </div>
+		</li>
+		<li class="orbit-slide">
+		  <div class="docs-example-orbit-slide" id="two">
+		    <h3>WordSearch</h3>
+		    <p>{{search}}</p>
+		    <!-- SCORE INFO-->
+		  </div>
+		</li>
+		<li class="orbit-slide">
+		  <div class="docs-example-orbit-slide" id="three">
+		    <h3>Reaction</h3>
+		    <p>{{react}}</p>
+		    <!-- SCORE INFO-->
+		  </div>
+		</li>
+	      </ul>
+	      <nav class="orbit-bullets">
+		<button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
+		<button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
+		<button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
+	      </nav>
+	    </div>
+	  </div>
+	</div>
       </div>
     </div>
   </div>
 </div>
-  Teams: 
-  {% for team in teams %}
-  {{team}} 
-  {% endfor %}
-  <br>
+Teams: 
+{% for team in teams %}
+{{team}} 
+{% endfor %}
+<br>
 
-  {% if iu %}
-  <form method="POST" action="/upload" enctype="multipart/form-data">
-    <input type="file" name="image" accept="image/*" required>
-    <input class="button" type="submit" value="Upload Image">
-  </form> 
-  {% endif %}
+{% if iu %}
+<form method="POST" action="/upload" enctype="multipart/form-data">
+  <input type="file" name="image" accept="image/*" required>
+  <input class="button" type="submit" value="Upload Image">
+</form> 
+{% endif %}
 </div>
 <br><br><br>
 {% endblock %}

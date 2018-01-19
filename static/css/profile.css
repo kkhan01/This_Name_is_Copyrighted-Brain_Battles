@@ -1,3 +1,5 @@
+$white: #fefefe;
+
 .thumbnail{
     max-width: 60%;
     max-height: 60%;
@@ -6,4 +8,47 @@
 
 .scores{
     width: 80%;
+    text-align: center;
+    background-color: lightsteelblue;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+
+/* Demo Styles */
+
+.docs-example-orbit-slide {
+    padding: 2rem 4rem;
+    color: $white;
+    text-align: center
+}
+
+#one{
+    background-color: #f95959;
+}
+
+#two{
+    background-color: cyan;
+}
+
+#three{
+    background-color: #5eed74;
+}
+
+h3{
+    margin: 0;
+}
+
+.wrapper{
+    padding-top: 3rem;
+}
+
+hr{
+    margin-bottom: 2rem;
+    margin-top: 0;
+}
+
+h1{
+    margin-left: 10px;
 }
