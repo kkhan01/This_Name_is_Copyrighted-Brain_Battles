@@ -13,17 +13,23 @@
 }
 
 td.selected {
-	text-align: center;
 	background-color: #A6C36F;
 }
 
 .found {
-	text-align: center;
-	background-color: gold;
+	background-color: Gold;
 }
 
 #wordTable {
 	border: 1px solid black;
+}
+
+#wordBankContainer {
+	display: block;
+}
+
+#wordBank {
+	display: inline-block;
 }
 
 #gameContainer{

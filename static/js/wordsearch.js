@@ -124,6 +124,10 @@ function createTable() {
 
 //create the word bank
 function createBank() {
+	//for css
+	let container = document.createElement("div");
+	container.id = "wordBankContainer";
+	
 	wordBank = document.createElement("ul");
 	wordBank.id = "wordBank";
 	let item;
@@ -142,7 +146,8 @@ function createBank() {
 		wordBank.appendChild(item);
 	}
 	
-	appendMain(wordBank);
+	container.appendChild(wordBank);
+	appendMain(container);
 }
 
 function getWordTableElem(row, col) {
@@ -241,7 +246,15 @@ function checkSelection() {
 						s.elem.classList.add("found");
 					}
 					
-					console.log(wordBank);
+					//highlight word in word bank (mark as found)
+					for (let w of wordBank.children) {
+						if (w.innerHTML === word || w.innerHTML === reverse(word)) {
+							w.classList.add("found");
+							break;
+						}
+					}
+					
+					//console.log(wordBank);
 				}
 			}
 		}
