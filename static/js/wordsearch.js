@@ -4,11 +4,12 @@ let wordlist, grid;
 let wordsAdded;
 let wordTable, wordBank;
 
-let answers = {
+let answers = [
 	/*
 	format:
 	
-	word: {
+	{
+		word: <string>
 		row: <num>,
 		col: <num>,
 		reverse: <false or true>,
@@ -18,7 +19,7 @@ let answers = {
 	},
 	...
 	*/
-};
+];
 
 /*
 plan for validation:
@@ -126,15 +127,15 @@ function createBank() {
 	wordBank.id = "wordBank";
 	let item;
 	
-	for (let word of Object.keys(answers)) {
+	for (let word of answers) {
 		item = document.createElement("li");
 		item.className = "word";
 		
-		if (answers[word]["reverse"]) {
-			item.innerHTML = reverse(word);
+		if (word["reverse"]) {
+			item.innerHTML = reverse(word["word"]);
 		}
 		else {
-			item.innerHTML = word;
+			item.innerHTML = word["word"];
 		}
 		
 		wordBank.appendChild(item);
@@ -148,9 +149,11 @@ function getWordTableElem(row, col) {
 }
 
 //based on GRID_LEN
-function outOfRange(row, col, delta) {
-	let r = row+delta[0];
-	let c = col+delta[1];
+function outOfRange(row, col) {
+	let r = row;//+delta[0];
+	let c = col;//+delta[1];
+	
+	console.log(r + " " + c);
 	
 	return r < 0 || r >= GRID_LEN || c < 0 || c >= GRID_LEN;
 }
@@ -166,47 +169,52 @@ function checkSelection() {
 		col: <num>
 	}
 	*/
-	let selected = [];
+	let selected;
 	let elem;
 	let body = wordTable.children.item(0);	//everything is in a <tbody>
 	
 	for (let row = 0; row < body.children.length; row++) {
 	for (let col = 0; col < body.children.item(row).children.length; col++) {
-		//elem = body.children.item(row).children.item(col);
+		selected = [];
 		elem = getWordTableElem(row, col);
 		if (elem.classList.contains("selected")) {
-			/*
 			selected.push({
 				elem,
 				row,
 				col
 			});
-			*/
-			let tRow = row, tCol = col;
+			console.log("starting at " + row + " " + col);
+			
+			//search for surrounding selected squares
+			let tRow, tCol;
 			for (let key of Object.keys(DIRECTIONS)) {
 				let delta = DIRECTIONS[key];
-				if (outOfRange(row, col, delta)) continue;
+				tRow = row + delta[0];
+				tCol = col + delta[1];
+				if (outOfRange(tRow, tCol) || !getWordTableElem(tRow, tCol).classList.contains("selected")) continue;
 				
-				tRow += delta[0]; 
-				tCol += delta[1]; 
-				let temp = getWordTableElem(tRow, tCol);
-				let letterList = [];
+				console.log(key);
 				
-				//search for surrounding selected squares
-				if (temp.classList.contains("selected")) {
-					console.log(key);
+				//now keep going until out of range or no more selected squares
+				let temp;
+				while ( !outOfRange(tRow, tCol) && getWordTableElem(tRow, tCol).classList.contains("selected") ) {
+					temp = getWordTableElem(tRow, tCol);
+					selected.push({
+						elem: temp,
+						row: tRow,
+						col: tCol
+					});
 					
-					//now keep going until out of range or no more selected squares
-					while ( !outOfRange(tRow, tCol, delta) && getWordTableElem(tRow, tCol).classList.contains("selected") ) {
-						temp = getWordTableElem(tRow, tCol);
-					}
+					tRow += delta[0];
+					tCol += delta[1];
 				}
+				
+				console.log(selected);
+				return;
 			}
 		}
 	}
 	}
-	
-	console.log(selected);
 }
 
 function init() {
@@ -367,12 +375,13 @@ function addSingleWord(word, row, col){
 			}
 			
 			//add to answer key
-			answers[word] = {
+			answers.push({
+				word,
 				row,
 				col,
 				reverse: turn == 1,
 				direction: delta
-			};
+			});
 			
 			wordsAdded.push(word);
 			return true;
