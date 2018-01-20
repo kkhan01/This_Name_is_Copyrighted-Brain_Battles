@@ -240,6 +240,8 @@ function checkSelection() {
 						s.elem.classList.add("unselected");
 						s.elem.classList.add("found");
 					}
+					
+					console.log(wordBank);
 				}
 			}
 		}
@@ -264,6 +266,14 @@ function init() {
 		}
 		
 	}
+	
+	let startButton = document.createElement("div");
+	startButton.id = "startButton";
+	startButton.classList.add("button");
+	startButton.innerHTML = "Start";
+	startButton.addEventListener("click", start);
+	
+	appendMain(startButton);
 }
 
 //ajax with promise
@@ -309,10 +319,12 @@ function start() {
 		console.log("creating word bank");
 		createBank();
 	})
+	/*
 	.then(() => {
 		console.log("temp");
 		console.log(wordTable);
 	})
+	*/
 	.then(() => {
 		console.log("adding validation button");
 		let validate = document.createElement("div");
@@ -323,6 +335,9 @@ function start() {
 		});
 		appendMain(validate);
 	})
+	
+	let startButton = document.getElementById("startButton");
+	removeElem(startButton);
 	
 	//add a "please wait notification"
 	let waitMsg = document.createElement("h4");
@@ -428,5 +443,5 @@ function addSingleWord(word, row, col){
 
 
 init();
-start();
+//start();
 
