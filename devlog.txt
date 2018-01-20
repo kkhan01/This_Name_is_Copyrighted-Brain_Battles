@@ -199,3 +199,6 @@ wordsearch css
 elsharawyM -- 2018-01-19 20:41:07
 fixed an overlaying issue in profile
 
+elsharawyM -- 2018-01-19 21:55:54
+update profile box styling
+

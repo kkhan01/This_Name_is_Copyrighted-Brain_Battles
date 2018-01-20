@@ -73,10 +73,14 @@ Teams:
 <br>
 
 {% if iu %}
-<form method="POST" action="/upload" enctype="multipart/form-data">
-  <input type="file" name="image" accept="image/*" required>
+<div class="pfpupdate">
+  <h4>Update Profile Picture</h4>
+  <hr>
+  <form method="POST" action="/upload" enctype="multipart/form-data">
+  <input id="file" type="file" name="image" accept="image/*" required>
   <input class="button" type="submit" value="Upload Image">
-</form> 
+</form>
+</div>
 {% endif %}
 </div>
 <br><br><br>

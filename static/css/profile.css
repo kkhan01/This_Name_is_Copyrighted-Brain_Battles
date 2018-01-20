@@ -12,6 +12,8 @@ $white: #fefefe;
     background-color: lightsteelblue;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 100%;
+    padding-top: 10%;
 
 }
 
@@ -40,6 +42,10 @@ h3{
     margin: 0;
 }
 
+h2{
+    margin-bottom: 10%;
+}
+
 .wrapper{
     padding-top: 3rem;
 }
@@ -56,3 +62,19 @@ h1{
 .orbit{
     z-index: 1;
 }
+
+.pfpupdate{
+    background-color: lightsteelblue;
+    width: 40%;
+    margin: auto;
+    text-align: center;
+    padding-top: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+
+}
+
+#file{
+    text-align: center;
+}
+
