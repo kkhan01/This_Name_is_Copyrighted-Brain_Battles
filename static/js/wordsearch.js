@@ -20,6 +20,7 @@ let answers = [
 	...
 	*/
 ];
+let wordsFound, startTime;
 
 /*
 plan for validation:
@@ -254,7 +255,12 @@ function checkSelection() {
 						}
 					}
 					
-					//console.log(wordBank);
+					if (++wordsFound >= answers.length) {
+						console.log("all words found");
+						endGame();
+					}
+					
+					return;
 				}
 			}
 		}
@@ -267,10 +273,47 @@ function checkSelection() {
 	}
 }
 
-function init() {
+function sendScore(score) {
+	ajaxP({
+		url: '/addscore',
+		data : { game : 'search', score : ''+score },
+		type: 'POST'
+	});
+}
+
+function endGame() {
+	let totalTime = (Date.now() - startTime) / 1000;
+	
+	let total = document.createElement("h3");
+	total.id = "totalTime";
+	total.innerHTML = Math.round(totalTime) + " seconds total";
+	appendMain(total);
+	console.log("time elapsed: " + totalTime);
+	
+	let avgTime = document.createElement("h3");
+	avgTime.id = "avgTime";
+	avgTime.innerHTML = Math.round(totalTime / answers.length) + " seconds per word";
+	appendMain(avgTime);
+	console.log("time per word: " + (totalTime / answers.length));
+	
+	sendScore(Math.round(totalTime / answers.length));
+	
+	let restartButton = document.createElement("div");
+	restartButton.classList.add("button");
+	restartButton.id = "restart";
+	restartButton.innerHTML = "Play Again";
+	restartButton.addEventListener("click", restart);
+	appendMain(restartButton);
+}
+
+function reset() {
 	wordlist = [];
 	grid = [];
 	wordsAdded = [];
+	wordsFound = 0;
+	answers = [];
+	wordTable = null;
+	wordBank = null;
 	
 	for (let y = 0; y < GRID_LEN; y++) {
 		grid.push([]);
@@ -279,6 +322,10 @@ function init() {
 		}
 		
 	}
+}
+
+function init() {
+	reset();
 	
 	let startButton = document.createElement("div");
 	startButton.id = "startButton";
@@ -287,6 +334,29 @@ function init() {
 	startButton.addEventListener("click", start);
 	
 	appendMain(startButton);
+}
+
+function restart() {
+	removeElem(wordTable);
+	
+	let elem = document.getElementById("validate");
+	removeElem(elem);
+	
+	elem = document.getElementById("wordBankContainer");
+	removeElem(elem);
+	
+	elem = document.getElementById("totalTime");
+	removeElem(elem);
+	
+	elem = document.getElementById("avgTime");
+	removeElem(elem);
+	
+	elem = document.getElementById("restart");
+	removeElem(elem);
+	
+	reset();
+	
+	start();
 }
 
 //ajax with promise
@@ -332,15 +402,10 @@ function start() {
 		console.log("creating word bank");
 		createBank();
 	})
-	/*
-	.then(() => {
-		console.log("temp");
-		console.log(wordTable);
-	})
-	*/
 	.then(() => {
 		console.log("adding validation button");
 		let validate = document.createElement("div");
+		validate.id = "validate";
 		validate.className = "button";
 		validate.innerHTML = "Check";
 		validate.addEventListener("click", e => {
@@ -348,6 +413,10 @@ function start() {
 		});
 		appendMain(validate);
 	})
+	.then(() => {
+		console.log("starting timer");
+		startTime = Date.now();
+	});
 	
 	let startButton = document.getElementById("startButton");
 	removeElem(startButton);
