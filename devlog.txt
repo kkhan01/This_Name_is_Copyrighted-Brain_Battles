@@ -210,3 +210,6 @@ updated Readme.md
 linS -- 2018-01-20 18:21:56
 finished wordsearch
 
+linS -- 2018-01-20 18:40:05
+added instructions to wordsearch
+

@@ -327,6 +327,15 @@ function reset() {
 function init() {
 	reset();
 	
+	let introText = document.createElement("p");
+	introText.id = "introText";
+	introText.innerHTML = `Instructions:
+Click a letter to select it.
+Click the "Check" button to check your selection.
+Only check one word at a time.
+`;
+	appendMain(introText);
+	
 	let startButton = document.createElement("div");
 	startButton.id = "startButton";
 	startButton.classList.add("button");
@@ -420,6 +429,9 @@ function start() {
 	
 	let startButton = document.getElementById("startButton");
 	removeElem(startButton);
+	
+	let introText = document.getElementById("introText");
+	removeElem(introText);
 	
 	//add a "please wait notification"
 	let waitMsg = document.createElement("h4");
