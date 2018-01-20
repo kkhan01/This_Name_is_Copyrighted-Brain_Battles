@@ -1,11 +1,19 @@
 .letter {
 	text-align: center;
+}
+
+.unselected {
 	background-color: BlanchedAlmond;
 }
 
-.selected {
+td.selected {
 	text-align: center;
 	background-color: #A6C36F;
+}
+
+.found {
+	text-align: center;
+	background-color: gold;
 }
 
 #wordTable {

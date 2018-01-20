@@ -95,19 +95,20 @@ function createTable() {
 		
 		for (let y of x) {
 			data = document.createElement("td");
-			data.className = "letter";
+			data.classList.add("letter");
+			data.classList.add("unselected");
 			data.innerHTML = y;
 			
 			data.addEventListener("click", e => {
 				let elem = e.target;
 				
-				if (elem.classList.contains("letter")) {
-					elem.classList.remove("letter");
+				if (elem.classList.contains("unselected")) {
+					elem.classList.remove("unselected");
 					elem.classList.add("selected");
 				}
 				else if (elem.classList.contains("selected")) {
 					elem.classList.remove("selected");
-					elem.classList.add("letter");
+					elem.classList.add("unselected");
 				}
 			});
 			
@@ -150,15 +151,13 @@ function getWordTableElem(row, col) {
 
 //based on GRID_LEN
 function outOfRange(row, col) {
-	let r = row;//+delta[0];
-	let c = col;//+delta[1];
-	
-	console.log(r + " " + c);
+	let r = row;
+	let c = col;
 	
 	return r < 0 || r >= GRID_LEN || c < 0 || c >= GRID_LEN;
 }
 
-function checkSelection() {
+function obtainSelection() {
 	//holds all selected cells
 	/*
 	for each elem:
@@ -183,7 +182,6 @@ function checkSelection() {
 				row,
 				col
 			});
-			console.log("starting at " + row + " " + col);
 			
 			//search for surrounding selected squares
 			let tRow, tCol;
@@ -192,8 +190,6 @@ function checkSelection() {
 				tRow = row + delta[0];
 				tCol = col + delta[1];
 				if (outOfRange(tRow, tCol) || !getWordTableElem(tRow, tCol).classList.contains("selected")) continue;
-				
-				console.log(key);
 				
 				//now keep going until out of range or no more selected squares
 				let temp;
@@ -209,11 +205,50 @@ function checkSelection() {
 					tCol += delta[1];
 				}
 				
-				console.log(selected);
-				return;
+				return selected;
 			}
 		}
 	}
+	}
+	
+	return null;
+}
+
+function checkSelection() {
+	let selection = obtainSelection();
+	if (selection === null) return;
+	
+	let letters = [];
+	for (let s of selection) {
+		letters.push(s.elem.innerHTML);
+	}
+	let word = letters.join("");
+	
+	let current;
+	//either start at the beginning of selection or end of selection
+	for (let x = 0; x < 2; x++) {
+		current = (x == 0) ? selection[0] : selection[selection.length-1];
+		for (let elem of answers) {
+			if (current.row == elem.row && current.col == elem.col) {
+				if (word === elem.word ||
+						word === reverse(elem.word)) {
+					console.log("match found");
+					
+					//set all the letters to a special "found" class
+					for (let s of selection) {
+						s.elem.classList.remove("selected");
+						s.elem.classList.add("unselected");
+						s.elem.classList.add("found");
+					}
+				}
+			}
+		}
+	}
+	console.log("no match");
+	//set all the letters back to unselected
+	for (let s of selection) {
+		s.elem.classList.remove("selected");
+		s.elem.classList.add("unselected");
 	}
 }
 
