@@ -52,3 +52,7 @@ hr{
 h1{
     margin-left: 10px;
 }
+
+.orbit{
+    z-index: 1;
+}

@@ -1,6 +1,7 @@
 .navbar {
     background-color: rgb(126, 208, 126);
     color: black;
+    z-index: 100;
 }
 
 .top-bar{
@@ -8,9 +9,11 @@
     width: 100%;
     top: 0px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 100;
 }
 
 .top-bar ul{
+    z-index: 100;
     background-color: inherit;
 }
 
@@ -24,6 +27,7 @@
 
 .input-group{
     margin-bottom: 0rem;
+    z-index: 100;
 }
 
 a {
@@ -46,6 +50,7 @@ a:hover {
 .dropdown.menu .is-active > a {
     color: black;
     background-color: #73bf73;
+    z-index: 100;
 }
 
 p {
@@ -73,11 +78,13 @@ h2 {
     padding-left: 10px;
     padding-right: 1rem;
     padding-top: 0px;
+    z-index: 100;
 }
 
 .logo{
     height: 42.38px;
     width: 42.38px;
+    z-index: 100;
 }
 
 
@@ -93,6 +100,7 @@ h2 {
     right: 5px;
     left: auto;
     margin-top: -3px;
+    z-index: 100;
 }
 
 body{
@@ -132,4 +140,5 @@ h3{
 .dropdown.menu > li.opens-right > .is-dropdown-submenu {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: 0 black solid;
+    z-index: 100;
 }
