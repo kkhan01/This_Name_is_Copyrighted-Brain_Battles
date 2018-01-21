@@ -8,7 +8,14 @@ Log In
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login_custom.css') }}">
 {% endblock %}
 
+
 {% block c_content %}
+<!-- Messages -->
+{% set messages = get_flashed_messages() %}
+{% for message in messages %}
+<h4 style="color:crimson;">{{ message }}</h4>
+{% endfor %}
+
 <!-- Actual Info -->
 <h1>Please Log In</h1>
 <div class="container">
