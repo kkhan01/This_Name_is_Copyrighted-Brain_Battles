@@ -135,9 +135,33 @@ function userClear() {
 	}
 }
 
+function playSound(index) {
+	//reset any sounds that are playing
+	for (let s of soundArray) {
+		if (!soundArray[index].paused) {
+			soundArray[index].pause();
+			soundArray[index].currentTime = 0;
+		}
+	}
+	
+	//play sound
+	soundArray[index].play();
+	
+	//stop playing after a while
+	setTimeout(() => {
+		if (!soundArray[index].paused) {
+			soundArray[index].pause();
+			soundArray[index].currentTime = 0;
+		}
+	}, 500);
+}
+
 //Every button press will call this
 function correctClick() {
 	let index = parseInt(this.id);
+	
+	playSound(index);
+		
 	if (index != pattern[curIndex++]) {
 		console.log("oh no");
 		
