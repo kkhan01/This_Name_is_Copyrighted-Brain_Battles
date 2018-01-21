@@ -78,3 +78,25 @@ h1{
     text-align: center;
 }
 
+.teams{
+    background-color: lightsteelblue;
+    width: 95%;
+    margin: auto;
+    margin-top: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 0.5rem;
+}
+
+#alignthisright{
+    text-align: right;
+    padding-left: 5%;
+}
+
+#alignthisleft{
+    text-align: left;
+}
+
+
+
+

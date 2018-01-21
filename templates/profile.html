@@ -18,14 +18,14 @@
 <hr>
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
-    <div class="medium-6 cell">
+    <div class="medium-6 cell" id="alignthisleft">
       <div class="media-object-section">
-	<img class="thumbnail" src={{pic}}  alt="You Shouldn't Be Downloading This... It's Copyrighted">
+	<img class="thumbnail" src="{{pic}}"  alt="You Shouldn't Be Downloading This... It's Copyrighted">
       </div>
     </div>
-    <div class="medium-6 cell">
+    <div class="medium-6 cell" id="alignthisright">
       <div class="scores">
-	<h2>High Scores</h2>
+	<h2>Best Scores</h2>
 	<div class="row">
 	  <div class="columns">
 	    <div class="orbit" role="region" aria-label="Favorite Text Ever" data-orbit>
@@ -35,21 +35,21 @@
 		<li class="is-active orbit-slide">
 		  <div class="docs-example-orbit-slide" id="one">
 		    <h3>Simon</h3>
-		    <p>{{simon}}</p>
+		    <p>{{simon}} rounds</p>
 		    <!-- SCORE INFO-->
 		  </div>
 		</li>
 		<li class="orbit-slide">
 		  <div class="docs-example-orbit-slide" id="two">
 		    <h3>WordSearch</h3>
-		    <p>{{search}}</p>
+		    <p>{{search}} words/second</p>
 		    <!-- SCORE INFO-->
 		  </div>
 		</li>
 		<li class="orbit-slide">
 		  <div class="docs-example-orbit-slide" id="three">
 		    <h3>Reaction</h3>
-		    <p>{{react}}</p>
+		    <p>{{react}} ms</p>
 		    <!-- SCORE INFO-->
 		  </div>
 		</li>
@@ -66,10 +66,28 @@
     </div>
   </div>
 </div>
-Teams: 
-{% for team in teams %}
-{{team}} 
-{% endfor %}
+<div class="teams">
+  <h4>Teams:</h4>
+      {% if teams|length > 1%}
+  <ul>
+      {% for team in teams %}
+      <li>
+	{% if iu %}
+	<a href="idkthelinkyet">{{team}}</a>
+	{% else %}
+	<p>{{team}}</p>
+	{% endif %}
+      </li>
+      {% endfor %}
+  </ul>
+  
+  {% else %}
+  <p>{{user}} is not in any teams.</p>
+  {% endif %}
+  
+  <a class="button" href="/createteam"> Create a Team!</a>
+    
+</div>
 <br>
 
 {% if iu %}
