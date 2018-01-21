@@ -313,21 +313,27 @@ def simon():
     if 'user' not in session:
         return redirect(url_for('login'))
     else:
-        return render_template('simon.html')
+        username = session['user']
+        hs = get_user_highscore('simon', username)
+        return render_template('simon.html', hs = hs)
 
 @app.route('/react')
 def react():
     if 'user' not in session:
         return redirect(url_for('login'))
     else:
-        return render_template('react.html')
+        username = session['user']
+        hs = get_user_highscore('react', username)
+        return render_template('react.html', hs = hs)
 
 @app.route('/wordsearch')
 def wordsearch():
     if 'user' not in session:
         return redirect(url_for('login'))
     else:
-        return render_template('wordsearch.html')
+        username = session['user']
+        hs = get_user_highscore('search', username)
+        return render_template('wordsearch.html', hs = hs)
 
 #check if valid ext
 def allowed_file(filename):

@@ -222,3 +222,6 @@ added user click sounds to simon
 khanK -- 2018-01-21 17:52:49
 found out scores is a-okay to go, the 'error' was trying to print null i think. fixed pfps?
 
+khanK -- 2018-01-21 18:18:35
+pass highscores to each game of the username for display. i think mansour will make it pretty?
+
