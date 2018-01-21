@@ -396,9 +396,9 @@ def profile():
         files = os.listdir(path)
         for filen in files:
             base, ext = os.path.splitext(filen)
-        if(base == username):
-            pic = path + "/" + filen
-            eprint(pic)
+            if(base == username):
+                pic = path + "/" + filen
+                eprint(pic)
         simon = get_user_highscore('simon', username)
         search = get_user_highscore('search', username)
         react = get_user_highscore('react', username)

@@ -219,3 +219,6 @@ did some more profile css and set up frontend for viewing and creating teams
 linS -- 2018-01-21 16:35:54
 added user click sounds to simon
 
+khanK -- 2018-01-21 17:52:49
+found out scores is a-okay to go, the 'error' was trying to print null i think. fixed pfps?
+
