@@ -1,0 +1,16 @@
+{% extends 'default.html' %}
+
+{% block c_title %}
+Create Team
+{% endblock %}
+
+{% block c_content %}
+<form action = "/team_backend">
+  Team Name: <input type="text" name="team"> <br>
+  Select members you want to add to your team <br>
+  {% for user in users %}
+  <input type="checkbox" name="member" value={{user}}> {{user}} <br>
+  {% endfor %}
+  <input type="submit" value="Submit">
+</form>
+{% endblock %}
