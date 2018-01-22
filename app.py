@@ -138,19 +138,10 @@ def find_teams(user):
 
 #gets a user's highscore for a given game
 def get_user_highscore(game, user):
-    if game != "react":
+    if game == "simon":
         c.execute('SELECT MAX(score) FROM scores WHERE game="%s" AND username="%s";'%(game, user))
     else:
         c.execute('SELECT MIN(score) FROM scores WHERE game="%s" AND username="%s";'%(game, user))
-    result = c.fetchall()
-    if result == []:
-        return 0
-    else:
-        return result[0][0]
-
-#gets the all time highscore for a given game
-def get_game_highscore(game):
-    c.execute('SELECT MAX(score) FROM  scores WHERE game = "%s";'%game)
     result = c.fetchall()
     if result == []:
         return 0
@@ -181,7 +172,7 @@ def get_leaderboards():
     scores['search'] = []
     games = ['simon', 'react', 'search']
     for game in games:
-        if game == 'react':
+        if game == 'react' or game == 'search':
             c.execute('SELECT MIN(score),username FROM scores WHERE game="%s";'%game)
             scores[game].append(c.fetchall()[0])
         else:
@@ -193,7 +184,7 @@ def get_leaderboards():
         highscore = scores[game][0][0]
         count = 0
         while count < 4:
-            if game == 'react':
+            if game == 'react' or game == 'search':
                 c.execute('SELECT MIN(score),username FROM scores WHERE game="%s" AND score > %d;'%(game, highscore))
                 scores[game].append(c.fetchall()[0])
                 if scores[game][count+1][0] is None:
@@ -209,7 +200,57 @@ def get_leaderboards():
                 highscore = scores[game][count+1][0]
             count = count + 1
     return scores
-            
+
+#top scores of each game of all time
+def top_scores():
+    #simon
+    simonscore = 0
+    simonuser = "N/A"
+    c.execute('SELECT MAX(score) FROM scores WHERE game="%s";'%("simon"))
+    result = c.fetchall()
+    if result == []:
+         simonscore = 0
+    simonscore = result[0][0]
+    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("simon", simonscore))
+    result = c.fetchall()
+    if result == []:
+         simonuser = "N/A"
+    simonuser = result[0][0]
+    #eprint("%s$$$$$$$$%d"%(simonuser, simonscore))
+    #react
+    reactscore = 0
+    reactuser = "N/A"
+    c.execute('SELECT MIN(score) FROM scores WHERE game="%s";'%("react"))
+    result = c.fetchall()
+    if result == []:
+         reactscore = 0
+    reactscore = result[0][0]
+    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("react", reactscore))
+    result = c.fetchall()
+    if result == []:
+         reactuser = "N/A"
+    reactuser = result[0][0]
+    #eprint("%s$$$$$$$$%d"%(reactuser, reactscore))
+    #wordsearch
+    wsscore = 0
+    wsuser = "N/A"
+    c.execute('SELECT MIN(score) FROM scores WHERE game="%s";'%("search"))
+    result = c.fetchall()
+    if result == []:
+         wsscore = 0
+    wsscore = result[0][0]
+    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("search", wsscore))
+    result = c.fetchall()
+    if result == []:
+         wsuser = "N/A"
+    wsuser = result[0][0]
+    #eprint("%s$$$$$$$$%d"%(wsuser, wsscore))
+
+    scores = {}
+    scores["simon"] = [simonuser, simonscore]
+    scores["react"] = [reactuser, reactscore]
+    scores["search"] = [wsuser, wsscore]
+    return scores
 #==========================================================
 #flask code
 
@@ -298,7 +339,7 @@ def home():
         return redirect(url_for('login'))
 
     else:
-        return render_template('dummy.html', name = session['user'])
+        return render_template('dummy.html', name = session['user'], scores = top_scores())
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
