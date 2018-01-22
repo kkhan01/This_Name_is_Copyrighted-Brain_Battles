@@ -485,7 +485,7 @@ def upload():
         else:
             flash ('Invalid file! Please upload a valid image.')
     eprint(5)
-    return redirect(url_for('profile'))
+    return redirect(url_for('profile', user=session['user']))
 
 def rename(image):
     eprint(11)
