@@ -72,7 +72,7 @@ def search_user(username):
 
 c.execute('CREATE TABLE IF NOT EXISTS accounts (username TEXT PRIMARY KEY, password TEXT);')
 c.execute('CREATE TABLE IF NOT EXISTS scores (game TEXT, username TEXT, score INTEGER);')
-c.execute('CREATE TABLE IF NOT EXISTS teams (teamname TEXT,creator TEXT,  members TEXT);')
+c.execute('CREATE TABLE IF NOT EXISTS teams (teamname TEXT, creator TEXT,  members TEXT);')
 
 #adds a users new score
 @app.route('/addscore', methods=['POST'])
@@ -550,7 +550,7 @@ def team_backend():
             flash ('Sorry, that team name already exists.')
             return redirect(url_for('createteam'))
         else:
-            create_team(teamname, session['user'], session['user'])
+            create_team(teamname, session['user'])
             members = request.args.getlist("member")
             for member in members:
                 add_member(teamname, member)
