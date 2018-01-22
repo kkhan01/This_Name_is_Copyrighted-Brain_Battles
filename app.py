@@ -231,158 +231,64 @@ def top_scores():
     #simon
     simonscore = 0
     simonuser = "N/A"
-    c.execute('SELECT MAX(score) FROM scores WHERE game="%s";'%("simon"))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         simonscore = 0
-    else:
-        simonscore = result[0][0]
-    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("simon", simonscore))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         simonuser = "N/A"
-    else:
-        simonuser = result[0][0]
-    #eprint("%s$$$$$$$$%d"%(simonuser, simonscore))
-    #simon second best
     simonscore1 = 0
     simonuser1 = "N/A"
-    if simonscore != 0:
-        c.execute('SELECT MAX(score) FROM scores WHERE game="%s" AND score<%d;'%("simon", simonscore))
-        result = c.fetchall()
-        if result == [] or result[0][0] == None:
-            simonscore1 = 0
-        else:
-            simonscore1 = result[0][0]
-    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("simon", simonscore1))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         simonuser1 = "N/A"
-    else:
-        simonuser1 = result[0][0]
-    #eprint("%s$$$$$$$$%d"%(simonuser1, simonscore1))
-    #simon third best
     simonscore2 = 0
     simonuser2 = "N/A"
-    if simonscore1 != 0:
-        c.execute('SELECT MAX(score) FROM scores WHERE game="%s" AND score<%d;'%("simon", simonscore1))
-        result = c.fetchall()
-        if result == [] or result[0][0] == None:
-            simonscore2 = 0
-        else:
-            simonscore2 = result[0][0]
-    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("simon", simonscore2))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         simonuser2 = "N/A"
-    else:
-        simonuser2 = result[0][0]
-    #eprint("%s$$$$$$$$%d"%(simonuser2, simonscore2))
-
-    
+    result = c.execute('SELECT DISTINCT * FROM scores WHERE game = "simon" ORDER BY score DESC;')
+    counter = 0
+    for i in result:
+        if(counter == 0):
+            simonuser = i[1]
+            simonscore = i[2]
+        if(counter == 1):
+            simonuser1 = i[1]
+            simonscore1 = i[2]
+        if(counter == 2):
+            simonuser2 = i[1]
+            simonscore2 = i[2]
+        counter += 1
     #react
     reactscore = 0
     reactuser = "N/A"
-    c.execute('SELECT MIN(score) FROM scores WHERE game="%s";'%("react"))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         reactscore = 0
-    else:
-        reactscore = result[0][0]
-    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("react", reactscore))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         reactuser = "N/A"
-    else:
-        reactuser = result[0][0]
-    #eprint("%s$$$$$$$$%d"%(reactuser, reactscore))
-    #react second best
     reactscore1 = 0
     reactuser1 = "N/A"
-    if reactscore != 0:
-        c.execute('SELECT MIN(score) FROM scores WHERE game="%s" AND score>%d;'%("react", reactscore))
-        result = c.fetchall()
-        if result == [] or result[0][0] == None:
-            reactscore1 = 0
-        else:
-            reactscore1 = result[0][0]
-    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("react", reactscore1))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         reactuser1 = "N/A"
-    else:
-        reactuser1 = result[0][0]
-    #eprint("%s$$$$$$$$%d"%(reactuser1, reactscore1))
-    #react third best
     reactscore2 = 0
     reactuser2 = "N/A"
-    if reactscore1 != 0:
-        c.execute('SELECT MIN(score) FROM scores WHERE game="%s AND score>%d";'%("react", reactscore1))
-        result = c.fetchall()
-        if result == [] or result[0][0] == None:
-         reactscore2 = 0
-        else:
-            reactscore2 = result[0][0]
-    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("react", reactscore2))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         reactuser2 = "N/A"
-    else:
-        reactuser2 = result[0][0]
-    #eprint("%s$$$$$$$$%d"%(reactuser2, reactscore2))
-
-
-    #wordsearch
+    result = c.execute('SELECT DISTINCT * FROM scores WHERE game = "react" ORDER BY score ASC;')
+    counter = 0
+    for i in result:
+        if(counter == 0):
+            reactuser = i[1]
+            reactscore = i[2]
+        if(counter == 1):
+            reactuser1 = i[1]
+            reactscore1 = i[2]
+        if(counter == 2):
+            reactuser2 = i[1]
+            reactscore2 = i[2]
+        counter += 1
+    #search
     wsscore = 0
     wsuser = "N/A"
-    c.execute('SELECT MIN(score) FROM scores WHERE game="%s";'%("search"))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         wsscore = 0
-    else:
-        wsscore = result[0][0]
-    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("search", wsscore))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         wsuser = "N/A"
-    else:
-        wsuser = result[0][0]
-    #eprint("%s$$$$$$$$%d"%(wsuser, wsscore))
-    #wordsearch second best
     wsscore1 = 0
     wsuser1 = "N/A"
-    if wsscore != 0:
-        c.execute('SELECT MIN(score) FROM scores WHERE game="%s AND score>%d";'%("search", wsscore))
-        result = c.fetchall()
-        if result == [] or result[0][0] == None:
-            wsscore1 = 0
-        else:
-            wsscore1 = result[0][0]
-    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("search", wsscore1))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         wsuser1 = "N/A"
-    else:
-        wsuser1 = result[0][0]
-    #eprint("%s$$$$$$$$%d"%(wsuser1, wsscore1))
-    #wordsearch third best
     wsscore2 = 0
     wsuser2 = "N/A"
-    if wsscore1 != 0:
-        c.execute('SELECT MIN(score) FROM scores WHERE game="%s" AND score>%d;'%("search", wsscore1))
-        result = c.fetchall()
-        if result == [] or result[0][0] == None:
-            wsscore2 = 0
-        else:
-            wsscore2 = result[0][0]
-    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("search", wsscore2))
-    result = c.fetchall()
-    if result == [] or result[0][0] == None:
-         wsuser2 = "N/A"
-    else:
-        wsuser2 = result[0][0]
-    #eprint("%s$$$$$$$$%d"%(wsuser2, wsscore2))
-
+    result = c.execute('SELECT DISTINCT * FROM scores WHERE game = "search" ORDER BY score ASC;')
+    counter = 0
+    for i in result:
+        if(counter == 0):
+            wsuser = i[1]
+            wsscore = i[2]
+        if(counter == 1):
+            wsuser1 = i[1]
+            wsscore1 = i[2]
+        if(counter == 2):
+            wsuser2 = i[1]
+            wsscore2 = i[2]
+        counter += 1
+    
     #all scores
     scores = {}
     #simon

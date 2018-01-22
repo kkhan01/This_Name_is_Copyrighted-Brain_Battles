@@ -2,19 +2,20 @@
 This Name is Copyrighted &copy; <br>
 Michela Marchini, Mansour Elsharawy, Stanley Lin, Khinshan Khan <br>
 Project 02 <br>
-Period 9 <br>
+Period 09 <br>
 
 ## Overview
 Welcome to Mind Games! Our app aims to give its users a space to have fun while engaging in brain-stimulating exercises. Users may play a reaction timing game, a word search, or Simon, a game that tests the player's memory. Users can connect with friends through our Team function, which allows groups of users to compare high scores and compete to be the top player in each game.
 
 ## Installation and Setup
- Installing and using our app is desgned to be as easy as possible.
+ Installing and using our app is designed to be as easy as possible.
  
 ### Downloading the Application
 1. Clone this repository with `git clone https://github.com/michelamar/softDevFinalProject.git`.
 
 ### Running the Application
-2. In order to run our application you will need virtualenv, Python 2.7, the and the `Flask` and `requests` modules.
+2. In order to run our application you will need virtualenv, Python 2.7, the and the `Flask` and `requests` modules. <br>
+   Skip steps/ commands if you already have it set up.
 ```
 $ sudo pip install virtualenv
 $ cd <PATH_TO_APPLICATION_ROOT>
