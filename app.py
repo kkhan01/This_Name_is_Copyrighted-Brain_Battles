@@ -85,6 +85,23 @@ def add_score():
     db.commit()
     return True
 
+def user_exist(name):
+    c.execute('SELECT username FROM accounts WHERE username = "%s";'%name)
+    user = c.fetchall()
+    if user is None:
+        return False
+    else:
+        return True
+
+def get_users():
+    c.execute('SELECT username FROM accounts;')
+    members = c.fetchall()
+    users = []
+    for member in members:
+        if member[0] != session['user']:
+            users.append(member[0])
+    return users
+
 #creates a new team
 def create_team(name, creator):
     c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, creator))
@@ -94,7 +111,15 @@ def delete_team(name):
     c.execute('DELETE FROM teams WHERE teamname = "%s";'%name)
     db.commit()
 
-
+def team_exist(name):
+    c.execute('SELECT teamname FROM teams WHERE teamname = "%s";'%name)
+    team = c.fetchall()
+    eprint(team)
+    if team != name:
+        return False
+    else:
+        return True
+    
 #adds a member to a team 
 def add_member(name, member):
     c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
@@ -132,7 +157,7 @@ def find_teams(user):
         c.execute('SELECT members FROM teams WHERE teamname = "%s";'%team)
         members = c.fetchall()[0][0]
         if members.find(user) != -1:
-            teams_in.append(team)
+            teams_in.append(team[0])
     return teams_in
 
 
@@ -379,6 +404,7 @@ def top_scores():
     search["2"] = [wsuser2, wsscore2]
     scores["search"] = search
     return scores
+
 #==========================================================
 #flask code
 
@@ -593,6 +619,75 @@ def team():
         members = get_members(teamname) #list of members
         stats = get_team_stats(teamname) #highscore dict game: [score, user] sorted
         return render_template('team.html', name = teamname, members = members, stats = stats)
+
+@app.route('/createteam', methods = ["POST", "GET"])
+def createteam():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    else:
+        users = get_users()
+        return render_template('new_team.html', users = users)
+
+@app.route('/team_backend', methods = ["POST", "GET"])
+def team_backend():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    else:
+        teamname = request.args['team']
+        #eprint(teamname)
+        #eprint(team_exist(teamname))
+        if team_exist(teamname):
+            flash ('Sorry, that team name already exists.')
+            return redirect(url_for('createteam'))
+        else:
+            create_team(teamname, session['user'])
+            members = request.args.getlist("member")
+            for member in members:
+                add_member(teamname, member)
+        flash('Team successfully created!')
+        return redirect(url_for('profile'))
+
+@app.route('/new_member', methods = ["POST"])
+def new_member():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    else:
+        user = request.form['member']
+        team = request.form['team']
+        if user_exist(user):
+            add_member(team, user)
+        else:
+            flash ('That username does not exist')
+
+@app.route('/delete_member', methods = ["POST"])
+def delete_member():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    else:
+        user = request.form['member']
+        team = request.form['team']
+        remove_member(team, user)
+
+@app.route('/leave_team', methods = ["POST"])
+def leave_team():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    else:
+        user = request.form['member']
+        team = request.form['team']
+        remove_member(team, user)
+        flash ('You have successfully left the team')
+        return redirect(url_for('home'))
+
+@app.route('/disband_team', methods = ["POST"])
+def disband_team():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    else:
+        team = request.form['team']
+        delete_team(team)
+        flash ('You have successfully disbanded your team')
+        return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
