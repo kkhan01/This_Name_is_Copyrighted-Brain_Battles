@@ -426,7 +426,7 @@ def home():
         return redirect(url_for('login'))
 
     else:
-        return render_template('dummy.html', name = session['user'], scores = top_scores())
+        return render_template('dummy.html', name = session['user'], scores = top_scores(), me = session['user'])
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
@@ -434,7 +434,7 @@ def search():
         return redirect(url_for('login'))
     else:
         s = request.form['searchtext']
-        return render_template('search.html', s_text = s, results = search_user(s))
+        return render_template('search.html', s_text = s, results = search_user(s), me = session['user'])
 
 @app.route('/simon')
 def simon():
@@ -443,7 +443,7 @@ def simon():
     else:
         username = session['user']
         hs = get_user_highscore('simon', username)
-        return render_template('simon.html', hs = hs)
+        return render_template('simon.html', hs = hs,me = session['user'])
 
 @app.route('/react')
 def react():
@@ -452,7 +452,7 @@ def react():
     else:
         username = session['user']
         hs = get_user_highscore('react', username)
-        return render_template('react.html', hs = hs)
+        return render_template('react.html', hs = hs, me = session['user'])
 
 @app.route('/wordsearch')
 def wordsearch():
@@ -461,7 +461,7 @@ def wordsearch():
     else:
         username = session['user']
         hs = get_user_highscore('search', username)
-        return render_template('wordsearch.html', hs = hs)
+        return render_template('wordsearch.html', hs = hs, me = session['user'])
 
 #check if valid ext
 def allowed_file(filename):
@@ -521,7 +521,7 @@ def profile():
         if request.method == 'POST':
             username = request.form['user']
         else:
-            username = session['user']
+            username = request.args['user']
          #if it's THE user, they get extra settings
         if username == session['user']:
             isuser = True
@@ -538,7 +538,7 @@ def profile():
         react = get_user_highscore('react', username)
         teams = find_teams(username)
         eprint(isuser)
-        return render_template('profile.html', pic = pic, user = username, iu = isuser, simon = simon, search = search, react = react, teams = teams)
+        return render_template('profile.html', pic = pic, user = username, iu = isuser, simon = simon, search = search, react = react, teams = teams, me = session['user'])
     
 @app.route('/team', methods = ["POST", "GET"])
 def team():
@@ -560,7 +560,7 @@ def createteam():
         return redirect(url_for('login'))
     else:
         users = get_users()
-        return render_template('new_team.html', users = users)
+        return render_template('new_team.html', users = users, me=session['user'])
 
 @app.route('/team_backend', methods = ["POST", "GET"])
 def team_backend():

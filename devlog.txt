@@ -243,3 +243,6 @@ worked on team page CSS and did some python debugs
 elsharawyM -- 2018-01-22 05:31:17
 implemented team creators kicking and adding members to teams
 
+elsharawyM -- 2018-01-22 05:47:18
+fixed some profile bugs
+
