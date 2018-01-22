@@ -185,11 +185,12 @@ def get_team_stats(name):
     scores['search'] = []
     games = ['simon', 'react', 'search']
     members = get_members(name)
-    eprint(members)
+    #eprint(members)
     for game in games:
         for member in members:
             high_score = get_user_highscore(game, member)
-            scores[game].append([high_score, member])
+            if high_score is not None:
+                scores[game].append([high_score, member])
         sorted(scores[game])
     return scores
 
