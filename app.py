@@ -208,48 +208,176 @@ def top_scores():
     simonuser = "N/A"
     c.execute('SELECT MAX(score) FROM scores WHERE game="%s";'%("simon"))
     result = c.fetchall()
-    if result == []:
+    if result == [] or result[0][0] == None:
          simonscore = 0
-    simonscore = result[0][0]
+    else:
+        simonscore = result[0][0]
     c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("simon", simonscore))
     result = c.fetchall()
-    if result == []:
+    if result == [] or result[0][0] == None:
          simonuser = "N/A"
-    simonuser = result[0][0]
+    else:
+        simonuser = result[0][0]
     #eprint("%s$$$$$$$$%d"%(simonuser, simonscore))
+    #simon second best
+    simonscore1 = 0
+    simonuser1 = "N/A"
+    if simonscore != 0:
+        c.execute('SELECT MAX(score) FROM scores WHERE game="%s" AND score<%d;'%("simon", simonscore))
+        result = c.fetchall()
+        if result == [] or result[0][0] == None:
+            simonscore1 = 0
+        else:
+            simonscore1 = result[0][0]
+    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("simon", simonscore1))
+    result = c.fetchall()
+    if result == [] or result[0][0] == None:
+         simonuser1 = "N/A"
+    else:
+        simonuser1 = result[0][0]
+    #eprint("%s$$$$$$$$%d"%(simonuser1, simonscore1))
+    #simon third best
+    simonscore2 = 0
+    simonuser2 = "N/A"
+    if simonscore1 != 0:
+        c.execute('SELECT MAX(score) FROM scores WHERE game="%s" AND score<%d;'%("simon", simonscore1))
+        result = c.fetchall()
+        if result == [] or result[0][0] == None:
+            simonscore2 = 0
+        else:
+            simonscore2 = result[0][0]
+    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("simon", simonscore2))
+    result = c.fetchall()
+    if result == [] or result[0][0] == None:
+         simonuser2 = "N/A"
+    else:
+        simonuser2 = result[0][0]
+    #eprint("%s$$$$$$$$%d"%(simonuser2, simonscore2))
+
+    
     #react
     reactscore = 0
     reactuser = "N/A"
     c.execute('SELECT MIN(score) FROM scores WHERE game="%s";'%("react"))
     result = c.fetchall()
-    if result == []:
+    if result == [] or result[0][0] == None:
          reactscore = 0
-    reactscore = result[0][0]
+    else:
+        reactscore = result[0][0]
     c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("react", reactscore))
     result = c.fetchall()
-    if result == []:
+    if result == [] or result[0][0] == None:
          reactuser = "N/A"
-    reactuser = result[0][0]
+    else:
+        reactuser = result[0][0]
     #eprint("%s$$$$$$$$%d"%(reactuser, reactscore))
+    #react second best
+    reactscore1 = 0
+    reactuser1 = "N/A"
+    if reactscore != 0:
+        c.execute('SELECT MIN(score) FROM scores WHERE game="%s" AND score>%d;'%("react", reactscore))
+        result = c.fetchall()
+        if result == [] or result[0][0] == None:
+            reactscore1 = 0
+        else:
+            reactscore1 = result[0][0]
+    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("react", reactscore1))
+    result = c.fetchall()
+    if result == [] or result[0][0] == None:
+         reactuser1 = "N/A"
+    else:
+        reactuser1 = result[0][0]
+    #eprint("%s$$$$$$$$%d"%(reactuser1, reactscore1))
+    #react third best
+    reactscore2 = 0
+    reactuser2 = "N/A"
+    if reactscore1 != 0:
+        c.execute('SELECT MIN(score) FROM scores WHERE game="%s AND score>%d";'%("react", reactscore1))
+        result = c.fetchall()
+        if result == [] or result[0][0] == None:
+         reactscore2 = 0
+        else:
+            reactscore2 = result[0][0]
+    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("react", reactscore2))
+    result = c.fetchall()
+    if result == [] or result[0][0] == None:
+         reactuser2 = "N/A"
+    else:
+        reactuser2 = result[0][0]
+    #eprint("%s$$$$$$$$%d"%(reactuser2, reactscore2))
+
+
     #wordsearch
     wsscore = 0
     wsuser = "N/A"
     c.execute('SELECT MIN(score) FROM scores WHERE game="%s";'%("search"))
     result = c.fetchall()
-    if result == []:
+    if result == [] or result[0][0] == None:
          wsscore = 0
-    wsscore = result[0][0]
+    else:
+        wsscore = result[0][0]
     c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("search", wsscore))
     result = c.fetchall()
-    if result == []:
+    if result == [] or result[0][0] == None:
          wsuser = "N/A"
-    wsuser = result[0][0]
+    else:
+        wsuser = result[0][0]
     #eprint("%s$$$$$$$$%d"%(wsuser, wsscore))
+    #wordsearch second best
+    wsscore1 = 0
+    wsuser1 = "N/A"
+    if wsscore != 0:
+        c.execute('SELECT MIN(score) FROM scores WHERE game="%s AND score>%d";'%("search", wsscore))
+        result = c.fetchall()
+        if result == [] or result[0][0] == None:
+            wsscore1 = 0
+        else:
+            wsscore1 = result[0][0]
+    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("search", wsscore1))
+    result = c.fetchall()
+    if result == [] or result[0][0] == None:
+         wsuser1 = "N/A"
+    else:
+        wsuser1 = result[0][0]
+    #eprint("%s$$$$$$$$%d"%(wsuser1, wsscore1))
+    #wordsearch third best
+    wsscore2 = 0
+    wsuser2 = "N/A"
+    if wsscore1 != 0:
+        c.execute('SELECT MIN(score) FROM scores WHERE game="%s" AND score>%d;'%("search", wsscore1))
+        result = c.fetchall()
+        if result == [] or result[0][0] == None:
+            wsscore2 = 0
+        else:
+            wsscore2 = result[0][0]
+    c.execute('SELECT username FROM scores WHERE game="%s" AND score="%s";'%("search", wsscore2))
+    result = c.fetchall()
+    if result == [] or result[0][0] == None:
+         wsuser2 = "N/A"
+    else:
+        wsuser2 = result[0][0]
+    #eprint("%s$$$$$$$$%d"%(wsuser2, wsscore2))
 
+    #all scores
     scores = {}
-    scores["simon"] = [simonuser, simonscore]
-    scores["react"] = [reactuser, reactscore]
-    scores["search"] = [wsuser, wsscore]
+    #simon
+    simon = {}
+    simon["0"] = [simonuser, simonscore]
+    simon["1"] = [simonuser1, simonscore1]
+    simon["2"] = [simonuser2, simonscore2]
+    scores["simon"] = simon
+    #react
+    react = {}
+    react["0"] = [reactuser, reactscore]
+    react["1"] = [reactuser1, reactscore1]
+    react["2"] = [reactuser2, reactscore2]
+    scores["react"] = react
+    #ws
+    search = {}
+    search["0"] = [wsuser, wsscore]
+    search["1"] = [wsuser1, wsscore1]
+    search["2"] = [wsuser2, wsscore2]
+    scores["search"] = search
     return scores
 #==========================================================
 #flask code

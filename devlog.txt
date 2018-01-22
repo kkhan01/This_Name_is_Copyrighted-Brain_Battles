@@ -228,3 +228,6 @@ pass highscores to each game of the username for display. i think mansour will m
 elsharawyM -- 2018-01-21 19:11:43
 added best scores to game pages
 
+khanK -- 2018-01-21 21:08:52
+made top 3 of each game leader board + scores
+
