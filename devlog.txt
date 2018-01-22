@@ -237,3 +237,6 @@ top_scores code cleaned up
 elsharawyM -- 2018-01-22 00:30:19
 homepage work to display overall leaderboards
 
+elsharawyM -- 2018-01-22 03:00:23
+worked on team page CSS and did some python debugs
+

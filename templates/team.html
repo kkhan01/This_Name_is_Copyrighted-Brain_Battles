@@ -1,0 +1,86 @@
+{% extends 'default.html' %}
+
+{% block c_title %}
+Team {{name}}
+{% endblock %}
+
+{% block include %}
+<link rel="stylesheet" type="text/css" href="../static/css/team.css">
+{% endblock %}
+
+{% block c_content %}
+<h1> Team {{name}} </h1>
+<table>
+  <tr>
+    <td id="left">
+      <div class="memberlist">
+	<h3>Team Members</h3>
+	<ul>
+	  {% for member in members %}
+	  <li>
+	    <div class="grid-container">
+	      <div class="grid-x grid-margin-x">
+		<div class="cell medium-6">
+		  <a href="/profile?user={{member}}">{{member}}</a>
+		  </div>
+		{% if me == creator %}
+		<div class="cell medium-6" id="right">
+		  <button class="button" id="kick">
+		    {% if member != me %}
+		    Kick
+		    {% else %}
+		    Disband
+		    {% endif %}
+		  </button>
+		</div>
+		{% endif %}
+	      </div>
+	    </div>
+	  </li>
+	  {% endfor %}
+	</ul>
+      </div>
+    </td>
+    <td>
+      <div class="leaderboards">
+	<h3>Team Leaderboards</h3>
+	{% for game in stats %}
+	<table class="scores">
+	  <tr>
+	    <th colspan="2">
+	      {% if game == "react" %}
+	      React
+	      {% elif game == "simon" %}
+	      Simon
+	      {% else %}
+	      WordSearch
+	      {% endif %}
+	    </th>
+	  </tr>
+	  {% for score in stats[game] %}
+	  <tr>
+	    <td>
+	      {{score[1]}}
+	    </td>
+	    <td id="number">
+	      {{score[0]}}
+	      {% if game == "react" %}
+	      ms
+	      {% elif game == "simon" %}
+	      rounds
+	      {% else %}
+	      sec/word
+	      {% endif %}
+	    </td>
+	  </tr>
+	  {% endfor %}
+	</table>
+	{% endfor %}
+      </div>
+    </td>
+  </tr>
+</table>
+{% endblock %}
+
+{% block scripts %}    
+{% endblock  %}

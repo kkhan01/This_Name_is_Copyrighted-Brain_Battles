@@ -1,0 +1,48 @@
+.memberlist{
+    display: inline-block; 
+    width: 90%;
+    background-color: lightsteelblue;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 100%;
+    padding-top: 1rem;
+}
+
+.leaderboards{
+    display: inline-block; 
+    width: 90%;
+    background-color: lightsteelblue;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 100%;
+    padding-top: 1rem;
+}
+
+
+#left{
+    padding-top: 0;
+}
+
+#right{
+    text-align: right;
+}
+
+#number{
+    width: 150px;
+    text-align: right;
+    padding-right: 30px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.scores{
+    width: 95%;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+#kick{
+    background-color: crimson;
+}

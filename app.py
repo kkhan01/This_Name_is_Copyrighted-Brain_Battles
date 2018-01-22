@@ -85,14 +85,14 @@ def add_score():
     db.commit()
     return True
 
-def user_exist(name):
+'''def user_exist(name):
     c.execute('SELECT username FROM accounts WHERE username = "%s";'%name)
     user = c.fetchall()
     if user != name:
         return False
     else:
         return True
-
+'''
 def get_users():
     c.execute('SELECT username FROM accounts;')
     members = c.fetchall()
@@ -152,7 +152,7 @@ def get_members(name):
 
 def get_creator(name):
     c.execute('SELECT creator FROM teams WHERE teamname = "%s";'%name)
-    creator = c.fetchall[0][0]
+    creator = c.fetchall()[0][0]
     return creator
 
 #finds all the teams a given user is a part of
@@ -181,6 +181,8 @@ def get_user_highscore(game, user):
     else:
         return result[0][0]
 
+def getscore(elem):
+    return elem[1]
 #returns highest scores of each game dict
 def get_team_stats(name):
     scores = {}
@@ -195,7 +197,11 @@ def get_team_stats(name):
             high_score = get_user_highscore(game, member)
             if high_score is not None:
                 scores[game].append([high_score, member])
-        sorted(scores[game])
+        eprint(scores[game])
+        if game == 'simon':
+            scores[game] = sorted(scores[game], key=getscore ,reverse=True)
+        else:
+            scores[game] = sorted(scores[game], key=getscore,reverse=True)
     return scores
 
 
@@ -350,6 +356,7 @@ def login():
 #will say what's wrong
 def authenticate(user, passw):
     #check if username & pass are in the database
+    eprint(user_exist(user))
     if user_exist(user):
         if get_pass(user) == passw:
             return 'good'
@@ -398,8 +405,11 @@ def home():
         if 'uname' in request.form:
             user = request.form['uname']
             passw = request.form['upass']
-        
+
+            eprint(user)
+            eprint(passw)
             result = authenticate(user, passw)
+            eprint(result + '\n\n\n\n')
         
             if result == 'good':
                 session['user'] = user
@@ -534,7 +544,7 @@ def team():
         members = get_members(teamname) #list of members
         creator = get_creator(teamname) #creator of team
         stats = get_team_stats(teamname) #highscore dict game: [score, user] sorted
-        return render_template('team.html', name = teamname, members = members, stats = stats, creator = creator)
+        return render_template('team.html', name = teamname, members = members, stats = stats, creator = creator, me = session['user'])
 
 @app.route('/createteam', methods = ["POST", "GET"])
 def createteam():
