@@ -72,7 +72,7 @@ def search_user(username):
 
 c.execute('CREATE TABLE IF NOT EXISTS accounts (username TEXT PRIMARY KEY, password TEXT);')
 c.execute('CREATE TABLE IF NOT EXISTS scores (game TEXT, username TEXT, score INTEGER);')
-c.execute('CREATE TABLE IF NOT EXISTS teams (teamname TEXT, members TEXT);')
+c.execute('CREATE TABLE IF NOT EXISTS teams (teamname TEXT,creator TEXT,  members TEXT);')
 
 #adds a users new score
 @app.route('/addscore', methods=['POST'])
@@ -88,7 +88,7 @@ def add_score():
 def user_exist(name):
     c.execute('SELECT username FROM accounts WHERE username = "%s";'%name)
     user = c.fetchall()
-    if user is None:
+    if user != name:
         return False
     else:
         return True
@@ -104,7 +104,7 @@ def get_users():
 
 #creates a new team
 def create_team(name, creator):
-    c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, creator))
+    c.execute('INSERT INTO teams VALUES("%s", "%s", "%s");'%(name, creator, creator))
     db.commit()
 
 def delete_team(name):
@@ -125,8 +125,10 @@ def add_member(name, member):
     c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
     members = c.fetchall()[0][0]
     members = members + "," + member
+    c.execute('SELECT creator FROM teams WHERE teamname = "%s";'%name)
+    creator = c.fetchall()[0][0]
     c.execute('DELETE FROM teams WHERE teamname = "%s";'%name)
-    c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, members))
+    c.execute('INSERT INTO teams VALUES("%s", "%s", "%s");'%(name, creator, members))
     db.commit()
 
 
@@ -136,8 +138,10 @@ def remove_member(name, member):
     members = c.fetchall()[0][0]
     member = "," + member
     members = members.replace(member, "", 1)
+    c.execute('SELECT creator FROM teams WHERE teamname = "%s";'%name)
+    creator = c.fetchall()[0][0]
     c.execute('DELETE FROM teams WHERE teamname = "%s";'%name)
-    c.execute('INSERT INTO teams VALUES("%s", "%s");'%(name, members))
+    c.execute('INSERT INTO teams VALUES("%s", "%s", "%s");'%(name, creator, members))
     db.commit()
 
 #retuns all members of a team
@@ -546,7 +550,7 @@ def team_backend():
             flash ('Sorry, that team name already exists.')
             return redirect(url_for('createteam'))
         else:
-            create_team(teamname, session['user'])
+            create_team(teamname, session['user'], session['user'])
             members = request.args.getlist("member")
             for member in members:
                 add_member(teamname, member)
