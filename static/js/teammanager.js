@@ -59,10 +59,25 @@ var addMember = function(e){
     
 };
 
+var disband = function(e){
+    window.location.href = "/home";
+    $.ajax({
+	url: '/disband_team',
+	data : {team : teamname},
+	type: 'POST',
+	success: function(d) {
+	    console.log(d);
+	} //end success callback
+    });//end ajax call
+}
+
 for (i = 0; i < kickbuttons.length; i++){
     if(kickbuttons[i].innerHTML.includes("Kick")){
 	kickbuttons[i].addEventListener("click", removeMember);
-    };
+    }
+    else{
+	kickbuttons[i].addEventListener("click", disband);
+    }
 };
 adderbutton.addEventListener("click", addMember);
 

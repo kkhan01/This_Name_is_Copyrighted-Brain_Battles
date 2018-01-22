@@ -246,3 +246,6 @@ implemented team creators kicking and adding members to teams
 elsharawyM -- 2018-01-22 05:47:18
 fixed some profile bugs
 
+elsharawyM -- 2018-01-22 06:47:48
+fixed team bugs, implemented leaving, adding, disbanding teams, did css for creating team form, patches here and there
+

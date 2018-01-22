@@ -1,0 +1,53 @@
+.wrapper {
+    text-align: center;
+}
+
+input[type="text"]{
+    width: 30%;
+    margin: auto;
+    margin-bottom: 1rem;
+    border-radius: 30px;
+}
+
+input[type="password"]{
+    width: 30%;
+    margin: auto;
+    margin-bottom: 1rem;
+    border-radius: 30px;
+}
+
+#verify{
+    margin-bottom: 2rem;
+}
+
+#signup{
+    background-color: crimson;
+}
+
+#login{
+    background-color: rgb(126, 208, 126);
+}
+
+h1{
+    margin-bottom: 50px;
+}
+
+#alignthisright{
+    text-align: right;
+}
+
+#alignthisleft{
+    text-align: left;
+}
+
+body{
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    flex-shrink: 0;
+}
+
+.button{
+    border-radius: 30px;
+}

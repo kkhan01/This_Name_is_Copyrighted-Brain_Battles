@@ -4,13 +4,15 @@
 Create Team
 {% endblock %}
 
+{% block include %}
+<link rel="stylesheet" type="text/css" href="../static/css/new_team.css">
+
+{% endblock %}
+
 {% block c_content %}
+<h1>Start Your Own Team!</h1>
 <form action = "/team_backend">
   Team Name: <input type="text" name="team"> <br>
-  Select members you want to add to your team <br>
-  {% for user in users %}
-  <input type="checkbox" name="member" value={{user}}> {{user}} <br>
-  {% endfor %}
-  <input type="submit" value="Submit">
+  <input class="button" type="submit" value="Submit">
 </form>
 {% endblock %}

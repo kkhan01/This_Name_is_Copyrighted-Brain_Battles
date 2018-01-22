@@ -25,12 +25,19 @@ Team {{name}}
 		</div>
 		{% if me == creator %}
 		<div class="cell medium-6" id="right">
-		  <button class="kick button">
+		  <button class="kick button" {% if member == me %} action="/home"{% endif %}>
 		    {% if member != me %}
 		    Kick
 		    {% else %}
 		    Disband
 		    {% endif %}
+		  </button>
+		</div>
+		{% endif %}
+		{% if member == me and me != creator %}
+		<div class="cell medium-6" id="right">
+		  <button class="kick button" id="leave" action="/home">
+		    Leave
 		  </button>
 		</div>
 		{% endif %}
@@ -93,6 +100,10 @@ Team {{name}}
 
 {% block scripts %}
 {% if creator == me %}
-<script src="../static/js/teammanager.js"></script>   
+<script src="../static/js/teammanager.js"></script>
+
+{% else %}
+<script src="../static/js/teamleaver.js"></script>
+
 {% endif %}
 {% endblock  %}

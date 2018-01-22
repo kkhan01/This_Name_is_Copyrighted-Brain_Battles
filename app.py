@@ -115,7 +115,8 @@ def team_exist(name):
     c.execute('SELECT teamname FROM teams WHERE teamname = "%s";'%name)
     team = c.fetchall()
     eprint(team)
-    if team != name:
+    eprint('\n\n\n\n')
+    if len(team) < 1:
         return False
     else:
         return True
@@ -567,19 +568,21 @@ def team_backend():
     if 'user' not in session:
         return redirect(url_for('login'))
     else:
-        teamname = request.args['team']
-        #eprint(teamname)
+        if request.method == 'POST':
+            teamname = request.form['team']
+        else:
+            teamname = request.args['team']
+            eprint(teamname)
         #eprint(team_exist(teamname))
         if team_exist(teamname):
             flash ('Sorry, that team name already exists.')
             return redirect(url_for('createteam'))
         else:
             create_team(teamname, session['user'])
-            members = request.args.getlist("member")
-            for member in members:
-                add_member(teamname, member)
+
+
         flash('Team successfully created!')
-        return redirect(url_for('profile'))
+        return redirect(url_for('profile', user=session['user']))
 
 @app.route('/new_member', methods = ["POST"])
 def new_member():
@@ -595,7 +598,7 @@ def new_member():
             add_member(team, user)
             return 'Done!'
         else:
-            flash ('That username does not exist')
+            #flash ('That username does not exist')
             return 'DNE'
 
 @app.route('/delete_member', methods = ["POST"])
