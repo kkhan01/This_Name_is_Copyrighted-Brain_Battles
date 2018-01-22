@@ -47,9 +47,9 @@ Team {{name}}
 	  {% endfor %}
 	</ul>
 	{% if me == creator %}
-	<div class="input-group">
+	<div class="input-group" id="special">
 	  <span class="input-group-label">Add Member</span>
-	  <input class="input-group-field" type="text" placeholder="Search for other players!" name="searchtext">
+	  <input class="input-group-field" type="text" placeholder="Enter an exact username" name="searchtext">
 	  <div class="input-group-button" id="adderbutton">
 	    <button type="submit" class="button">Add</button>
 	  </div>

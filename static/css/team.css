@@ -37,6 +37,10 @@ ul{
     list-style-type: none;
 }
 
+h1{
+    margin-left: 1rem;
+}
+
 .scores{
     width: 95%;
     margin: auto;
@@ -47,7 +51,7 @@ ul{
     background-color: crimson;
 }
 
-.input-group{
+#special{
     width: 80%;
     margin: auto;
     margin-bottom: 1rem;
