@@ -225,3 +225,6 @@ found out scores is a-okay to go, the 'error' was trying to print null i think. 
 khanK -- 2018-01-21 18:18:35
 pass highscores to each game of the username for display. i think mansour will make it pretty?
 
+elsharawyM -- 2018-01-21 19:11:43
+added best scores to game pages
+
