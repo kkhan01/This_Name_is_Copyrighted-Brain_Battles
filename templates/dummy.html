@@ -4,26 +4,134 @@
 Homepage
 {% endblock %}
 
-{% block c_content %}
-<!-- DJ Khaled Lorem Ipsum: http://khaledipsum.com/ -->
-<p>Let’s see what Chef Dee got that they don’t want us to eat. I’m up to something. In life you have to take the trash out, if you have trash in your life, take it out, throw it away, get rid of it, major key. Fan luv. To succeed you must believe. When you believe, you will succeed. The ladies always say Khaled you smell good, I use no cologne. Cocoa butter is the key. It’s on you how you want to live your life. Everyone has a choice. I pick my choice, squeaky clean. Life is what you make it, so let’s make it.</p>
-
-<p>They never said winning was easy. Some people can’t handle success, I can. Always remember in the jungle there’s a lot of they in there, after you overcome they, you will make it to paradise. Mogul talk. In life you have to take the trash out, if you have trash in your life, take it out, throw it away, get rid of it, major key. The first of the month is coming, we have to get money, we have no choice. It cost money to eat and they don’t want you to eat. The key is to drink coconut, fresh coconut, trust me.</p>
-
-<p>Every chance I get, I water the plants, Lion! The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion! They will try to close the door on you, just open it. They never said winning was easy. Some people can’t handle success, I can. Learning is cool, but knowing is better, and I know the key to success. Hammock talk come soon. Congratulations, you played yourself. To succeed you must believe. When you believe, you will succeed. Another one. Celebrate success right, the only way, apple. In life you have to take the trash out, if you have trash in your life, take it out, throw it away, get rid of it, major key.</p>
-
-<p>We the best. They key is to have every key, the key to open every door. Bless up. Stay focused. Every chance I get, I water the plants, Lion! Bless up. Always remember in the jungle there’s a lot of they in there, after you overcome they, you will make it to paradise. Watch your back, but more importantly when you get out the shower, dry your back, it’s a cold world out there. Stay focused. Look at the sunset, life is amazing, life is beautiful, life is what you make it. It’s important to use cocoa butter. It’s the key to more success, why not live smooth? Why live rough?</p>
-
-<p>Special cloth alert. They don’t want us to win. To succeed you must believe. When you believe, you will succeed. You smart, you loyal, you a genius. Let’s see what Chef Dee got that they don’t want us to eat. You should never complain, complaining is a weak emotion, you got life, we breathing, we blessed. Find peace, life is like a water fall, you’ve gotta flow. How’s business? Boomin. They don’t want us to eat. How’s business? Boomin. Another one.</p>
-
-<p>Stay focused. The ladies always say Khaled you smell good, I use no cologne. Cocoa butter is the key. They key is to have every key, the key to open every door. Special cloth alert. Celebrate success right, the only way, apple. Stay focused. You see that bamboo behind me though, you see that bamboo? Ain’t nothin’ like bamboo. Bless up. To succeed you must believe. When you believe, you will succeed. The other day the grass was brown, now it’s green because I ain’t give up. Never surrender.</p>
-
-<p>Look at the sunset, life is amazing, life is beautiful, life is what you make it. Put it this way, it took me twenty five years to get these plants, twenty five years of blood sweat and tears, and I’m never giving up, I’m just getting started. They will try to close the door on you, just open it. Life is what you make it, so let’s make it. Don’t ever play yourself. You see the hedges, how I got it shaped up? It’s important to shape up your hedges, it’s like getting a haircut, stay fresh. They don’t want us to eat.</p>
-
-<p>Special cloth alert. The key is to enjoy life, because they don’t want you to enjoy life. I promise you, they don’t want you to jetski, they don’t want you to smile. They key is to have every key, the key to open every door. Surround yourself with angels, positive energy, beautiful people, beautiful souls, clean heart, angel. Wraith talk. A major key, never panic. Don’t panic, when it gets crazy and rough, don’t panic, stay calm.</p>
-
-<p>A major key, never panic. Don’t panic, when it gets crazy and rough, don’t panic, stay calm. Celebrate success right, the only way, apple. The first of the month is coming, we have to get money, we have no choice. It cost money to eat and they don’t want you to eat. You do know, you do know that they don’t want you to have lunch. I’m keeping it real with you, so what you going do is have lunch. Let’s see what Chef Dee got that they don’t want us to eat. Special cloth alert. Hammock talk come soon.</p>
-
-<p>Let me be clear, you have to make it through the jungle to make it to paradise, that’s the key, Lion! To succeed you must believe. When you believe, you will succeed. The key to success is to keep your head above the water, never give up. Let me be clear, you have to make it through the jungle to make it to paradise, that’s the key, Lion! They key is to have every key, the key to open every door. Let’s see what Chef Dee got that they don’t want us to eat.</p>
+{% block include %}
+<link rel="stylesheet" type="text/css" href="../static/css/dummy.css">
 {% endblock %}
+
+
+{% block c_content %}
+<h1>Weclome to BrainBattles!</h1>
+<p><i>Get started by going to games in the navigation bar!</i></p>
+<div class="leaderboards">
+  <h3>Global Leaderboards</h3>
+  <table>
+    <tr>
+      <th colspan="3"> <h5>Simon</h5> </th>
+    </tr>
+      <td>
+	1
+      </td>
+      <td>
+	{{scores["simon"]["0"][0]}}
+      </td>
+      <td>
+	{{scores["simon"]["0"][1]}} rounds
+      </td>
+    </tr>
+    <tr>
+      <td>
+	2
+      </td>
+      <td>
+	{{scores["simon"]["1"][0]}}
+      </td>
+      <td>
+	{{scores["simon"]["1"][1]}} rounds
+      </td>
+    </tr>
+    <tr>
+      <td>
+	3
+      </td>
+      <td>
+	{{scores["simon"]["2"][0]}} 
+      </td>
+      <td>
+	{{scores["simon"]["2"][1]}} rounds
+      </td>
+    </tr>
+  </table>
+
+
+  <table>
+    <tr>
+      <th colspan="3"> <h5>React</h5> </th>
+    </tr>
+    <tr>
+      <td>
+	1
+      </td>
+      <td>
+	{{scores["react"]["0"][0]}} 
+      </td>
+      <td>
+	{{scores["react"]["0"][1]}} ms
+      </td>
+    </tr>
+    <tr>
+      <td>
+	2
+      </td>
+      <td>
+	{{scores["react"]["1"][0]}} 
+      </td>
+      <td>
+	{{scores["react"]["1"][1]}} ms
+      </td>
+    </tr>
+    <tr>
+      <td>
+	3
+      </td>
+      <td>
+	{{scores["react"]["2"][0]}} 
+      </td>
+      <td>
+	{{scores["react"]["2"][1]}} ms
+      </td>
+    </tr>
+  </table>
+
+
+  <table>
+    <tr>
+      <th colspan="3"> <h5>Word Search</h5> </th>
+    </tr>
+    <tr>
+      <td>
+	1
+      </td>
+      <td>
+	{{scores["search"]["0"][0]}} 
+      </td>
+      <td>
+	{{scores["search"]["0"][1]}} sec/word
+      </td>
+    </tr>
+    <tr>
+      <td>
+	2
+      </td>
+      <td>
+	{{scores["search"]["1"][0]}} 
+      </td>
+      <td>
+	{{scores["search"]["1"][1]}} sec/word
+      </td>
+    </tr>
+    <tr>
+      <td>
+	3
+      </td>
+      <td>
+	{{scores["search"]["2"][0]}} 
+      </td>
+      <td>
+	{{scores["search"]["2"][1]}} sec/word
+      </td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
+
 

@@ -95,7 +95,10 @@
   <h4>Update Profile Picture</h4>
   <hr>
   <form method="POST" action="/upload" enctype="multipart/form-data">
-  <input id="file" type="file" name="image" accept="image/*" required>
+    <label for="file-upload" class="custon-file-upload button">
+      Choose File
+    </label>
+  <input id="file-upload" type="file" name="image" accept="image/*" required>
   <input class="button" type="submit" value="Upload Image">
 </form>
 </div>
