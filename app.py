@@ -150,6 +150,10 @@ def get_members(name):
     members = c.fetchall()[0][0]
     return members.split(',')
 
+def get_creator(name):
+    c.execute('SELECT creator FROM teams WHERE teamname = "%s";'%name)
+    creator = c.fetchall[0][0]
+    return creator
 
 #finds all the teams a given user is a part of
 def find_teams(user):
@@ -528,8 +532,9 @@ def team():
         else:
             teamname = request.args['team']
         members = get_members(teamname) #list of members
+        creator = get_creator(teamname) #creator of team
         stats = get_team_stats(teamname) #highscore dict game: [score, user] sorted
-        return render_template('team.html', name = teamname, members = members, stats = stats)
+        return render_template('team.html', name = teamname, members = members, stats = stats, creator = creator)
 
 @app.route('/createteam', methods = ["POST", "GET"])
 def createteam():
