@@ -43,6 +43,12 @@ ul{
     margin-bottom: 1rem;
 }
 
-#kick{
+.kick{
     background-color: crimson;
+}
+
+.input-group{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 1rem;
 }

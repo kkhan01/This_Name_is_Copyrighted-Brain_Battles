@@ -240,3 +240,6 @@ homepage work to display overall leaderboards
 elsharawyM -- 2018-01-22 03:00:23
 worked on team page CSS and did some python debugs
 
+elsharawyM -- 2018-01-22 05:31:17
+implemented team creators kicking and adding members to teams
+

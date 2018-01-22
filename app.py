@@ -85,14 +85,14 @@ def add_score():
     db.commit()
     return True
 
-'''def user_exist(name):
+def user_exists(name):
     c.execute('SELECT username FROM accounts WHERE username = "%s";'%name)
     user = c.fetchall()
     if user != name:
         return False
     else:
         return True
-'''
+
 def get_users():
     c.execute('SELECT username FROM accounts;')
     members = c.fetchall()
@@ -130,6 +130,13 @@ def add_member(name, member):
     c.execute('DELETE FROM teams WHERE teamname = "%s";'%name)
     c.execute('INSERT INTO teams VALUES("%s", "%s", "%s");'%(name, creator, members))
     db.commit()
+
+#checks for member presence in team 
+def is_member(name, member):
+    c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
+    members = c.fetchall()[0][0]
+    eprint(members)
+    return member in members
 
 
 #removes a member from a team
@@ -182,7 +189,8 @@ def get_user_highscore(game, user):
         return result[0][0]
 
 def getscore(elem):
-    return elem[1]
+    eprint(elem[0])
+    return elem[0]
 #returns highest scores of each game dict
 def get_team_stats(name):
     scores = {}
@@ -201,7 +209,7 @@ def get_team_stats(name):
         if game == 'simon':
             scores[game] = sorted(scores[game], key=getscore ,reverse=True)
         else:
-            scores[game] = sorted(scores[game], key=getscore,reverse=True)
+            scores[game] = sorted(scores[game], key=getscore,reverse=False)
     return scores
 
 
@@ -580,10 +588,15 @@ def new_member():
     else:
         user = request.form['member']
         team = request.form['team']
-        if user_exist(user):
+        eprint(user);
+        eprint(team);
+        eprint('\n\n\n\n\n');
+        if user_exist(user) and not is_member(team,user):
             add_member(team, user)
+            return 'Done!'
         else:
             flash ('That username does not exist')
+            return 'DNE'
 
 @app.route('/delete_member', methods = ["POST"])
 def delete_member():
@@ -593,6 +606,7 @@ def delete_member():
         user = request.form['member']
         team = request.form['team']
         remove_member(team, user)
+        return "Done!"
 
 @app.route('/leave_team', methods = ["POST"])
 def leave_team():

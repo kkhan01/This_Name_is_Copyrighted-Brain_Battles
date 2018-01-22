@@ -15,17 +15,17 @@ Team {{name}}
     <td id="left">
       <div class="memberlist">
 	<h3>Team Members</h3>
-	<ul>
+	<ul id="memberul">
 	  {% for member in members %}
 	  <li>
 	    <div class="grid-container">
 	      <div class="grid-x grid-margin-x">
 		<div class="cell medium-6">
 		  <a href="/profile?user={{member}}">{{member}}</a>
-		  </div>
+		</div>
 		{% if me == creator %}
 		<div class="cell medium-6" id="right">
-		  <button class="button" id="kick">
+		  <button class="kick button">
 		    {% if member != me %}
 		    Kick
 		    {% else %}
@@ -39,6 +39,15 @@ Team {{name}}
 	  </li>
 	  {% endfor %}
 	</ul>
+	{% if me == creator %}
+	<div class="input-group">
+	  <span class="input-group-label">Add Member</span>
+	  <input class="input-group-field" type="text" placeholder="Search for other players!" name="searchtext">
+	  <div class="input-group-button" id="adderbutton">
+	    <button type="submit" class="button">Add</button>
+	  </div>
+	</div>
+	{% endif %}
       </div>
     </td>
     <td>
@@ -82,5 +91,8 @@ Team {{name}}
 </table>
 {% endblock %}
 
-{% block scripts %}    
+{% block scripts %}
+{% if creator == me %}
+<script src="../static/js/teammanager.js"></script>   
+{% endif %}
 {% endblock  %}
