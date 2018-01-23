@@ -124,7 +124,9 @@ def team_exist(name):
 #adds a member to a team 
 def add_member(name, member):
     c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
-    members = c.fetchall()[0][0]
+    members = c.fetchall()
+    eprint(members)
+    eprint('\n\n\n\n')
     members = members + "," + member
     c.execute('SELECT creator FROM teams WHERE teamname = "%s";'%name)
     creator = c.fetchall()[0][0]
@@ -135,8 +137,9 @@ def add_member(name, member):
 #checks for member presence in team 
 def is_member(name, member):
     c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
-    members = c.fetchall()[0][0]
+    members = c.fetchall()
     eprint(members)
+    eprint('\n\n\n\n')
     return member in members
 
 
@@ -355,6 +358,13 @@ def root():
     if 'user' in session:
         return redirect(url_for('home'))
     return redirect(url_for('login'))
+
+@app.route('/about')
+def about():
+    if 'user' not in session:
+        return redirect(url_for('home'))
+    return render_template('about.html')
+    
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
