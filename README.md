@@ -1,11 +1,11 @@
-# Mind Games
+# Brain Battles
 This Name is Copyrighted &copy; <br>
 Michela Marchini, Mansour Elsharawy, Stanley Lin, Khinshan Khan <br>
 Project 02 <br>
 Period 09 <br>
 
 ## Overview
-Welcome to Mind Games! Our app aims to give its users a space to have fun while engaging in brain-stimulating exercises. Users may play a reaction timing game, a word search, or Simon, a game that tests the player's memory. Users can connect with friends through our Team function, which allows groups of users to compare high scores and compete to be the top player in each game.
+Welcome to Brain Battles! Our app aims to give its users a space to have fun while engaging in brain-stimulating exercises. Users may play a reaction timing game, a word search, or Simon, a game that tests the player's memory. Users can connect with friends through our Team function, which allows groups of users to compare high scores and compete to be the top player in each game.
 
 ## Installation and Setup
  Installing and using our app is designed to be as easy as possible.
