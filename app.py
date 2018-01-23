@@ -137,8 +137,9 @@ def add_member(name, member):
 #checks for member presence in team 
 def is_member(name, member):
     c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
-    members = c.fetchall()
+    members = c.fetchall()[0][0]
     eprint(members)
+    eprint(member)
     eprint('\n\n\n\n')
     return member in members
 
