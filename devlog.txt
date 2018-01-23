@@ -237,6 +237,9 @@ top_scores code cleaned up
 elsharawyM -- 2018-01-22 00:30:19
 homepage work to display overall leaderboards
 
+marchiniM -- 2018-01-22 01:36:22
+created routes for creating and disbanding teams, and adding and removing members, wrote new_team.html form, updated databse structure so the team table keeps track of a team's creator
+
 elsharawyM -- 2018-01-22 03:00:23
 worked on team page CSS and did some python debugs
 
