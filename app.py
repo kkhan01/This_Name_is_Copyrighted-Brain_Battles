@@ -124,7 +124,7 @@ def team_exist(name):
 #adds a member to a team 
 def add_member(name, member):
     c.execute('SELECT members FROM teams WHERE teamname = "%s";'%name)
-    members = c.fetchall()
+    members = c.fetchall()[0][0]
     eprint(members)
     eprint('\n\n\n\n')
     members = members + "," + member
