@@ -31,7 +31,8 @@ var addMember = function(e){
     
     var userinput = input.value;
     var response = "string";
-
+    console.log(teamname);
+    console.log(userinput);
     $.ajax({
 	url: '/new_member',
 	data : { member: userinput, team : teamname},

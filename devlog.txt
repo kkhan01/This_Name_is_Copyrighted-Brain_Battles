@@ -255,3 +255,6 @@ fixed team bugs, implemented leaving, adding, disbanding teams, did css for crea
 elsharawyM -- 2018-01-22 07:07:05
 css bugfixes
 
+elsharawyM -- 2018-01-23 12:55:24
+added about page
+

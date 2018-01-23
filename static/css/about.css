@@ -1,0 +1,31 @@
+td{
+    text-align: center;
+    width: 50%;
+    padding-left: 20rem;
+    padding-right: 20rem;
+}
+
+i {
+    margin-bottom: 2rem;
+}
+
+p.blurb {
+    text-align: justify;
+    margin: auto;
+    margin-top: 1rem;
+    max-width: 430px;
+}
+
+.quote{
+    text-align: center;
+    background-color: #d9dbdd;
+}
+
+
+#khinshan{
+    padding-top: 0;
+}
+
+h1{
+    margin-left: 1rem;
+}
