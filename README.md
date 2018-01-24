@@ -7,7 +7,7 @@ Period 09 <br>
 Project Demo: https://youtu.be/RXbPhHFDLuc
 
 ## Overview
-Welcome to Brain Battles! Our app aims to give its users a space to have fun while engaging in brain-stimulating exercises. Users may play a reaction timing game, a word search, or Simon, a game that tests the player's memory. Users can connect with friends through our Team function, which allows groups of users to compare high scores and compete to be the top player in each game.
+Welcome to Brain Battles! Our app aims to give its users a space to have fun while engaging in brain-stimulating exercises. Users may play a reaction time game, a word search, or Simon, a game that tests the player's memory. Users can connect with friends through our Team function, which allows groups of users to compare high scores and compete to be the top player in each game either across their team or worldwide.
 
 ## Installation and Setup
  Installing and using our app is designed to be as easy as possible.
