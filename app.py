@@ -364,7 +364,7 @@ def root():
 def about():
     if 'user' not in session:
         return redirect(url_for('home'))
-    return render_template('about.html')
+    return render_template('about.html', me=session['user'])
     
 
 @app.route('/login', methods=['POST', 'GET'])
