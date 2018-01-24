@@ -260,6 +260,9 @@ added about page
 
 marchiniM -- 2018-01-23 11:10:13
 uploaded updated design doc
+
+marchiniM -- 2018-01-23 11:39:42
+updated readme
+
 elsharawyM -- 2018-01-23 23:41:13
 fixed a bug where about didn't link properly to profile
-
