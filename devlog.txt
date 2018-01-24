@@ -258,3 +258,5 @@ css bugfixes
 elsharawyM -- 2018-01-23 12:55:24
 added about page
 
+marchiniM -- 2018-01-23 11:10:13
+uploaded updated design doc
